@@ -2,7 +2,7 @@ name: learning_barcode_scanning
 description: The easy way to use ML Kit for barcode scanning in Flutter.
 version: 0.0.1
 # author: Salman S
-homepage: https://github.com/salkuadrat/learning/packages/learning_barcode_scanning
+homepage: https://github.com/salkuadrat/learning/tree/master/packages/learning_barcode_scanning
 publish_to: none
 
 environment:
