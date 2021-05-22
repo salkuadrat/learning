@@ -27,7 +27,7 @@ import 'package:learning_smart_reply/learning_smart_reply.dart';
 
 ### Generating Smart Replies
 
-We can generate smart replies by feeding chat message history to the [SmartReplyGenerator].
+We can generate smart replies by feeding chat message history to `SmartReplyGenerator`.
 
 ```dart
 SmartReplyGenerator smartReply = SmartReplyGenerator();
