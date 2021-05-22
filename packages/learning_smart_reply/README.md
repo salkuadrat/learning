@@ -2,6 +2,8 @@
 
 The easy way to use ML Kit for generating smart replies in Flutter.
 
+With ML Kit's Smart Reply, you can automatically generate relevant replies to messages. Smart Reply helps your users respond to messages quickly, and makes it easier to reply to messages on devices with limited input capabilities.
+
 ## Getting Started
 
 Add dependency to your flutter project:
