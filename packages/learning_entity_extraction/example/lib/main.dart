@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learning_entity_extraction/learning_entity_extraction.dart';
-import 'package:learning_input_image/input_image.dart';
+import 'package:learning_input_image/learning_input_image.dart';
 
 void main() {
   runApp(MyApp());

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learning_input_image/input_image.dart';
+import 'package:learning_input_image/learning_input_image.dart';
 import 'dart:async';
 
 import 'package:learning_language/learning_language.dart';
