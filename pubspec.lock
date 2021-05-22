@@ -145,37 +145,37 @@ packages:
   learning_entity_extraction:
     dependency: "direct main"
     description:
-      path: "packages/learning_entity_extraction"
-      relative: true
-    source: path
-    version: "0.0.1"
+      name: learning_entity_extraction
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1+1"
   learning_input_image:
     dependency: "direct main"
     description:
-      path: "packages/learning_input_image"
-      relative: true
-    source: path
+      name: learning_input_image
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.0.1"
   learning_language:
     dependency: "direct main"
     description:
-      path: "packages/learning_language"
-      relative: true
-    source: path
+      name: learning_language
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.0.1"
   learning_smart_reply:
     dependency: "direct main"
     description:
-      path: "packages/learning_smart_reply"
-      relative: true
-    source: path
-    version: "0.0.1"
+      name: learning_smart_reply
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1+1"
   learning_translate:
     dependency: "direct main"
     description:
-      path: "packages/learning_translate"
-      relative: true
-    source: path
+      name: learning_translate
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.0.1"
   matcher:
     dependency: transitive

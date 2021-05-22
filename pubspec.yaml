@@ -12,16 +12,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  learning_input_image:
-    path: packages/learning_input_image
-  learning_language:
-    path: packages/learning_language
-  learning_translate:
-    path: packages/learning_translate
-  learning_smart_reply:
-    path: packages/learning_smart_reply
-  learning_entity_extraction:
-    path: packages/learning_entity_extraction
+  learning_input_image: ^0.0.1
+  learning_language: ^0.0.1
+  learning_translate: ^0.0.1
+  learning_smart_reply: ^0.0.1+1
+  learning_entity_extraction: ^0.0.1+1
 
 dev_dependencies:
   flutter_test:

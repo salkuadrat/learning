@@ -35,7 +35,7 @@ or
 
 ```yaml
 dependencies:
-  learning_entity_extraction: ^0.0.1
+  learning_entity_extraction: ^0.0.1+1
 ```
 
 Then run `flutter pub get`.
