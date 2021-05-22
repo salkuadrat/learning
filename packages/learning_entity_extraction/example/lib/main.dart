@@ -44,13 +44,13 @@ class _MyAppState extends State<MyApp> {
   Future<void> testModelManager() async {
     var models = await EntityModelManager.list();
     print(models);
-    var downloaded = await EntityModelManager.download(KOREAN);
+    var downloaded = await EntityModelManager.download(ENGLISH);
     print('Donwloaded: $downloaded');
-    var exist = await EntityModelManager.exist(KOREAN);
+    var exist = await EntityModelManager.exist(ENGLISH);
     print('HasModel: $exist');
     models = await EntityModelManager.list();
     print(models);
-    var deleted = await EntityModelManager.delete(KOREAN);
+    var deleted = await EntityModelManager.delete(ENGLISH);
     print('Deleted: $deleted');
     models = await EntityModelManager.list();
     print(models);
