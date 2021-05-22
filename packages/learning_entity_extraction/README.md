@@ -6,6 +6,7 @@ Most apps offer users very little interaction with text beyond the basic cut/cop
 
 The Entity Extraction allows you to recognize specific entities within static text and while you're typing. Once an entity is identified, you can easily enable different actions for the user based on the entity type.
 
+
 | Entity | Example |
 | --- | ----------- |
 | Address | 350 third street, Cambridge MA |
@@ -19,6 +20,7 @@ The Entity Extraction allows you to recognize specific entities within static te
 | Phone Number | (555) 225-3556 |
 | Tracking Number (standardized international formats) | 1Z204E380338943508 |
 | URL | https://github.com/salkuadrat/learning |
+
 
 ## Getting Started
 
