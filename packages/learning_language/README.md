@@ -2,6 +2,8 @@
 
 The easy way to use ML Kit for identifying languages in Flutter.
 
+With ML Kit's on-device language identification, we can determine the language of a string of text. Language identification can be useful when working with user-provided text, which often doesn't come with any language information.
+
 ## Getting Started
 
 Add dependency to your flutter project:
