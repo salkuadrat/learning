@@ -1,3 +1,3 @@
-## 0.0.1
+## [0.0.1] - 23 May 2021
 
-* TODO: Describe initial release.
+* A working learning_pose_detection plugin.

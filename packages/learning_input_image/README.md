@@ -1,4 +1,3 @@
 # InputImage
 
-InputImage model to be used by learning packages.
-
+InputImage model to be used by most of learning packages.
