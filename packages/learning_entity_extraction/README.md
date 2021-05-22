@@ -68,6 +68,28 @@ Delete entity model.
 await EntityModelManager.delete(ENGLISH);
 ```
 
+### Supported Languages
+
+Here is language variables you can use in learning_entity_extraction.
+
+```dart
+const ARABIC = 'arabic';
+const CHINESE = 'chinese';
+const DUTCH = 'dutch';
+const ENGLISH = 'english';
+const FRENCH = 'french';
+const GERMAN = 'german';
+const ITALIAN = 'italian';
+const JAPANESE = 'japanese';
+const KOREAN = 'korean';
+const POLISH = 'polish';
+const PORTUGUESE = 'portuguese';
+const RUSSIAN = 'russian';
+const SPANISH = 'spanish';
+const THAI = 'thai';
+const TURKISH = 'turkish';
+```
+
 ## Example Project
 
 You can learn more from example project [here](example).
