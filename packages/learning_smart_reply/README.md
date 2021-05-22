@@ -52,7 +52,7 @@ print(result);
 ### Dispose
 
 ```dart
-identifier.dispose();
+smartReply.dispose();
 ```
 
 ## Example Project
