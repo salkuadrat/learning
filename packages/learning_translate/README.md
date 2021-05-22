@@ -77,7 +77,7 @@ await TranslationModelManager.delete(KOREAN);
 
 ### Supported Languages
 
-Here is constant variables you can use in learning_translate.
+Here is constant language variables you can use in learning_translate.
 
 ```dart
 const AFRIKAANS = "af";
