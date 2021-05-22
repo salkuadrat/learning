@@ -4,8 +4,9 @@ The easy way to use ML Kit for entity extraction in Flutter.
 
 Most apps offer users very little interaction with text beyond the basic cut/copy/paste operations. Entity extraction improves the user experience inside your app by understanding text and allowing you to add helpful shortcuts based on context.
 
-The Entity Extraction allows you to recognize specific entities within static text and while you're typing. Once an entity is identified, you can easily enable different actions for the user based on the entity type.\
+The Entity Extraction allows you to recognize specific entities within static text and while you're typing. Once an entity is identified, you can easily enable different actions for the user based on the entity type.
 
+### Supported Entities
 
 | Entity | Example |
 | --- | ----------- |
