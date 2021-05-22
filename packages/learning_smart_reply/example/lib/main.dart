@@ -42,8 +42,7 @@ class _MyAppState extends State<MyApp> {
     ];
 
     _smartReply = SmartReplyGenerator();
-    await _smartReply.setHistory(history);
-    var result = await _smartReply.generateReplies();
+    var result = await _smartReply.generateReplies(history);
     print('testSmartReply Result:');
     print(result);
   }

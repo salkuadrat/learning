@@ -35,8 +35,7 @@ class ML {
 
   static Future<List> generateSmartReplies(List<Message> history) async {
     SmartReplyGenerator smartReply = SmartReplyGenerator();
-    await smartReply.setHistory(history);
-    var result = await smartReply.generateReplies();
+    var result = await smartReply.generateReplies(history);
     smartReply.dispose();
     return result;
   }

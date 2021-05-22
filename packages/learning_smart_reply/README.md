@@ -16,7 +16,7 @@ or
 
 ```yaml
 dependencies:
-  learning_smart_reply: ^0.0.1
+  learning_smart_reply: ^0.0.1+1
 ```
 
 Then run `flutter pub get`.
@@ -44,8 +44,7 @@ List<Message> history = [
   Message('I am fine. Thanks.', user: userId, timestamp: now - (10*60*1000)),
 ];
 
-await _smartReply.setHistory(history);
-List result = await _smartReply.generateReplies();
+List result = await _smartReply.generateReplies(history);
 
 print('Result:');
 print(result);

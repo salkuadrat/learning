@@ -10,7 +10,7 @@ dependencies:
     sdk: flutter
 
   uuid: ^3.0.4
-  learning_smart_reply: ^0.0.1
+  learning_smart_reply: ^0.0.1+1
 
 dev_dependencies:
   flutter_test:

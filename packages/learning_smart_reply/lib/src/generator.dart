@@ -13,12 +13,6 @@ class SmartReplyGenerator {
     }
   }
 
-  Future<void> setHistory(List<Message> history) async {
-    for (Message message in history) {
-      await add(message);
-    }
-  }
-
   Future<void> add(Message message) async {
     try {
       await channel.invokeMethod('push', <String, dynamic>{
@@ -31,8 +25,12 @@ class SmartReplyGenerator {
     }
   }
 
-  Future<List> generateReplies() async {
+  Future<List> generateReplies(List<Message> history) async {
     List result = [];
+
+    for (Message message in history) {
+      await add(message);
+    }
 
     try {
       result = await channel.invokeMethod('generateReplies');
