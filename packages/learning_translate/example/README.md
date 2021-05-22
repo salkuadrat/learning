@@ -1,5 +1,3 @@
-# learning_translate_example
+# ML Translate Example
 
 Demonstrates how to use the learning_translate plugin.
-
-## Getting Started
