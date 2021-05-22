@@ -1,0 +1,20 @@
+name: learning_selfie_segmentation_example
+description: Demonstrates how to use the learning_selfie_segmentation plugin.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  learning_selfie_segmentation:
+    path: ../
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

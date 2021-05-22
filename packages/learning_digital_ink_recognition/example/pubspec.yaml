@@ -1,0 +1,20 @@
+name: learning_digital_ink_recognition_example
+description: Demonstrates how to use the learning_digital_ink_recognition plugin.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  learning_digital_ink_recognition:
+    path: ../
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

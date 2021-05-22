@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/learning_image_labeling.iml" filepath="$PROJECT_DIR$/learning_image_labeling.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/learning_image_labeling_android.iml" filepath="$PROJECT_DIR$/android/learning_image_labeling_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/example/android/learning_image_labeling_example_android.iml" filepath="$PROJECT_DIR$/example/android/learning_image_labeling_example_android.iml" />
+    </modules>
+  </component>
+</project>

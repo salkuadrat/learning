@@ -1,0 +1,26 @@
+name: learning_input_image
+description: InputImage model to be used by learning packages.
+version: 0.0.1
+# author: Salman S
+homepage: https://github.com/salkuadrat/learning/packages/learning_input_image
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_svg: ^0.22.0
+  image_picker: ^0.7.5+2
+  camera: ^0.8.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  assets:
+    - assets/flip_camera.svg
+    - assets/gallery.svg
+    - assets/camera.svg
+    - assets/image.svg

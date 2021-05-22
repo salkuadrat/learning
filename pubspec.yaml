@@ -1,0 +1,36 @@
+name: learning
+description: The easy way to use Machine Learning Kit in Flutter.
+version: 0.0.1
+# author: Salman S
+homepage: https://github.com/salkuadrat/learning
+publish_to: none
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  learning_input_image:
+    path: packages/learning_input_image
+  learning_language:
+    path: packages/learning_language
+  learning_translate:
+    path: packages/learning_translate
+  learning_smart_reply:
+    path: packages/learning_smart_reply
+  learning_entity_extraction:
+    path: packages/learning_entity_extraction
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.salkuadrat.learning
+        pluginClass: LearningPlugin
+      ios:
+        pluginClass: LearningPlugin

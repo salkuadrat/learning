@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/learning_barcode_scanning.iml" filepath="$PROJECT_DIR$/learning_barcode_scanning.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/learning_barcode_scanning_android.iml" filepath="$PROJECT_DIR$/android/learning_barcode_scanning_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/example/android/learning_barcode_scanning_example_android.iml" filepath="$PROJECT_DIR$/example/android/learning_barcode_scanning_example_android.iml" />
+    </modules>
+  </component>
+</project>
