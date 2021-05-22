@@ -21,6 +21,10 @@ Then run `flutter pub get`.
 
 ## Usage
 
+```
+import 'package:learning_language/learning_language.dart';
+```
+
 ### Identify Language
 
 ```dart
