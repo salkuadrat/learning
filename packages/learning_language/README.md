@@ -46,3 +46,7 @@ print(possibleLanguages);
 ```dart
 identifier.dispose();
 ```
+
+## Example Project
+
+You can learn more from example project [here](example).
