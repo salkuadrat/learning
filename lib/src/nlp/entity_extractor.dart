@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import '../shared.dart';
 
 class EntityExtractor {
-
   final String model;
 
   EntityExtractor(this.model);
@@ -12,9 +11,9 @@ class EntityExtractor {
     var result = [];
 
     try {
-      result = await channel.invokeMethod('nEntityExtractor', 
-        <String, dynamic>{ 'text': text });
-    } on PlatformException catch(e) {
+      result = await channel
+          .invokeMethod('nEntityExtractor', <String, dynamic>{'text': text});
+    } on PlatformException catch (e) {
       print(e.message);
     }
 

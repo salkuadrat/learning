@@ -64,11 +64,7 @@ class Language {
   static const WELSH = "cy";
 }
 
-enum InputImageFormat { 
-  NV21, 
-  YV12, 
-  YUV_420_888 
-}
+enum InputImageFormat { NV21, YV12, YUV_420_888 }
 
 enum InputImageRotation {
   Rotation_0deg,
@@ -89,7 +85,7 @@ enum EntityType {
 }
 
 /// Convert enum [InputImageFormat] to it's corresponding integer value.
-/// 
+///
 /// Source: https://developers.google.com/android/reference/com/google/mlkit/vision/common/InputImage#constants
 int imageFormatToInt(InputImageFormat inputImageFormat) {
   switch (inputImageFormat) {

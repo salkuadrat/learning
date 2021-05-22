@@ -34,7 +34,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> identify() async {
     String text = 'Baby, you light up my world like nobody else';
-    
+
     List<IdentifiedLanguage> possibleLanguages =
         await _identifier.idenfityPossibleLanguages(text);
     print('Possible Languages:');
@@ -51,7 +51,7 @@ class _MyAppState extends State<MyApp> {
 
     String text = _controller.text;
     String language = await _identifier.identify(text);
-    
+
     setState(() {
       _result = language.toUpperCase();
       _isProcessing = false;
@@ -66,7 +66,7 @@ class _MyAppState extends State<MyApp> {
     String text = _controller.text;
     List<IdentifiedLanguage> langs =
         await _identifier.idenfityPossibleLanguages(text);
-    
+
     String result = '';
     for (IdentifiedLanguage lang in langs) {
       result +=

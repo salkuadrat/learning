@@ -20,7 +20,7 @@ String formatsToString(List<BarcodeFormat> formats) {
   for (BarcodeFormat format in formats) {
     String formatStr = formatToString(format);
 
-    if(formatStr.isNotEmpty) {
+    if (formatStr.isNotEmpty) {
       strings.add(formatStr);
     }
   }

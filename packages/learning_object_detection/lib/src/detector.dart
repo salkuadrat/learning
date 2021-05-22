@@ -33,5 +33,4 @@ class ObjectDetector {
   Future dispose() async {
     await channel.invokeMethod('dispose');
   }
-
 }

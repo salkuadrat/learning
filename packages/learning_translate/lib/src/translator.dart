@@ -7,8 +7,8 @@ class Translator {
   final bool isDownloadRequireWifi;
 
   Translator({
-    required this.from, 
-    required this.to, 
+    required this.from,
+    required this.to,
     this.isDownloadRequireWifi = false,
   });
 

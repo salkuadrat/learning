@@ -3,7 +3,7 @@ import 'package:learning_input_image/input_image.dart';
 
 class DigitalInkRecognition {
   final MethodChannel channel = MethodChannel('LearningDigitalInkRecognition');
-  
+
   DigitalInkRecognition();
 
   Future<List<Map<String, dynamic>>> process(InputImage image) async {

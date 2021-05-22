@@ -11,7 +11,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   InputImage? _image;
 
   void _processImage(InputImage image) {
@@ -19,9 +18,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _startRecognition() {
-    if (_image != null) {
-
-    }
+    if (_image != null) {}
   }
 
   @override

@@ -12,7 +12,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   SmartReplyGenerator _smartReply = SmartReplyGenerator();
 
   @override
@@ -36,9 +35,10 @@ class _MyAppState extends State<MyApp> {
     int now = DateTime.now().millisecondsSinceEpoch;
 
     List<Message> history = [
-      Message('Hi', user: userId, timestamp: now - (60*60*1000)),
-      Message('How are you?', timestamp: now - (20*60*1000)),
-      Message('I am fine. Thanks.', user: userId, timestamp: now - (10*60*1000)),
+      Message('Hi', user: userId, timestamp: now - (60 * 60 * 1000)),
+      Message('How are you?', timestamp: now - (20 * 60 * 1000)),
+      Message('I am fine. Thanks.',
+          user: userId, timestamp: now - (10 * 60 * 1000)),
     ];
 
     _smartReply = SmartReplyGenerator();

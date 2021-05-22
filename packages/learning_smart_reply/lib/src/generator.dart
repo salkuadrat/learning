@@ -14,7 +14,7 @@ class SmartReplyGenerator {
   }
 
   Future<void> setHistory(List<Message> history) async {
-    for(Message message in history) {
+    for (Message message in history) {
       await add(message);
     }
   }

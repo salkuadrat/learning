@@ -5,7 +5,7 @@ void main() {
   const MethodChannel channel = MethodChannel('LearningDigitalInkRecognition');
 
   TestWidgetsFlutterBinding.ensureInitialized();
-  
+
   setUp(() {
     channel.setMockMethodCallHandler((MethodCall methodCall) async {
       return '42';

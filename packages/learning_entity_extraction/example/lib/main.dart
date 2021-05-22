@@ -66,7 +66,7 @@ class _MyAppState extends State<MyApp> {
     List result = await _extractor.extract(text);
 
     _result = '';
-    for(var item in result) {
+    for (var item in result) {
       _result += '${item.toString()}\n\n';
     }
 

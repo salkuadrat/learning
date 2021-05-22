@@ -2,21 +2,12 @@ import 'package:camera/camera.dart';
 
 List<CameraDescription> cameras = [];
 
-enum InputImageFormat { 
-  NV21, 
-  YV12, 
-  YUV_420_888 
-}
+enum InputImageFormat { NV21, YV12, YUV_420_888 }
 
-enum InputImageRotation {
-  ROTATION_0,
-  ROTATION_90,
-  ROTATION_180,
-  ROTATION_270
-}
+enum InputImageRotation { ROTATION_0, ROTATION_90, ROTATION_180, ROTATION_270 }
 
 /// Convert enum [InputImageFormat] to it's corresponding integer value.
-/// 
+///
 /// Source: https://developers.google.com/android/reference/com/google/mlkit/vision/common/InputImage#constants
 int imageFormatToInt(InputImageFormat inputImageFormat) {
   switch (inputImageFormat) {

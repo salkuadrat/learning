@@ -5,14 +5,13 @@ import 'text.dart';
 
 class TextRecognition {
   final MethodChannel channel = MethodChannel('LearningTextRecognition');
-  
+
   TextRecognition();
 
   Future<MLText?> process(InputImage image) async {
     try {
-      final result = await channel.invokeMethod('process', <String, dynamic>{
-        'image': image.json
-      });
+      final result = await channel
+          .invokeMethod('process', <String, dynamic>{'image': image.json});
       return MLText.from(result);
     } on PlatformException catch (e) {
       print(e.message);
