@@ -1,6 +1,60 @@
-# Learning Smart Reply
+# ML Smart Reply
 
 The easy way to use ML Kit for generating smart replies in Flutter.
 
 ## Getting Started
 
+Add dependency to your flutter project:
+
+```
+$ flutter pub add learning_smart_reply
+```
+
+or
+
+```yaml
+dependencies:
+  learning_smart_reply: ^0.0.1
+```
+
+Then run `flutter pub get`.
+
+## Usage
+
+```
+import 'package:learning_smart_reply/learning_smart_reply.dart';
+```
+
+### Generating Smart Replies
+
+We can generate smart replies by feeding chat message history to the [SmartReplyGenerator].
+
+```dart
+SmartReplyGenerator smartReply = SmartReplyGenerator();
+
+Uuid uuid = Uuid();
+String userId = uuid.v4();
+int now = DateTime.now().millisecondsSinceEpoch;
+
+List<Message> history = [
+  Message('Hi', user: userId, timestamp: now - (60*60*1000)),
+  Message('How are you?', timestamp: now - (20*60*1000)),
+  Message('I am fine. Thanks.', user: userId, timestamp: now - (10*60*1000)),
+];
+
+await _smartReply.setHistory(history);
+List result = await _smartReply.generateReplies();
+
+print('Result:');
+print(result);
+```
+
+### Dispose
+
+```dart
+identifier.dispose();
+```
+
+## Example Project
+
+You can learn more from example project [here](example).
