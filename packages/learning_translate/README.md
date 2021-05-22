@@ -37,7 +37,7 @@ print(result);
 ### Dispose
 
 ```dart
-identifier.dispose();
+translator.dispose();
 ```
 
 ### Translation Model Management
