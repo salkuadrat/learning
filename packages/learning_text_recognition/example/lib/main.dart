@@ -29,10 +29,6 @@ class _MyAppState extends State<MyApp> {
     super.dispose();
   }
 
-  void _processImage(InputImage image) {
-    _image = image;
-  }
-
   void _startProcessing() {
     setState(() {
       _isProcessing = true;
@@ -73,7 +69,9 @@ class _MyAppState extends State<MyApp> {
         canSwitchMode: false,
         mode: InputCameraMode.gallery,
         title: 'Text Recognition',
-        onImage: _processImage,
+        onImage: (image) {
+          _image = image;
+        },
         action: 'Start Recognition',
         onTapAction: _startRecognition,
       ),
