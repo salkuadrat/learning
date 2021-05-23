@@ -59,7 +59,8 @@ class _MyAppState extends State<MyApp> {
     if (_isProcessing) {
       return Center(
         child: Container(
-          width: 32, height: 32,
+          width: 32,
+          height: 32,
           child: CircularProgressIndicator(strokeWidth: 2),
         ),
       );
@@ -69,7 +70,8 @@ class _MyAppState extends State<MyApp> {
       return Center(
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 9, horizontal: 18),
-          child: Text(_result!.text, style: TextStyle(fontWeight: FontWeight.w500)),
+          child: Text(_result!.text,
+              style: TextStyle(fontWeight: FontWeight.w500)),
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.5),
             borderRadius: BorderRadius.all(Radius.circular(4.0)),

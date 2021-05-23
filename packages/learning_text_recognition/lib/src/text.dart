@@ -10,7 +10,7 @@ class RecognizedText {
         text: json['text'] as String,
         blocks: toBlocks(json['blocks']),
       );
-  
+
   @override
   String toString() {
     return '<RecognizedText: $text, $blocks>';
@@ -39,7 +39,7 @@ class TextBlock {
         frame: toRect(json['frame']),
         lines: toLines(json['lines']),
       );
-    
+
   @override
   String toString() {
     return '<TextBlock: $text, $language, $cornerPoints, $frame, $lines>';
@@ -68,7 +68,7 @@ class TextLine {
         frame: toRect(json['frame']),
         elements: toElements(json['elements']),
       );
-  
+
   @override
   String toString() {
     return '<TextLine: $text, $language, $cornerPoints, $frame, $elements>';
@@ -93,7 +93,7 @@ class TextElement {
         cornerPoints: toPoints(json['cornerPoints']),
         frame: toRect(json['frame']),
       );
-  
+
   @override
   String toString() {
     return '<TextElement: $text, $language, $cornerPoints, $frame>';

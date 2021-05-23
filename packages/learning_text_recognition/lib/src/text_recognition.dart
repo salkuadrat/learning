@@ -10,9 +10,8 @@ class TextRecognition {
 
   Future<RecognizedText?> process(InputImage image) async {
     try {
-      final result = await channel.invokeMethod('process', 
-        <String, dynamic>{'image': image.json}
-      );
+      final result = await channel
+          .invokeMethod('process', <String, dynamic>{'image': image.json});
 
       if (result != null) {
         return RecognizedText.from(result);
