@@ -4,7 +4,7 @@ The easy way to use ML Kit for text recognition in Flutter.
 
 ML Kit's text recognition can recognize text in any Latin-based character set. They can also be used to automate data-entry tasks such as processing credit cards, receipts, and business cards.
 
-<img src="https://github.com/salkuadrat/learning/raw/master/packages/learning_text_recognition/screenshot.jpg" alt="universe" width="400">
+<img src="https://github.com/salkuadrat/learning/raw/master/packages/learning_text_recognition/screenshot.jpg" alt="universe" width="280">
 
 ## Getting Started
 
