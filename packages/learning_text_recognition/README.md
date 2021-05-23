@@ -51,12 +51,42 @@ Here is example of structure data inside `RecognizedText`.
     <th colspan="2">RecognizedText</td>
   </tr>
   <tr>
-    <td>text</td>
+    <td>Text</td>
+    <td>
+      Wege\
+      der parlamentarischen\ 
+      Demokratie
+    </td>
+  </tr>
+  <tr>
+    <td>Blocks</td>
+    <td>(1 block)</td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th colspan="2">Block 0</td>
+  </tr>
+  <tr>
+    <td>Text</td>
     <td>Wege der parlamentarischen Demokratie</td>
   </tr>
   <tr>
-    <td>blocks</td>
-    <td>(1 block)</td>
+    <td>Frame</td>
+    <td>(117.0, 258.0, 190.0, 83.0)</td>
+  </tr>
+  <tr>
+    <td>Corner Points</td>
+    <td>(117, 270), (301.64, 258.49), (306.05, 329.36), (121.41, 340.86)</td>
+  </tr>
+  <tr>
+    <td>Recognized Language Code</td>
+    <td>de</td>
+  </tr>
+  <tr>
+    <td>Lines</td>
+    <td>(3 lines))</td>
   </tr>
 </table>
 
