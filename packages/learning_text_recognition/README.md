@@ -46,12 +46,19 @@ The result of text recognition process is a `RecognizedText` variable that conta
 
 Here is example of structure data inside `RecognizedText`.
 
-| RecognizedText |
-| -------------- | --------------- |
-| text | Wege der parlamentarischen Demokratie |
-| blocks | (1 block) |
-
-
+<table>
+  <tr>
+    <th colspan="2">RecognizedText</td>
+  </tr>
+  <tr>
+    <td>text</td>
+    <td>Wege der parlamentarischen Demokratie</td>
+  </tr>
+  <tr>
+    <td>blocks</td>
+    <td>(1 block)</td>
+  </tr>
+</table>
 
 ### Dispose
 
