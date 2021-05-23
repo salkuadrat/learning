@@ -2,7 +2,7 @@
 
 The easy way to use ML Kit for face detection in Flutter.
 
-With ML Kit's face detection, we can detect faces in an image, identify key facial features, and get the contours of detected faces. Note: it's only detecting face, not recognizing people.
+With ML Kit's face detection, we can detect faces in an image, identify key facial features, and get the contours of detected faces. Note: it's only detecting faces, not recognizing people.
 
 With face detection, we can get the information to perform tasks like embellishing selfies and portraits, or generating avatars from user's photo. Because it can perform face detection in real time, we can use it in applications like video chat, games, or TikTok that respond to user's expressions.
 
@@ -50,13 +50,68 @@ InputCameraView(
 
 ### Face Detection
 
-After getting the `InputImage`, we can start doing face detection by calling method `detect` from an instance of `FaceDetector`.
+After getting the `InputImage`, we can start detecting faces by calling method `detect` from an instance of `FaceDetector`.
 
 ```dart
 FaceDetector detector = FaceDetector();
 final result = await detector.detect(image);
 print(result);
 ```
+
+`FaceDetector` is instantiated with default parameters as following.
+
+```dart
+FaceDetector detector = FaceDetector(
+  performance: 'fast',
+  landmark: 'none',
+  classification: 'none',
+  contour: 'none',
+  minFaceSize: 0.15,
+  enableTracking: false,
+)
+```
+
+But we can override this default behavior by passing other parameters to `FaceDetector`.
+
+<table>
+  <tr>
+    <th>Parameter</th>
+    <th>Default</th>
+    <th>Value</th>
+  </tr>
+  <tr>
+    <td>performance</td>
+    <td>fast</td>
+    <td>fast, accurate</td>
+  </tr>
+  <tr>
+    <td>landmark</td>
+    <td>none</td>
+    <td>none, all</td>
+  </tr>
+  <tr>
+    <td>classification</td>
+    <td>none</td>
+    <td>none, all</td>
+  </tr>
+  <tr>
+    <td>contour</td>
+    <td>none</td>
+    <td>none, all</td>
+  </tr>
+  <tr>
+    <td>minFaceSize</td>
+    <td>0.15</td>
+    <td>Any value between 0.0 and 1.0</td>
+  </tr>
+  <tr>
+    <td>enableTracking</td>
+    <td>false</td>
+    <td>false, true</td>
+  </tr>
+</table>
+
+
 
 ### Output
 
