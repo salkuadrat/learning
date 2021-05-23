@@ -53,8 +53,8 @@ Here is example of structure data inside `RecognizedText`.
   <tr>
     <td>Text</td>
     <td>
-      Wege\
-      der parlamentarischen\ 
+      Wege<br>
+      der parlamentarischen<br>
       Demokratie
     </td>
   </tr>
@@ -86,7 +86,7 @@ Here is example of structure data inside `RecognizedText`.
   </tr>
   <tr>
     <td>Lines</td>
-    <td>(3 lines))</td>
+    <td>(3 lines)</td>
   </tr>
 </table>
 
