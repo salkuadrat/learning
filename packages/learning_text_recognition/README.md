@@ -164,3 +164,7 @@ The result of text recognition is a `RecognizedText` that contains nested elemen
 ```dart
 textRecognition.dispose();
 ```
+
+## Example Project
+
+You can learn more from example project [here](example).
