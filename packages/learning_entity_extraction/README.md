@@ -8,19 +8,56 @@ The Entity Extraction allows you to recognize specific entities within static te
 
 ### Supported Entities
 
-| Entity | Example |
-| --- | ----------- |
-| Address | 350 third street, Cambridge MA |
-| Date-Time | 2019/09/29, let's meet tomorrow at 6pm |
-| Email address | salkuadrat@gmail.com |
-| Flight Number (IATA flight codes only) | LX37 |
-| IBAN | CH52 0483 0000 0000 0000 9 |
-| ISBN (version 13 only) | 978-1101904190 |
-| Money/Currency (Arabic numerals only) | $12, 25 USD |
-| Payment / Credit Cards | 4111 1111 1111 1111 |
-| Phone Number | (555) 225-3556 |
-| Tracking Number (standardized international formats) | 1Z204E380338943508 |
-| URL | https://github.com/salkuadrat/learning |
+<table>
+  <th>
+    <td>Entity</td>
+    <td>Example</td>
+  </th>
+  <tr>
+    <td>Address</td>
+    <td>350 third street, Cambridge MA</td>
+  </tr>
+  <tr>
+    <td>Date-Time</td>
+    <td>2019/09/29, let's meet tomorrow at 6pm</td>
+  </tr>
+  <tr>
+    <td>Email address</td>
+    <td>salkuadrat@gmail.com</td>
+  </tr>
+  <tr>
+    <td>Flight Number (IATA flight codes only)</td>
+    <td>LX37</td>
+  </tr>
+  <tr>
+    <td>IBAN</td>
+    <td>CH52 0483 0000 0000 0000 9</td>
+  </tr>
+  <tr>
+    <td>ISBN (version 13 only)</td>
+    <td>978-1101904190</td>
+  </tr>
+  <tr>
+    <td>Money/Currency (Arabic numerals only)</td>
+    <td>$12, 25 USD</td>
+  </tr>
+  <tr>
+    <td>Payment / Credit Cards</td>
+    <td>4111 1111 1111 1111</td>
+  </tr>
+  <tr>
+    <td>Phone Number</td>
+    <td>(555) 225-3556</td>
+  </tr>
+  <tr>
+    <td>Tracking Number (standardized international formats)</td>
+    <td>1Z204E380338943508</td>
+  </tr>
+  <tr>
+    <td>URL</td>
+    <td>https://github.com/salkuadrat/learning</td>
+  </tr>
+</table>
 
 
 ## Getting Started
