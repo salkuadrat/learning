@@ -46,7 +46,7 @@ The result of text recognition process is a `RecognizedText` variable that conta
 
 Here is example of structure data inside `RecognizedText`.
 
-| RecognizedText | |
+| RecognizedText |
 | -------------- | --------------- |
 | text | Wege der parlamentarischen Demokratie |
 | blocks | (1 block) |
