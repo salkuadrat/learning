@@ -8,16 +8,15 @@ class TextRecognition {
 
   TextRecognition();
 
-  Future<MLText?> process(InputImage image) async {
+  Future<RecognizedText?> process(InputImage image) async {
     try {
       final result = await channel
           .invokeMethod('process', <String, dynamic>{'image': image.json});
-      return MLText.from(result);
+      return RecognizedText.from(result);
     } on PlatformException catch (e) {
       print(e.message);
+      return null;
     }
-
-    return null;
   }
 
   Future<void> dispose() async {

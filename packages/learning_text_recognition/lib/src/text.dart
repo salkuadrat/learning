@@ -1,25 +1,25 @@
 import 'dart:ui';
 
-class MLText {
+class RecognizedText {
   final String text;
-  final List<MLTextBlock> blocks;
+  final List<TextBlock> blocks;
 
-  MLText({required this.text, this.blocks = const []});
+  RecognizedText({required this.text, this.blocks = const []});
 
-  factory MLText.from(Map<String, dynamic> json) => MLText(
+  factory RecognizedText.from(Map<String, dynamic> json) => RecognizedText(
         text: json['text'],
         blocks: toBlocks(json['blocks'] as List<Map<String, dynamic>>),
       );
 }
 
-class MLTextBlock {
+class TextBlock {
   final String text;
   final String? language;
   final List<Offset> cornerPoints;
   final Rect? frame;
-  final List<MLTextLine> lines;
+  final List<TextLine> lines;
 
-  MLTextBlock({
+  TextBlock({
     required this.text,
     this.language,
     this.cornerPoints = const [],
@@ -27,7 +27,7 @@ class MLTextBlock {
     this.lines = const [],
   });
 
-  factory MLTextBlock.from(Map<String, dynamic> json) => MLTextBlock(
+  factory TextBlock.from(Map<String, dynamic> json) => TextBlock(
         text: json['text'],
         language: json['language'],
         cornerPoints:
@@ -37,14 +37,14 @@ class MLTextBlock {
       );
 }
 
-class MLTextLine {
+class TextLine {
   final String text;
   final String? language;
   final List<Offset> cornerPoints;
   final Rect? frame;
-  final List<MLTextElement> elements;
+  final List<TextElement> elements;
 
-  MLTextLine({
+  TextLine({
     required this.text,
     this.language,
     this.cornerPoints = const [],
@@ -52,7 +52,7 @@ class MLTextLine {
     this.elements = const [],
   });
 
-  factory MLTextLine.from(Map<String, dynamic> json) => MLTextLine(
+  factory TextLine.from(Map<String, dynamic> json) => TextLine(
         text: json['text'],
         language: json['language'],
         cornerPoints:
@@ -62,19 +62,19 @@ class MLTextLine {
       );
 }
 
-class MLTextElement {
+class TextElement {
   final String text;
   final String? language;
   final List<Offset> cornerPoints;
   final Rect? frame;
 
-  MLTextElement(
+  TextElement(
       {required this.text,
       this.language,
       this.cornerPoints = const [],
       this.frame});
 
-  factory MLTextElement.from(Map<String, dynamic> json) => MLTextElement(
+  factory TextElement.from(Map<String, dynamic> json) => TextElement(
         text: json['text'],
         language: json['language'],
         cornerPoints:
@@ -105,31 +105,31 @@ List<Offset> toPoints(List<Map<String, dynamic>> points) {
   return result;
 }
 
-List<MLTextElement> toElements(List<Map<String, dynamic>> elements) {
-  List<MLTextElement> result = [];
+List<TextElement> toElements(List<Map<String, dynamic>> elements) {
+  List<TextElement> result = [];
 
   for (var element in elements) {
-    result.add(MLTextElement.from(element));
+    result.add(TextElement.from(element));
   }
 
   return result;
 }
 
-List<MLTextLine> toLines(List<Map<String, dynamic>> lines) {
-  List<MLTextLine> result = [];
+List<TextLine> toLines(List<Map<String, dynamic>> lines) {
+  List<TextLine> result = [];
 
   for (var line in lines) {
-    result.add(MLTextLine.from(line));
+    result.add(TextLine.from(line));
   }
 
   return result;
 }
 
-List<MLTextBlock> toBlocks(List<Map<String, dynamic>> blocks) {
-  List<MLTextBlock> result = [];
+List<TextBlock> toBlocks(List<Map<String, dynamic>> blocks) {
+  List<TextBlock> result = [];
 
   for (var block in blocks) {
-    result.add(MLTextBlock.from(block));
+    result.add(TextBlock.from(block));
   }
 
   return result;
