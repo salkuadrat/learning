@@ -29,11 +29,26 @@ import 'package:learning_text_recognition/learning_text_recognition.dart';
 
 ### Input Image
 
+As with every process in other ML vision learning plugins, input to the system is fed as an instance of variable `InputImage` which is part of `learning_input_image` package. 
 
+You can use widget `InputCameraView` at `input_camera.dart` from `learning_input_image` package to use a default implementation of converting image (or image stream) from camera / storage into an `InputImage` format. But feel free to see the inside of `InputCameraView` to do your own implementation of preprocessing your image source into `InputImage`.
+
+Here is example of using the default `InputCameraView` to get the `InputImage` for text recognition.
+
+```dart
+InputCameraView(
+  canSwitchMode: false,
+  mode: InputCameraMode.gallery,
+  title: 'Text Recognition',
+  onImage: (InputImage image) {
+    // you can start feeding the image to text recognition
+  },
+)
+```
 
 ### Text Recognition
 
-When we have prepared the input image, we can start processing text recognition by calling method `process` from an instance of `TextRecognition`.
+After we have prepared the `InputImage`, we can start doing text recognition by calling method `process` from an instance of `TextRecognition`.
 
 ```dart
 TextRecognition textRecognition = TextRecognition();

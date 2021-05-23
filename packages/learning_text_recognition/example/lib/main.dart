@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learning_input_image/learning_input_image.dart';
+import 'package:learning_text_recognition/learning_text_recognition.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,14 +12,52 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  TextRecognition? _textRecognition;
   InputImage? _image;
+
+  bool _isProcessing = false;
+
+  @override
+  void initState() {
+    _textRecognition = TextRecognition();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _textRecognition?.dispose();
+    super.dispose();
+  }
 
   void _processImage(InputImage image) {
     _image = image;
   }
 
-  void _startRecognition() {
-    if (_image != null) {}
+  void _startProcessing() {
+    setState(() {
+      _isProcessing = true;
+    });
+  }
+
+  void _stopProcessing() {
+    setState(() {
+      _isProcessing = false;
+    });
+  }
+
+  Future<void> _startRecognition() async {
+    print('_startRecognition');
+
+    if (_image != null) {
+      _startProcessing();
+      RecognizedText? result = await _textRecognition?.process(_image!);
+
+      if (result != null) {
+        print(result);
+      }
+
+      _stopProcessing();
+    }
   }
 
   @override
