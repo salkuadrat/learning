@@ -42,9 +42,7 @@ RecognizedText result = await textRecognition.process(image);
 
 ### Output
 
-The result of text recognition is `RecognizedText` variable that contains nested elements describing the details of the recognized text from input image.
-
-Here is example of structure data inside `RecognizedText`.
+The result of text recognition is a `RecognizedText` variable that contains nested elements describing the details of the recognized text from input image. Here is example of structure data inside `RecognizedText`.
 
 <table>
   <tr>
