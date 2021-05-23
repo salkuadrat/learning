@@ -6,10 +6,15 @@ class RecognizedText {
 
   RecognizedText({required this.text, this.blocks = const []});
 
-  factory RecognizedText.from(Map<String, dynamic> json) => RecognizedText(
-        text: json['text'],
-        blocks: toBlocks(json['blocks'] as List<Map<String, dynamic>>),
+  factory RecognizedText.from(Map json) => RecognizedText(
+        text: json['text'] as String,
+        blocks: toBlocks(json['blocks']),
       );
+  
+  @override
+  String toString() {
+    return '<RecognizedText: $text, $blocks>';
+  }
 }
 
 class TextBlock {
@@ -27,14 +32,18 @@ class TextBlock {
     this.lines = const [],
   });
 
-  factory TextBlock.from(Map<String, dynamic> json) => TextBlock(
-        text: json['text'],
-        language: json['language'],
-        cornerPoints:
-            toPoints(json['cornerPoints'] as List<Map<String, dynamic>>),
+  factory TextBlock.from(Map json) => TextBlock(
+        text: json['text'] as String,
+        language: json['language'] as String,
+        cornerPoints: toPoints(json['cornerPoints']),
         frame: toRect(json['frame']),
         lines: toLines(json['lines']),
       );
+    
+  @override
+  String toString() {
+    return '<TextBlock: $text, $language, $cornerPoints, $frame, $lines>';
+  }
 }
 
 class TextLine {
@@ -52,14 +61,18 @@ class TextLine {
     this.elements = const [],
   });
 
-  factory TextLine.from(Map<String, dynamic> json) => TextLine(
-        text: json['text'],
-        language: json['language'],
-        cornerPoints:
-            toPoints(json['cornerPoints'] as List<Map<String, dynamic>>),
+  factory TextLine.from(Map json) => TextLine(
+        text: json['text'] as String,
+        language: json['language'] as String,
+        cornerPoints: toPoints(json['cornerPoints']),
         frame: toRect(json['frame']),
         elements: toElements(json['elements']),
       );
+  
+  @override
+  String toString() {
+    return '<TextLine: $text, $language, $cornerPoints, $frame, $elements>';
+  }
 }
 
 class TextElement {
@@ -74,28 +87,32 @@ class TextElement {
       this.cornerPoints = const [],
       this.frame});
 
-  factory TextElement.from(Map<String, dynamic> json) => TextElement(
-        text: json['text'],
-        language: json['language'],
-        cornerPoints:
-            toPoints(json['cornerPoints'] as List<Map<String, dynamic>>),
+  factory TextElement.from(Map json) => TextElement(
+        text: json['text'] as String,
+        language: json['language'] as String,
+        cornerPoints: toPoints(json['cornerPoints']),
         frame: toRect(json['frame']),
       );
+  
+  @override
+  String toString() {
+    return '<TextElement: $text, $language, $cornerPoints, $frame>';
+  }
 }
 
-Rect toRect(Map<String, dynamic> json) => Rect.fromLTRB(
-      json['left'] as double,
-      json['top'] as double,
-      json['right'] as double,
-      json['right'] as double,
+Rect toRect(Map json) => Rect.fromLTRB(
+      (json['left'] as int).toDouble(),
+      (json['top'] as int).toDouble(),
+      (json['right'] as int).toDouble(),
+      (json['right'] as int).toDouble(),
     );
 
-Offset toPoint(Map<String, dynamic> json) => Offset(
-      json['x'] as double,
-      json['y'] as double,
+Offset toPoint(Map json) => Offset(
+      (json['x'] as int).toDouble(),
+      (json['y'] as int).toDouble(),
     );
 
-List<Offset> toPoints(List<Map<String, dynamic>> points) {
+List<Offset> toPoints(List points) {
   List<Offset> result = [];
 
   for (var point in points) {
@@ -105,7 +122,7 @@ List<Offset> toPoints(List<Map<String, dynamic>> points) {
   return result;
 }
 
-List<TextElement> toElements(List<Map<String, dynamic>> elements) {
+List<TextElement> toElements(List elements) {
   List<TextElement> result = [];
 
   for (var element in elements) {
@@ -115,7 +132,7 @@ List<TextElement> toElements(List<Map<String, dynamic>> elements) {
   return result;
 }
 
-List<TextLine> toLines(List<Map<String, dynamic>> lines) {
+List<TextLine> toLines(List lines) {
   List<TextLine> result = [];
 
   for (var line in lines) {
@@ -125,7 +142,7 @@ List<TextLine> toLines(List<Map<String, dynamic>> lines) {
   return result;
 }
 
-List<TextBlock> toBlocks(List<Map<String, dynamic>> blocks) {
+List<TextBlock> toBlocks(List blocks) {
   List<TextBlock> result = [];
 
   for (var block in blocks) {
