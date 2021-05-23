@@ -36,6 +36,8 @@ You can use widget `InputCameraView` from package `learning_input_image` as defa
 Here is example of using `InputCameraView` to get `InputImage` for text recognition.
 
 ```dart
+import 'package:learning_input_image/learning_input_image.dart';
+
 InputCameraView(
   canSwitchMode: false,
   mode: InputCameraMode.gallery,
