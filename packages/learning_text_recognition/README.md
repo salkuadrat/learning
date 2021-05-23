@@ -31,7 +31,7 @@ import 'package:learning_text_recognition/learning_text_recognition.dart';
 
 ### Input Image
 
-As in other ML vision learning plugins, input is fed as an instance of `InputImage`, which is part of package  `learning_input_image`. 
+As in other ML vision plugins, input is fed as an instance of `InputImage`, which is part of package  `learning_input_image`. 
 
 You can use widget `InputCameraView` from `learning_input_image` as default implementation for processing image (or image stream) from camera / storage into `InputImage` format. But feel free to learn the inside of `InputCameraView` code if you want to create your own custom implementation.
 
