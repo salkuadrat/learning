@@ -48,7 +48,7 @@ InputCameraView(
 
 ### Text Recognition
 
-After we have prepared the `InputImage`, we can start doing text recognition by calling method `process` from an instance of `TextRecognition`.
+After we get the `InputImage`, now we can start doing text recognition by calling method `process` from an instance of `TextRecognition`.
 
 ```dart
 TextRecognition textRecognition = TextRecognition();
