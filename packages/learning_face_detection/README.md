@@ -71,7 +71,7 @@ FaceDetector detector = FaceDetector(
 )
 ```
 
-But we can override this default behavior by passing other parameters to `FaceDetector`.
+But we can override this default behavior by passing other values to `FaceDetector`.
 
 <table>
   <tr>
