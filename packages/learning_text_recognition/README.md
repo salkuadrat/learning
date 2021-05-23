@@ -1,4 +1,4 @@
-# Learning Text Recognition
+# ML Text Recognition
 
 The easy way to use ML Kit for text recognition in Flutter.
 
