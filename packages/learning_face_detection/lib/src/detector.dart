@@ -1,5 +1,5 @@
 import 'package:flutter/services.dart';
-import 'package:learning_input_image/input_image.dart';
+import 'package:learning_input_image/learning_input_image.dart';
 
 class FaceDetector {
   final MethodChannel channel = MethodChannel('LearningFaceDetection');

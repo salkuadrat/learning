@@ -48,6 +48,8 @@ translator.dispose();
 
 ### Translation Model Management
 
+When we translate text using `Translator`, ML Kit automatically downloads language-specific translation models to the device. But we can explicitly manage the translation models to be available on the device by using `TranslationModelManager`. This can be useful if you want to prepare the models ahead of time, or delete unnecessary models from the device.
+
 Get list of downloaded translation models.
 
 ```dart
@@ -77,7 +79,7 @@ await TranslationModelManager.delete(KOREAN);
 
 ### Supported Languages
 
-Here is constant language variables you can use in learning_translate.
+Here is language model variables you can use in learning_translate.
 
 ```dart
 const AFRIKAANS = "af";

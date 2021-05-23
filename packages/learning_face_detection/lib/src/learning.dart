@@ -1,4 +1,5 @@
-import 'package:learning_input_image/input_image.dart';
+import 'package:learning_input_image/learning_input_image.dart';
+
 import 'detector.dart';
 
 class MLFaceDetection {
