@@ -1,6 +1,6 @@
 name: learning_input_image
 description: InputImage model to be used by learning packages.
-version: 0.0.1
+version: 0.0.2
 # author: Salman S
 homepage: https://github.com/salkuadrat/learning/tree/master/packages/learning_input_image
 

@@ -68,7 +68,7 @@ public class FaceDetection {
         for (Face face : faces) {
             Map<String, Object> item = new HashMap<>();
 
-            item.put("bounds", rectToMap(face.getBoundingBox()));
+            item.put("bound", rectToMap(face.getBoundingBox()));
 
             // Head is rotated to the right rotY degrees
             item.put("headAngleY", face.getHeadEulerAngleY());
@@ -76,96 +76,76 @@ public class FaceDetection {
             // Head is tilted sideways rotZ degrees
             item.put("headAngleZ", face.getHeadEulerAngleZ());
 
-            // If landmark detection was enabled
-            // (mouth, ears, eyes, cheeks, and nose available):
-            Map<String, Object> landmark = new HashMap<>();
-            Map<String, Object> eye = new HashMap<>();
-            Map<String, Object> ear = new HashMap<>();
-            Map<String, Object> cheek = new HashMap<>();
-            Map<String, Object> mouth = new HashMap<>();
+            Map<String, Object> landmarks = new HashMap<>();
 
             // landmark eye
             FaceLandmark leftEye = face.getLandmark(FaceLandmark.LEFT_EYE);
             FaceLandmark rightEye = face.getLandmark(FaceLandmark.RIGHT_EYE);
 
             if (leftEye != null) {
-                eye.put("left", pointToMap(leftEye.getPosition()));
+                landmarks.put("LEFT_EYE", pointToMap(leftEye.getPosition()));
             }
 
             if (rightEye != null) {
-                eye.put("right", pointToMap(rightEye.getPosition()));
+                landmarks.put("RIGHT_EYE", pointToMap(rightEye.getPosition()));
             }
-
-            landmark.put("ear", eye);
 
             // landmark ear
             FaceLandmark leftEar = face.getLandmark(FaceLandmark.LEFT_EAR);
             FaceLandmark rightEar = face.getLandmark(FaceLandmark.RIGHT_EAR);
 
             if (leftEar != null) {
-                ear.put("left", pointToMap(leftEar.getPosition()));
+                landmarks.put("LEFT_EAR", pointToMap(leftEar.getPosition()));
             }
 
             if (rightEar != null) {
-                ear.put("right", pointToMap(rightEar.getPosition()));
+                landmarks.put("RIGHT_EAR", pointToMap(rightEar.getPosition()));
             }
-
-            landmark.put("ear", ear);
 
             // landmark cheek
             FaceLandmark leftCheek = face.getLandmark(FaceLandmark.LEFT_CHEEK);
             FaceLandmark rightCheek = face.getLandmark(FaceLandmark.RIGHT_CHEEK);
 
             if (leftCheek != null) {
-                cheek.put("left", pointToMap(leftCheek.getPosition()));
+                landmarks.put("LEFT_CHEEK", pointToMap(leftCheek.getPosition()));
             }
 
             if (rightCheek != null) {
-                cheek.put("right", pointToMap(rightCheek.getPosition()));
+                landmarks.put("RIGHT_CHEEK", pointToMap(rightCheek.getPosition()));
             }
-
-            landmark.put("cheek", cheek);
 
             // landmark nose
             FaceLandmark nose = face.getLandmark(FaceLandmark.NOSE_BASE);
 
             if (nose != null) {
-                landmark.put("nose", pointToMap(nose.getPosition()));
+                landmarks.put("nose", pointToMap(nose.getPosition()));
             }
 
-            // landmark eye
+            // landmark mouth
             FaceLandmark mouthLeft = face.getLandmark(FaceLandmark.MOUTH_LEFT);
             FaceLandmark mouthRight = face.getLandmark(FaceLandmark.MOUTH_RIGHT);
             FaceLandmark mouthBottom = face.getLandmark(FaceLandmark.MOUTH_BOTTOM);
 
             if (mouthLeft != null) {
-                mouth.put("left", pointToMap(mouthLeft.getPosition()));
+                landmarks.put("MOUTH_LEFT", pointToMap(mouthLeft.getPosition()));
             }
 
             if (mouthRight != null) {
-                mouth.put("right", pointToMap(mouthRight.getPosition()));
+                landmarks.put("MOUTH_RIGHT", pointToMap(mouthRight.getPosition()));
             }
 
             if (mouthBottom != null) {
-                mouth.put("bottom", pointToMap(mouthBottom.getPosition()));
+                landmarks.put("MOUTH_BOTTOM", pointToMap(mouthBottom.getPosition()));
             }
-
-            landmark.put("mouth", mouth);
-            item.put("landmark", landmark);
-
-            // If Contour detection is enabled.
-            Map<String, Object> contour = new HashMap<>();
-            Map<String, Object> cEye = new HashMap<>();
-            Map<String, Object> cEyebrow = new HashMap<>();
-            Map<String, Object> cNose = new HashMap<>();
-            Map<String, Object> cCheek = new HashMap<>();
-            Map<String, Object> cLip = new HashMap<>();
-
+            
+            item.put("landmarks", landmarks);
+            
+            Map<String, Object> contours = new HashMap<>();
             // Contour Face
             FaceContour faceContour = face.getContour(FaceContour.FACE);
 
             if (faceContour != null) {
-                contour.put("face", pointsToList(faceContour.getPoints()));
+                contours.put("FACE", pointsToList(faceContour.getPoints()));
             }
 
             // Contour Eye
@@ -173,14 +153,12 @@ public class FaceDetection {
             FaceContour rightEyeCountour = face.getContour(FaceContour.RIGHT_EYE);
 
             if (leftEyeCountour != null) {
-                cEye.put("left", pointsToList(leftEyeCountour.getPoints()));
+                contours.put("LEFT_EYE", pointsToList(leftEyeCountour.getPoints()));
             }
 
             if (rightEyeCountour != null) {
-                cEye.put("right", pointsToList(rightEyeCountour.getPoints()));
+                contours.put("RIGHT_EYE", pointsToList(rightEyeCountour.getPoints()));
             }
-
-            contour.put("eye", cEye);
 
             // Contour Eyebrow
             FaceContour leftTopEBCountour = face.getContour(FaceContour.LEFT_EYEBROW_TOP);
@@ -189,50 +167,44 @@ public class FaceDetection {
             FaceContour rightBottomEBCountour = face.getContour(FaceContour.RIGHT_EYEBROW_BOTTOM);
 
             if (leftTopEBCountour != null) {
-                cEyebrow.put("leftTop", pointsToList(leftTopEBCountour.getPoints()));
+                contours.put("LEFT_EYEBROW_TOP", pointsToList(leftTopEBCountour.getPoints()));
             }
 
             if (leftBottomEBCountour != null) {
-                cEyebrow.put("leftBottom", pointsToList(leftBottomEBCountour.getPoints()));
+                contours.put("LEFT_EYEBROW_BOTTOM", pointsToList(leftBottomEBCountour.getPoints()));
             }
 
             if (rightTopEBCountour != null) {
-                cEyebrow.put("rightTop", pointsToList(rightTopEBCountour.getPoints()));
+                contours.put("RIGHT_EYEBROW_TOP", pointsToList(rightTopEBCountour.getPoints()));
             }
 
             if (rightBottomEBCountour != null) {
-                cEyebrow.put("rightBottom", pointsToList(rightBottomEBCountour.getPoints()));
+                contours.put("RIGHT_EYEBROW_BOTTOM", pointsToList(rightBottomEBCountour.getPoints()));
             }
-
-            contour.put("eyebrow", cEyebrow);
 
             // Contour Nose
             FaceContour noseBridgeCountour = face.getContour(FaceContour.NOSE_BRIDGE);
             FaceContour noseBottomCountour = face.getContour(FaceContour.NOSE_BOTTOM);
 
             if (noseBridgeCountour != null) {
-                cNose.put("bridge", pointsToList(noseBridgeCountour.getPoints()));
+                contours.put("NOSE_BRIDGE", pointsToList(noseBridgeCountour.getPoints()));
             }
 
             if (noseBottomCountour != null) {
-                cNose.put("bottom", pointsToList(noseBottomCountour.getPoints()));
+                contours.put("NOSE_BOTTOM", pointsToList(noseBottomCountour.getPoints()));
             }
-
-            contour.put("nose", cNose);
 
             // Contour Cheek
             FaceContour leftCheekCountour = face.getContour(FaceContour.LEFT_CHEEK);
             FaceContour rightCheekCountour = face.getContour(FaceContour.RIGHT_CHEEK);
 
             if (leftCheekCountour != null) {
-                cCheek.put("left", pointsToList(leftCheekCountour.getPoints()));
+                contours.put("LEFT_CHEEK", pointsToList(leftCheekCountour.getPoints()));
             }
 
             if (rightCheekCountour != null) {
-                cCheek.put("right", pointsToList(rightCheekCountour.getPoints()));
+                contours.put("RIGHT_CHEEK", pointsToList(rightCheekCountour.getPoints()));
             }
-
-            contour.put("cheek", cCheek);
 
             // Contour Lip
             FaceContour upperTopLipCountour = face.getContour(FaceContour.UPPER_LIP_TOP);
@@ -241,44 +213,39 @@ public class FaceDetection {
             FaceContour lowerBottomLipCountour = face.getContour(FaceContour.LOWER_LIP_BOTTOM);
 
             if (upperTopLipCountour != null) {
-                cLip.put("upperTop", pointsToList(upperTopLipCountour.getPoints()));
+                contours.put("UPPER_LIP_TOP", pointsToList(upperTopLipCountour.getPoints()));
             }
 
             if (upperBottomLipCountour != null) {
-                cLip.put("upperBottom", pointsToList(upperBottomLipCountour.getPoints()));
+                contours.put("UPPER_LIP_BOTTOM", pointsToList(upperBottomLipCountour.getPoints()));
             }
 
             if (lowerTopLipCountour != null) {
-                cLip.put("lowerTop", pointsToList(lowerTopLipCountour.getPoints()));
+                contours.put("LOWER_LIP_TOP", pointsToList(lowerTopLipCountour.getPoints()));
             }
 
             if (lowerBottomLipCountour != null) {
-                cLip.put("lowerBottom", pointsToList(lowerBottomLipCountour.getPoints()));
+                contours.put("LOWER_LIP_BOTTOM", pointsToList(lowerBottomLipCountour.getPoints()));
             }
-
-            contour.put("lip", cLip);
-            item.put("contour", contour);
+            
+            item.put("contours", contours);
 
             // If classification was enabled:
             if (face.getSmilingProbability() != null) {
-                item.put("smile", face.getSmilingProbability());
+                item.put("smilingProbability", face.getSmilingProbability());
             }
 
-            Map<String, Object> eyeOpen = new HashMap<>();
-
             if (face.getLeftEyeOpenProbability() != null) {
-                eyeOpen.put("left", face.getLeftEyeOpenProbability());
+                item.put("leftEyeOpenProbability", face.getLeftEyeOpenProbability());
             }
 
             if (face.getRightEyeOpenProbability() != null) {
-                eyeOpen.put("right", face.getRightEyeOpenProbability());
+                item.put("rightEyeOpenProbability", face.getRightEyeOpenProbability());
             }
-
-            item.put("eyeOpen", eyeOpen);
 
             // If face tracking was enabled:
             if (face.getTrackingId() != null) {
-                item.put("id", face.getTrackingId());
+                item.put("trackingId", face.getTrackingId());
             }
 
             results.add(item);

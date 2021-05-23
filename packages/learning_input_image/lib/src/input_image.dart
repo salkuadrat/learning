@@ -18,13 +18,13 @@ class InputImage {
   });
 
   ///Create InputImage from File path
-  factory InputImage.fromFilePath(String path) {
-    return InputImage(type: 'file', path: path);
+  factory InputImage.fromFilePath(String path, {InputImageData? metadata}) {
+    return InputImage(type: 'file', path: path, metadata: metadata);
   }
 
   ///Create InputImage from File
-  factory InputImage.fromFile(File file) {
-    return InputImage(type: 'file', path: file.path);
+  factory InputImage.fromFile(File file, {InputImageData? metadata}) {
+    return InputImage(type: 'file', path: file.path, metadata: metadata);
   }
 
   ///Create InputImage from bytes

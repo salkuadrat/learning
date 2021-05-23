@@ -8,7 +8,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  
   learning_face_detection:
     path: ../
 

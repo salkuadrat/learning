@@ -1,3 +1,12 @@
 # InputImage
 
-InputImage model to be used by most of learning packages.
+Input image to be used by ML vision learning plugins.
+
+```
+$ flutter pub add flutter_input_image
+```
+
+```yaml
+dependencies:
+  flutter_input_image: ^0.0.2
+```

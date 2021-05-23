@@ -71,7 +71,7 @@ FaceDetector detector = FaceDetector(
 )
 ```
 
-But we can override this default behavior by passing other values to `FaceDetector`.
+But we can override this by passing other values to `FaceDetector`.
 
 <table>
   <tr>
@@ -110,8 +110,6 @@ But we can override this default behavior by passing other values to `FaceDetect
     <td>false, true</td>
   </tr>
 </table>
-
-
 
 ### Output
 

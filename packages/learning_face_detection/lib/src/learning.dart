@@ -1,9 +1,9 @@
-import 'package:learning_input_image/learning_input_image.dart';
+/* import 'package:learning_input_image/learning_input_image.dart';
 
 import 'detector.dart';
 
 class MLFaceDetection {
-  static Future<List<Map<String, dynamic>>> detect(
+  static Future<List> detect(
     InputImage image, {
     String performance = 'fast',
     String landmark = 'none',
@@ -20,8 +20,9 @@ class MLFaceDetection {
       minFaceSize: minFaceSize,
       enableTracking: enableTracking,
     );
-    List<Map<String, dynamic>> result = await detector.detect(image);
+    List result = await detector.detect(image);
     detector.dispose();
     return result;
   }
 }
+ */

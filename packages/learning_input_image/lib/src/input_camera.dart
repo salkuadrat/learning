@@ -132,11 +132,18 @@ class _InputCameraViewState extends State<InputCameraView> {
     PickedFile? pickedFile = await _imagePicker?.getImage(source: source);
 
     if (pickedFile != null) {
-      widget.onImage(InputImage.fromFilePath(pickedFile.path));
+      File image = new File(pickedFile.path);
 
       setState(() {
-        _image = File(pickedFile.path);
+        _image = image;
       });
+
+      final img = await decodeImageFromList(image.readAsBytesSync());
+
+      widget.onImage(InputImage.fromFile(image,
+          metadata: InputImageData(
+            size: Size(img.width.toDouble(), img.height.toDouble()),
+          )));
     }
 
     _refresh();

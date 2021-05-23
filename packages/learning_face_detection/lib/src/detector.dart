@@ -1,6 +1,8 @@
 import 'package:flutter/services.dart';
 import 'package:learning_input_image/learning_input_image.dart';
 
+import 'face.dart';
+
 class FaceDetector {
   final MethodChannel channel = MethodChannel('LearningFaceDetection');
   final String performance;
@@ -17,13 +19,13 @@ class FaceDetector {
     this.contour = 'none',
     this.minFaceSize = 0.15,
     this.enableTracking = false,
-  });
+  }) : assert(minFaceSize > 0.0 && minFaceSize <= 1.0);
 
-  Future<List<Map<String, dynamic>>> detect(InputImage image) async {
-    List<Map<String, dynamic>> result = [];
+  Future<List<Face>> detect(InputImage image) async {
+    List<Face> result = [];
 
     try {
-      result = await channel.invokeMethod('detect', <String, dynamic>{
+      List faces = await channel.invokeMethod('detect', <String, dynamic>{
         'image': image.json,
         'performance': performance,
         'landmark': landmark,
@@ -32,6 +34,10 @@ class FaceDetector {
         'minFaceSize': minFaceSize,
         'enableTracking': enableTracking,
       });
+
+      for (var face in faces) {
+        result.add(Face.from(face));
+      }
     } on PlatformException catch (e) {
       print(e.message);
     }

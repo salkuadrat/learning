@@ -15,7 +15,7 @@ class InputImageData {
 
   InputImageData(
       {required this.size,
-      required this.rotation,
+      this.rotation = InputImageRotation.ROTATION_0,
       this.format = InputImageFormat.NV21});
 
   ///Function to get the metadata of image processing purposes
