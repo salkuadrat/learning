@@ -9,10 +9,10 @@ The Entity Extraction allows you to recognize specific entities within static te
 ### Supported Entities
 
 <table>
-  <th>
+  <tr>
     <td>Entity</td>
     <td>Example</td>
-  </th>
+  </tr>
   <tr>
     <td>Address</td>
     <td>350 third street, Cambridge MA</td>
