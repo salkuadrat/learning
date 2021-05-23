@@ -90,6 +90,52 @@ Here is example of structure data inside `RecognizedText`.
   </tr>
 </table>
 
+<table>
+  <tr>
+    <th colspan="2">Line 0</td>
+  </tr>
+  <tr>
+    <td>Text</td>
+    <td>Wege der</td>
+  </tr>
+  <tr>
+    <td>Frame</td>
+    <td>(167.0, 261.0, 91.0, 28.0)</td>
+  </tr>
+  <tr>
+    <td>Corner Points</td>
+    <td>(167, 267), (255.82, 261.46), (257.19, 283.42), (168.36, 288.95)
+</td>
+  </tr>
+  <tr>
+    <td>Recognized Language Code</td>
+    <td>de</td>
+  </tr>
+  <tr>
+    <td>Elements</td>
+    <td>(2 elements)</td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th colspan="2">Element 0</td>
+  </tr>
+  <tr>
+    <td>Text</td>
+    <td>Wege</td>
+  </tr>
+  <tr>
+    <td>Frame</td>
+    <td>(167.0, 263.0, 59.0, 26.0)</td>
+  </tr>
+  <tr>
+    <td>Corner Points</td>
+    <td>(167, 267), (223.88, 263.45), (225.25, 285.41), (168.36, 288.95)
+</td>
+  </tr>
+</table>
+
 ### Dispose
 
 ```dart
