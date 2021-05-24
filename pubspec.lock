@@ -149,13 +149,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.1+1"
+  learning_face_detection:
+    dependency: "direct main"
+    description:
+      path: "packages/learning_face_detection"
+      relative: true
+    source: path
+    version: "0.0.1"
   learning_input_image:
     dependency: "direct main"
     description:
       name: learning_input_image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.1"
+    version: "0.0.3"
   learning_language:
     dependency: "direct main"
     description:
@@ -170,6 +177,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.1+1"
+  learning_text_recognition:
+    dependency: "direct main"
+    description:
+      path: "packages/learning_text_recognition"
+      relative: true
+    source: path
+    version: "0.0.1"
   learning_translate:
     dependency: "direct main"
     description:
