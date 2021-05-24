@@ -52,28 +52,15 @@ public class BarcodeScanning {
         List<Map<String, Object>> results = new ArrayList<>();
 
         for (Barcode barcode : barcodes) {
-            Rect bounds = barcode.getBoundingBox();
-            Point[] corners = barcode.getCornerPoints();
-
             Map<String, Object> item = new HashMap<>();
-            item.put("rawValue", barcode.getRawValue());
-
-            Map<String, Object> itemBounds = new HashMap<>();
-            if (bounds != null) {
-                itemBounds.put("top", bounds.top);
-                itemBounds.put("left", bounds.left);
-                itemBounds.put("right", bounds.right);
-                itemBounds.put("bottom", bounds.bottom);
-            }
-            item.put("bounds", itemBounds);
-
+            item.put("value", barcode.getRawValue());
+            item.put("boundingBox", rectToMap(barcode.getBoundingBox()));
+            
+            Point[] corners = barcode.getCornerPoints();
             List<Map<String, Object>> itemCorners = new ArrayList<>();
             if (corners != null) {
                 for (Point corner : corners) {
-                    Map<String, Object> itemCorner = new HashMap<>();
-                    itemCorner.put("x", corner.x);
-                    itemCorner.put("y", corner.y);
-                    itemCorners.add(itemCorner);
+                    itemCorners.add(pointToMap(corner));
                 }
             }
             item.put("corners", itemCorners);
@@ -215,7 +202,13 @@ public class BarcodeScanning {
                     }
                     break;
                 case Barcode.TYPE_ISBN:
+                    item.put("type", "ISBN");
+                    results.add(item);
+                    break;
                 case Barcode.TYPE_PRODUCT:
+                    item.put("type", "PRODUCT");
+                    results.add(item);
+                    break;
                 case Barcode.TYPE_UNKNOWN:
                 default:
                     break;
@@ -223,6 +216,22 @@ public class BarcodeScanning {
         }
 
         result.success(results);
+    }
+
+    Map<String, Object> rectToMap(@NonNull Rect bounds) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("top", bounds.top);
+        result.put("left", bounds.left);
+        result.put("right", bounds.right);
+        result.put("bottom", bounds.bottom);
+        return result;
+    }
+
+    Map<String, Object> pointToMap(@NonNull Point point) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("x", point.x);
+        result.put("y", point.y);
+        return result;
     }
 
     public void dispose() {

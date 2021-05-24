@@ -1,3 +1,8 @@
+## [0.0.4] - 24 May 2021
+
+* Restructure back widget _live inside InputCameraView
+* Add InputCameraType (rear / front) to set default camera view.
+
 ## [0.0.3] - 24 May 2021
 
 * Restructure widget _live inside InputCameraView

@@ -7,19 +7,19 @@ class ImageLabeling {
 
   ImageLabeling({this.confidenceThreshold = 0.8});
 
-  Future<List<Map<String, dynamic>>> process(InputImage image) async {
-    List<Map<String, dynamic>> result = [];
-
+  Future<List> process(InputImage image) async {
     try {
-      result = await channel.invokeMethod('process', <String, dynamic>{
+      List result = await channel.invokeMethod('process', <String, dynamic>{
         'image': image.json,
         'confidenceThreshold': confidenceThreshold,
       });
+
+      return result;
     } on PlatformException catch (e) {
       print(e.message);
     }
 
-    return result;
+    return [];
   }
 
   Future dispose() async {

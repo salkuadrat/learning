@@ -91,14 +91,7 @@ class FacePainter extends CustomPainter {
       ..style = PaintingStyle.fill
       ..color = landmarkColor!;
 
-    canvas.drawCircle(
-      Offset(
-        transformX(point.dx, size),
-        transformY(point.dy, size),
-      ),
-      landmarkRadius,
-      paint,
-    );
+    canvas.drawCircle(transform(point, size), landmarkRadius, paint);
   }
 
   void _paintContour(List<Offset> points, Canvas canvas, Size size) {
@@ -197,6 +190,10 @@ class FacePainter extends CustomPainter {
     final path = Path();
     path.addPolygon(points, true);
     canvas.drawPath(path, paint);
+  }
+
+  Offset transform(Offset point, Size size) {
+    return Offset(transformX(point.dx, size), transformY(point.dy, size));
   }
 
   double transformX(double x, Size size) {

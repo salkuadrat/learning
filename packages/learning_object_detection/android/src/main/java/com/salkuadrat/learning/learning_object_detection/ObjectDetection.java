@@ -41,7 +41,7 @@ public class ObjectDetection {
         detector = com.google.mlkit.vision.objects.ObjectDetection.getClient(options);
     }
 
-    public void process(@NonNull InputImage image, @NonNull final MethodChannel.Result result) {
+    public void detect(@NonNull InputImage image, @NonNull final MethodChannel.Result result) {
         detector.process(image)
             .addOnSuccessListener(
                 new OnSuccessListener<List<DetectedObject>>() {
@@ -65,7 +65,7 @@ public class ObjectDetection {
         for (DetectedObject object : objects) {
             Map<String, Object> objectData = new HashMap<>();
             objectData.put("trackingId", object.getTrackingId());
-            objectData.put("bounds", rectToMap(object.getBoundingBox()));
+            objectData.put("boundingBox", rectToMap(object.getBoundingBox()));
 
             List<Map<String, Object>> labelsData = new ArrayList<>();
             for (DetectedObject.Label label : object.getLabels()) {

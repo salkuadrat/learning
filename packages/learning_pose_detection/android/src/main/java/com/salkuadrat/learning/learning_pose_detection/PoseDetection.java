@@ -56,15 +56,15 @@ public class PoseDetection {
     private void process(Pose pose, MethodChannel.Result result) {
         // Get all PoseLandmarks. If no person was detected, the list will be empty
         List<PoseLandmark> allPoseLandmarks = pose.getAllPoseLandmarks();
-        List<Map<String, Object>> results = new ArrayList<>();
+        Map<String, Object> results = new HashMap<>();
 
         for (PoseLandmark landmark : allPoseLandmarks) {
             Map<String, Object> item = new HashMap<>();
-            item.put("type", getLandmarkType(landmark.getLandmarkType()));
+            String type = getLandmarkType(landmark.getLandmarkType());
             item.put("inFrameLikelihood", landmark.getInFrameLikelihood());
             item.put("position", pointToMap(landmark.getPosition()));
             item.put("position3D", point3DToMap(landmark.getPosition3D()));
-            results.add(item);
+            results.put(type, item);
         }
 
         result.success(results);
@@ -125,6 +125,10 @@ public class PoseDetection {
                 return "LEFT_THUMB";
             case PoseLandmark.RIGHT_THUMB:
                 return "RIGHT_THUMB";
+            case PoseLandmark.LEFT_INDEX:
+                return "LEFT_INDEX";
+            case PoseLandmark.RIGHT_INDEX:
+                return "RIGHT_INDEX";
             case PoseLandmark.LEFT_PINKY:
                 return "LEFT_PINKY";
             case PoseLandmark.RIGHT_PINKY:
@@ -137,6 +141,10 @@ public class PoseDetection {
                 return "LEFT_KNEE";
             case PoseLandmark.RIGHT_KNEE:
                 return "RIGHT_KNEE";
+            case PoseLandmark.LEFT_ANKLE:
+                return "LEFT_ANKLE";
+            case PoseLandmark.RIGHT_ANKLE:
+                return "RIGHT_ANKLE";
             case PoseLandmark.LEFT_HEEL:
                 return "LEFT_HEEL";
             case PoseLandmark.RIGHT_HEEL:

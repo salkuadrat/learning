@@ -14,6 +14,7 @@ import 'input_image_data.dart';
 import 'shared.dart';
 
 enum InputCameraMode { live, gallery }
+enum InputCameraType { front, rear }
 
 class InputCameraView extends StatefulWidget {
   InputCameraView({
@@ -21,6 +22,7 @@ class InputCameraView extends StatefulWidget {
     required this.title,
     this.overlay,
     this.mode = InputCameraMode.live,
+    this.cameraDefault = InputCameraType.rear,
     this.canSwitchMode = true,
     this.action,
     this.onTapAction,
@@ -30,6 +32,7 @@ class InputCameraView extends StatefulWidget {
   final String title;
   final Widget? overlay;
   final InputCameraMode mode;
+  final InputCameraType cameraDefault;
   final bool canSwitchMode;
   final String? action;
   final void Function()? onTapAction;
@@ -76,7 +79,8 @@ class _InputCameraViewState extends State<InputCameraView> {
 
   Future<void> _initializeCamera() async {
     cameras = await availableCameras();
-    if (cameras.length > 1) {
+
+    if (cameras.length > 1 && widget.cameraDefault == InputCameraType.front) {
       _cameraIndex = 1;
     }
   }
@@ -194,7 +198,8 @@ class _InputCameraViewState extends State<InputCameraView> {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            CameraPreview(_controller!, child: widget.overlay),
+            CameraPreview(_controller!),
+            widget.overlay ?? Container(),
           ],
         ),
       );

@@ -1,4 +1,4 @@
-import 'package:learning_input_image/learning_input_image.dart';
+/* import 'package:learning_input_image/learning_input_image.dart';
 
 import 'image_labeling.dart';
 
@@ -13,3 +13,4 @@ class MLImageLabeling {
     return result;
   }
 }
+ */

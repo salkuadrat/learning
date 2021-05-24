@@ -1,8 +1,9 @@
 import 'package:flutter/services.dart';
 import 'package:learning_input_image/learning_input_image.dart';
+import 'package:learning_object_detection/src/model.dart';
 
 class ObjectDetector {
-  final MethodChannel channel = MethodChannel('LearningObjectDetector');
+  final MethodChannel channel = MethodChannel('LearningObjectDetection');
   final bool isStream;
   final bool enableClassification;
   final bool enableTracking;
@@ -13,21 +14,21 @@ class ObjectDetector {
     this.enableTracking = false,
   });
 
-  Future<List<Map<String, dynamic>>> detect(InputImage image) async {
-    List<Map<String, dynamic>> result = [];
-
+  Future<List<DetectedObject>> detect(InputImage image) async {
     try {
-      result = await channel.invokeMethod('detect', <String, dynamic>{
+      List result = await channel.invokeMethod('detect', <String, dynamic>{
         'image': image.json,
         'isStream': isStream,
         'enableClassification': enableClassification,
         'enableTracking': enableTracking,
       });
+
+      return result.map((object) => DetectedObject.from(object)).toList();
     } on PlatformException catch (e) {
       print(e.message);
     }
 
-    return result;
+    return [];
   }
 
   Future dispose() async {

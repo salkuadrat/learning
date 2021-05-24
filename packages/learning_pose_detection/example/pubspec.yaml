@@ -8,7 +8,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  
+  provider: ^5.0.0
   learning_pose_detection:
     path: ../
 

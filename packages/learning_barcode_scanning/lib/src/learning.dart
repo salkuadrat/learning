@@ -1,4 +1,4 @@
-import 'package:learning_input_image/learning_input_image.dart';
+/* import 'package:learning_input_image/learning_input_image.dart';
 import 'shared.dart';
 import 'scanner.dart';
 
@@ -11,3 +11,4 @@ class MLBarcodeScanning {
     return result;
   }
 }
+ */

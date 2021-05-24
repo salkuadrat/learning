@@ -24,10 +24,8 @@ class FaceDetector {
   }) : assert(minFaceSize > 0.0 && minFaceSize <= 1.0);
 
   Future<List<Face>> detect(InputImage image) async {
-    List<Face> result = [];
-
     try {
-      List faces = await channel.invokeMethod('detect', <String, dynamic>{
+      List result = await channel.invokeMethod('detect', <String, dynamic>{
         'image': image.json,
         'minFaceSize': minFaceSize,
         'performance': mode == FaceDetectorMode.accurate ? 'accurate' : 'fast',
@@ -37,14 +35,12 @@ class FaceDetector {
         'enableTracking': enableTracking,
       });
 
-      for (var face in faces) {
-        result.add(Face.from(face));
-      }
+      return result.map((face) => Face.from(face)).toList();
     } on PlatformException catch (e) {
       print(e.message);
     }
 
-    return result;
+    return [];
   }
 
   Future<void> dispose() async {

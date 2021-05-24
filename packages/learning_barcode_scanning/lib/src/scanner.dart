@@ -9,19 +9,19 @@ class BarcodeScanner {
 
   BarcodeScanner({this.formats = const []});
 
-  Future<List<Map<String, dynamic>>> scan(InputImage image) async {
-    List<Map<String, dynamic>> result = [];
-
+  Future<List> scan(InputImage image) async {
     try {
-      result = await channel.invokeMethod('scan', <String, dynamic>{
+      List result = await channel.invokeMethod('scan', <String, dynamic>{
         'image': image.json,
         'formats': formatsToString(formats),
       });
+
+      return result;
     } on PlatformException catch (e) {
       print(e.message);
     }
 
-    return result;
+    return [];
   }
 
   Future dispose() async {

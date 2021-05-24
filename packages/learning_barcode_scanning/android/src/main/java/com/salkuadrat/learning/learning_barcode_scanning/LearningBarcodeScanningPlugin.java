@@ -33,7 +33,7 @@ public class LearningBarcodeScanningPlugin implements FlutterPlugin, MethodCallH
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
         applicationContext = flutterPluginBinding.getApplicationContext();
-        channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "learning_barcode_scanning");
+        channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "LearningBarcodeScanning");
         channel.setMethodCallHandler(this);
     }
 
@@ -57,8 +57,8 @@ public class LearningBarcodeScanningPlugin implements FlutterPlugin, MethodCallH
         String formats = call.argument("formats");
 
         if (formats != null) {
-            int count = formats.length();
             String[] formatItems = formats.split(",");
+            int count = formatItems.length;
 
             int[] formatValues = new int[count];
 
@@ -151,19 +151,20 @@ public class LearningBarcodeScanningPlugin implements FlutterPlugin, MethodCallH
                     return null;
                 }
             } else if (type.equals("bytes")) {
-                Map<String, Object> metaData = (Map<String, Object>) data.get("metadata");
+                Map metaData = (Map) data.get("metadata");
+
                 if (metaData != null) {
                     Object _bytes = data.get("bytes");
-                    Integer _width = (Integer) metaData.get("width");
-                    Integer _height = (Integer) metaData.get("height");
+                    Double _width = (Double) metaData.get("width");
+                    Double _height = (Double) metaData.get("height");
                     Integer _rotation = (Integer) metaData.get("rotation");
                     Integer _imageFormat = (Integer) metaData.get("imageFormat");
 
                     if (_bytes != null) {
                         inputImage = InputImage.fromByteArray(
                             (byte[]) _bytes,
-                            _width != null ? _width : 0,
-                            _height != null ? _height : 0,
+                            _width != null ? _width.intValue() : 0,
+                            _height != null ? _height.intValue() : 0,
                             _rotation != null ? _rotation : 0,
                             _imageFormat != null ? _imageFormat : 0
                         );

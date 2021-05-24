@@ -43,7 +43,7 @@ import 'package:learning_input_image/learning_input_image.dart';
 InputCameraView(
   title: 'Face Detection',
   onImage: (InputImage image) {
-    // now we can feed the input image into face detection process
+    // now we can feed the input image into face detector
   },
 )
 ```

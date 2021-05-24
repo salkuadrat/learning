@@ -100,7 +100,6 @@ class _FaceDetectionPageState extends State<FaceDetectionPage> {
   @override
   Widget build(BuildContext context) {
     return InputCameraView(
-      mode: InputCameraMode.gallery,
       title: 'Face Detection',
       onImage: _detectFaces,
       overlay: Consumer<FaceDetectionData>(

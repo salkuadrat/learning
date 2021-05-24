@@ -32,7 +32,7 @@ public class LearningSelfieSegmentationPlugin implements FlutterPlugin, MethodCa
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
         applicationContext = flutterPluginBinding.getApplicationContext();
-        channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "learning_selfie_segmentation");
+        channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "LearningSelfieSegmentation");
         channel.setMethodCallHandler(this);
     }
 
@@ -101,19 +101,20 @@ public class LearningSelfieSegmentationPlugin implements FlutterPlugin, MethodCa
                     return null;
                 }
             } else if (type.equals("bytes")) {
-                Map<String, Object> metaData = (Map<String, Object>) data.get("metadata");
+                Map metaData = (Map) data.get("metadata");
+
                 if (metaData != null) {
                     Object _bytes = data.get("bytes");
-                    Integer _width = (Integer) metaData.get("width");
-                    Integer _height = (Integer) metaData.get("height");
+                    Double _width = (Double) metaData.get("width");
+                    Double _height = (Double) metaData.get("height");
                     Integer _rotation = (Integer) metaData.get("rotation");
                     Integer _imageFormat = (Integer) metaData.get("imageFormat");
 
                     if (_bytes != null) {
                         inputImage = InputImage.fromByteArray(
                             (byte[]) _bytes,
-                            _width != null ? _width : 0,
-                            _height != null ? _height : 0,
+                            _width != null ? _width.intValue() : 0,
+                            _height != null ? _height.intValue() : 0,
                             _rotation != null ? _rotation : 0,
                             _imageFormat != null ? _imageFormat : 0
                         );

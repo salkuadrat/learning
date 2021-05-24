@@ -2,39 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:learning_input_image/learning_input_image.dart';
 
-import 'face.dart';
 import 'painter.dart';
+import 'pose.dart';
 
-class FaceOverlay extends StatelessWidget {
-  final List<Face> faces;
+class PoseOverlay extends StatelessWidget {
+  final Pose pose;
   final Size size;
   final Size? originalSize;
-  final Color? landmarkColor;
-  final Color? contourColor;
-  final Color? boundStrokeColor;
   final InputImageRotation rotation;
+  final Color? color;
 
-  const FaceOverlay({
+  const PoseOverlay({
     Key? key,
+    required this.pose,
     required this.size,
     this.originalSize,
     this.rotation = InputImageRotation.ROTATION_0,
-    this.faces = const [],
-    this.landmarkColor,
-    this.contourColor,
-    this.boundStrokeColor,
+    this.color,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: FacePainter(
-        faces: faces,
+      painter: PosePainter(
+        pose: pose,
         imageSize: originalSize ?? size,
         rotation: rotation,
-        landmarkColor: landmarkColor ?? Colors.red,
-        contourColor: contourColor ?? Theme.of(context).primaryColor,
-        boundStrokeColor: boundStrokeColor ?? Colors.red,
       ),
       child: Container(
         width: size.width,
