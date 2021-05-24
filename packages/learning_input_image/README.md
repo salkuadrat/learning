@@ -8,5 +8,5 @@ $ flutter pub add flutter_input_image
 
 ```yaml
 dependencies:
-  flutter_input_image: ^0.0.2
+  flutter_input_image: ^0.0.3
 ```

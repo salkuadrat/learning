@@ -1,18 +1,18 @@
 import 'package:flutter/rendering.dart';
 
 class Face {
-  Rect bound;
+  Rect boundingBox;
   double headAngleY;
   double headAngleZ;
   int? trackingId;
-  Map<FaceLandmarkTag, FaceLandmark> landmarks;
-  Map<FaceContourTag, FaceContour> countours;
+  Map<FaceLandmarkType, FaceLandmark> landmarks;
+  Map<FaceContourType, FaceContour> countours;
   double? smilingProbability;
   double? leftEyeOpenProbability;
   double? rightEyeOpenProbability;
 
   Face({
-    required this.bound,
+    required this.boundingBox,
     this.headAngleY = 0.0,
     this.headAngleZ = 0.0,
     this.trackingId,
@@ -24,19 +24,19 @@ class Face {
   });
 
   factory Face.from(Map json) {
-    Map<FaceLandmarkTag, FaceLandmark> landmarks = {};
-    Map<FaceContourTag, FaceContour> contours = {};
+    Map<FaceLandmarkType, FaceLandmark> landmarks = {};
+    Map<FaceContourType, FaceContour> contours = {};
 
     if (json.containsKey('landmarks')) {
       Map lmap = json['landmarks'];
 
       for (String key in lmap.keys) {
-        FaceLandmarkTag? tag = strToFaceLandmarkTag(key);
+        FaceLandmarkType? type = toFaceLandmarkType(key);
         Map point = lmap[key];
 
-        if (tag != null) {
-          landmarks[tag] = FaceLandmark(
-            tag: tag,
+        if (type != null) {
+          landmarks[type] = FaceLandmark(
+            type: type,
             point: toPoint(point),
           );
         }
@@ -47,12 +47,12 @@ class Face {
       Map cmap = json['contours'];
 
       for (String key in cmap.keys) {
-        FaceContourTag? tag = strToFaceContourTag(key);
+        FaceContourType? type = toFaceContourType(key);
         List points = cmap[key];
 
-        if (tag != null) {
-          contours[tag] = FaceContour(
-            tag: tag,
+        if (type != null) {
+          contours[type] = FaceContour(
+            type: type,
             points: toPoints(points),
           );
         }
@@ -60,7 +60,7 @@ class Face {
     }
 
     return Face(
-      bound: toRect(json['bound']),
+      boundingBox: toRect(json['bound']),
       headAngleY: json['headAngleY'] as double,
       headAngleZ: json['headAngleZ'] as double,
       trackingId:
@@ -81,26 +81,26 @@ class Face {
 }
 
 class FaceLandmark {
-  final FaceLandmarkTag tag;
+  final FaceLandmarkType type;
   final Offset point;
 
   FaceLandmark({
-    required this.tag,
+    required this.type,
     required this.point,
   });
 }
 
 class FaceContour {
-  final FaceContourTag tag;
+  final FaceContourType type;
   final List<Offset> points;
 
   FaceContour({
-    required this.tag,
+    required this.type,
     this.points = const [],
   });
 }
 
-enum FaceLandmarkTag {
+enum FaceLandmarkType {
   LEFT_EYE,
   RIGHT_EYE,
   LEFT_EAR,
@@ -113,7 +113,7 @@ enum FaceLandmarkTag {
   MOUTH_BOTTOM,
 }
 
-enum FaceContourTag {
+enum FaceContourType {
   FACE,
   LEFT_EYE,
   RIGHT_EYE,
@@ -131,65 +131,65 @@ enum FaceContourTag {
   LOWER_LIP_BOTTOM,
 }
 
-FaceLandmarkTag? strToFaceLandmarkTag(String tag) {
-  switch (tag) {
+FaceLandmarkType? toFaceLandmarkType(String type) {
+  switch (type) {
     case 'LEFT_EYE':
-      return FaceLandmarkTag.LEFT_EYE;
+      return FaceLandmarkType.LEFT_EYE;
     case 'RIGHT_EYE':
-      return FaceLandmarkTag.RIGHT_EYE;
+      return FaceLandmarkType.RIGHT_EYE;
     case 'LEFT_EAR':
-      return FaceLandmarkTag.LEFT_EAR;
+      return FaceLandmarkType.LEFT_EAR;
     case 'RIGHT_EAR':
-      return FaceLandmarkTag.RIGHT_EAR;
+      return FaceLandmarkType.RIGHT_EAR;
     case 'LEFT_CHEEK':
-      return FaceLandmarkTag.LEFT_CHEEK;
+      return FaceLandmarkType.LEFT_CHEEK;
     case 'RIGHT_CHEEK':
-      return FaceLandmarkTag.RIGHT_CHEEK;
+      return FaceLandmarkType.RIGHT_CHEEK;
     case 'NOSE_BASE':
-      return FaceLandmarkTag.NOSE_BASE;
+      return FaceLandmarkType.NOSE_BASE;
     case 'MOUTH_LEFT':
-      return FaceLandmarkTag.MOUTH_LEFT;
+      return FaceLandmarkType.MOUTH_LEFT;
     case 'MOUTH_RIGHT':
-      return FaceLandmarkTag.MOUTH_RIGHT;
+      return FaceLandmarkType.MOUTH_RIGHT;
     case 'MOUTH_BOTTOM':
-      return FaceLandmarkTag.MOUTH_BOTTOM;
+      return FaceLandmarkType.MOUTH_BOTTOM;
     default:
       return null;
   }
 }
 
-FaceContourTag? strToFaceContourTag(String tag) {
-  switch (tag) {
+FaceContourType? toFaceContourType(String type) {
+  switch (type) {
     case 'FACE':
-      return FaceContourTag.FACE;
+      return FaceContourType.FACE;
     case 'LEFT_EYE':
-      return FaceContourTag.LEFT_EYE;
+      return FaceContourType.LEFT_EYE;
     case 'RIGHT_EYE':
-      return FaceContourTag.RIGHT_EYE;
+      return FaceContourType.RIGHT_EYE;
     case 'LEFT_EYEBROW_TOP':
-      return FaceContourTag.LEFT_EYEBROW_TOP;
+      return FaceContourType.LEFT_EYEBROW_TOP;
     case 'LEFT_EYEBROW_BOTTOM':
-      return FaceContourTag.LEFT_EYEBROW_BOTTOM;
+      return FaceContourType.LEFT_EYEBROW_BOTTOM;
     case 'RIGHT_EYEBROW_TOP':
-      return FaceContourTag.RIGHT_EYEBROW_TOP;
+      return FaceContourType.RIGHT_EYEBROW_TOP;
     case 'RIGHT_EYEBROW_BOTTOM':
-      return FaceContourTag.RIGHT_EYEBROW_BOTTOM;
+      return FaceContourType.RIGHT_EYEBROW_BOTTOM;
     case 'NOSE_BRIDGE':
-      return FaceContourTag.NOSE_BRIDGE;
+      return FaceContourType.NOSE_BRIDGE;
     case 'NOSE_BOTTOM':
-      return FaceContourTag.NOSE_BOTTOM;
+      return FaceContourType.NOSE_BOTTOM;
     case 'LEFT_CHEEK':
-      return FaceContourTag.LEFT_CHEEK;
+      return FaceContourType.LEFT_CHEEK;
     case 'RIGHT_CHEEK':
-      return FaceContourTag.RIGHT_CHEEK;
+      return FaceContourType.RIGHT_CHEEK;
     case 'UPPER_LIP_TOP':
-      return FaceContourTag.UPPER_LIP_TOP;
+      return FaceContourType.UPPER_LIP_TOP;
     case 'UPPER_LIP_BOTTOM':
-      return FaceContourTag.UPPER_LIP_BOTTOM;
+      return FaceContourType.UPPER_LIP_BOTTOM;
     case 'LOWER_LIP_TOP':
-      return FaceContourTag.LOWER_LIP_TOP;
+      return FaceContourType.LOWER_LIP_TOP;
     case 'LOWER_LIP_BOTTOM':
-      return FaceContourTag.LOWER_LIP_BOTTOM;
+      return FaceContourType.LOWER_LIP_BOTTOM;
     default:
       return null;
   }

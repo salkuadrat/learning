@@ -62,12 +62,12 @@ print(result);
 
 ```dart
 FaceDetector detector = FaceDetector(
-  performance: 'fast',
-  landmark: 'none',
-  classification: 'none',
-  contour: 'none',
-  minFaceSize: 0.15,
+  mode: FaceDetectorMode.fast,
+  detectLandmark: true,
+  detectContour: true,
+  enableClassification: false,
   enableTracking: false,
+  minFaceSize: 0.15,
 )
 ```
 
@@ -76,38 +76,38 @@ But we can override this by passing other values to `FaceDetector`.
 <table>
   <tr>
     <th>Parameter</th>
-    <th>Default</th>
     <th>Value</th>
+    <th>Default</th>
   </tr>
   <tr>
-    <td>performance</td>
-    <td>fast</td>
-    <td>fast, accurate</td>
+    <td>mode</td>
+    <td>FaceDetectorMode.fast / FaceDetectorMode.accurate</td>
+    <td>FaceDetectorMode.fast</td>
   </tr>
   <tr>
-    <td>landmark</td>
-    <td>none</td>
-    <td>none, all</td>
+    <td>detectLandmark</td>
+    <td>false / true</td>
+    <td>false</td>
   </tr>
   <tr>
-    <td>classification</td>
-    <td>none</td>
-    <td>none, all</td>
+    <td>detectContour</td>
+    <td>false / true</td>
+    <td>false</td>
   </tr>
   <tr>
-    <td>contour</td>
-    <td>none</td>
-    <td>none, all</td>
-  </tr>
-  <tr>
-    <td>minFaceSize</td>
-    <td>0.15</td>
-    <td>Any value between 0.0 and 1.0</td>
+    <td>enableClassification</td>
+    <td>false / true</td>
+    <td>false</td>
   </tr>
   <tr>
     <td>enableTracking</td>
-    <td>false</td>
     <td>false, true</td>
+    <td>false</td>
+  </tr>
+  <tr>
+    <td>minFaceSize</td>
+    <td>Any value between 0.0 and 1.0</td>
+    <td>0.15</td>
   </tr>
 </table>
 

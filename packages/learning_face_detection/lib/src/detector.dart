@@ -3,21 +3,23 @@ import 'package:learning_input_image/learning_input_image.dart';
 
 import 'face.dart';
 
+enum FaceDetectorMode { fast, accurate }
+
 class FaceDetector {
   final MethodChannel channel = MethodChannel('LearningFaceDetection');
-  final String performance;
-  final String landmark;
-  final String classification;
-  final String contour;
   final double minFaceSize;
+  final bool detectLandmark;
+  final bool detectContour;
+  final bool enableClassification;
   final bool enableTracking;
+  final FaceDetectorMode mode;
 
   FaceDetector({
-    this.performance = 'fast',
-    this.landmark = 'none',
-    this.classification = 'none',
-    this.contour = 'none',
+    this.mode = FaceDetectorMode.fast,
     this.minFaceSize = 0.15,
+    this.detectLandmark = false,
+    this.detectContour = false,
+    this.enableClassification = false,
     this.enableTracking = false,
   }) : assert(minFaceSize > 0.0 && minFaceSize <= 1.0);
 
@@ -27,11 +29,11 @@ class FaceDetector {
     try {
       List faces = await channel.invokeMethod('detect', <String, dynamic>{
         'image': image.json,
-        'performance': performance,
-        'landmark': landmark,
-        'classification': classification,
-        'contour': contour,
         'minFaceSize': minFaceSize,
+        'performance': mode == FaceDetectorMode.accurate ? 'accurate' : 'fast',
+        'landmark': detectLandmark ? 'all' : 'none',
+        'contour': detectContour ? 'all' : 'none',
+        'classification': enableClassification ? 'all' : 'none',
         'enableTracking': enableTracking,
       });
 

@@ -54,11 +54,9 @@ class _InputCameraViewState extends State<InputCameraView> {
   @override
   void initState() {
     _mode = widget.mode;
-    super.initState();
-
     _imagePicker = ImagePicker();
-    if (cameras.length > 1) _cameraIndex = 1;
 
+    super.initState();
     WidgetsBinding.instance?.addPostFrameCallback((_) async {
       await _initializeCamera();
       if (_isLive) await _startLiveStream();
@@ -78,6 +76,9 @@ class _InputCameraViewState extends State<InputCameraView> {
 
   Future<void> _initializeCamera() async {
     cameras = await availableCameras();
+    if (cameras.length > 1) {
+      _cameraIndex = 1;
+    }
   }
 
   Future<void> _restartLiveStream() async {
@@ -192,9 +193,8 @@ class _InputCameraViewState extends State<InputCameraView> {
         color: Colors.black,
         child: Stack(
           fit: StackFit.expand,
-          children: <Widget>[
-            CameraPreview(_controller!),
-            widget.overlay ?? Container(),
+          children: [
+            CameraPreview(_controller!, child: widget.overlay),
           ],
         ),
       );
@@ -243,7 +243,7 @@ class _InputCameraViewState extends State<InputCameraView> {
           height: 360,
           width: 360,
           child: Stack(
-            fit: StackFit.expand,
+            alignment: Alignment.center,
             children: <Widget>[
               Image.file(_image!),
               widget.overlay ?? Container(),

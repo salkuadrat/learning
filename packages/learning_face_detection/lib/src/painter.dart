@@ -1,33 +1,43 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:learning_input_image/learning_input_image.dart';
 
-class CirclePainter extends CustomPainter {
-  final Offset center;
-  final double radius;
-  final bool? stroke;
-  final Color? strokeColor;
-  final double? strokeOpacity;
-  final double? strokeWidth;
-  final StrokeCap? strokeCap;
-  final StrokeJoin? strokeJoin;
-  final bool? fill;
-  final Color? fillColor;
-  final double? fillOpacity;
+import 'face.dart';
 
-  CirclePainter({
-    required this.center,
-    this.radius = 0.0,
-    this.stroke,
-    this.strokeColor,
-    this.strokeOpacity,
-    this.strokeWidth,
-    this.strokeCap,
-    this.strokeJoin,
-    this.fill,
-    this.fillColor,
-    this.fillOpacity,
+class FacePainter extends CustomPainter {
+  final List<Face> faces;
+  final Size imageSize;
+  final InputImageRotation rotation;
+
+  final bool boundFill;
+  final bool boundStroke;
+  final Color? boundFillColor;
+  final Color? boundStrokeColor;
+  final double boundStrokeWidth;
+
+  final bool paintLandmark;
+  final double landmarkRadius;
+  final Color? landmarkColor;
+
+  final bool paintContour;
+  final double contourStrokeWidth;
+  final Color? contourColor;
+
+  FacePainter({
+    this.faces = const [],
+    required this.imageSize,
+    required this.rotation,
+    this.boundFill = false,
+    this.boundStroke = true,
+    this.boundFillColor,
+    this.boundStrokeColor,
+    this.boundStrokeWidth = 1.0,
+    this.paintLandmark = true,
+    this.landmarkRadius = 2.0,
+    this.landmarkColor,
+    this.paintContour = true,
+    this.contourStrokeWidth = 0.5,
+    this.contourColor,
   });
 
   @override
@@ -35,97 +45,139 @@ class CirclePainter extends CustomPainter {
     final rect = Offset.zero & size;
     canvas.clipRect(rect);
 
-    // always check for strokeWidth and strokeColor before painting the stroke
-    final isPaintStroke =
-        stroke! && (strokeWidth! > 0) && (strokeColor != null);
-    final isPaintFill = fill! && (fillColor != null);
-
-    if (isPaintStroke) {
-      final paint = Paint()
-        ..style = PaintingStyle.stroke
-        ..color = strokeColor!.withOpacity(strokeOpacity!)
-        ..strokeCap = strokeCap!
-        ..strokeJoin = strokeJoin!
-        ..strokeWidth = strokeWidth!;
-
-      canvas.drawCircle(center, radius, paint);
-    }
-
-    if (isPaintFill) {
-      final paint = Paint()
-        ..style = PaintingStyle.fill
-        ..color = fillColor!.withOpacity(fillOpacity!);
-
-      canvas.drawCircle(center, radius, paint);
-    }
-  }
-
-  @override
-  bool shouldRepaint(CirclePainter oldCircle) => false;
-}
-
-class PolylinePainter extends CustomPainter {
-  final List<Offset> points;
-  final Color? strokeColor;
-  final double? strokeWidth;
-  final double? strokeOpacity;
-  final StrokeCap? strokeCap;
-  final StrokeJoin? strokeJoin;
-  final PathFillType? pathFillType;
-  final bool? isDotted;
-  final bool? culling;
-
-  PolylinePainter({
-    this.points = const [],
-    this.strokeColor,
-    this.strokeWidth,
-    this.strokeOpacity,
-    this.strokeCap,
-    this.strokeJoin,
-    this.pathFillType,
-    this.isDotted,
-    this.culling,
-  });
-
-  bool get hasPoints => points.isNotEmpty;
-  bool get noPoints => !hasPoints;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final rect = Offset.zero & size;
-    canvas.clipRect(rect);
-
-    if (noPoints) {
+    if (faces.isEmpty) {
       return;
     }
 
-    final radius = strokeWidth! / 2;
-    final spacing = strokeWidth! * 1.5;
-
-    final paint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = strokeWidth!
-      ..strokeCap = strokeCap!
-      ..strokeJoin = strokeJoin!
-      ..blendMode = BlendMode.srcOver;
-
-    paint.color = strokeColor!.withOpacity(strokeOpacity!);
-
-    canvas.saveLayer(rect, paint);
-
-    if (isDotted!) {
-      paint.style = PaintingStyle.fill;
-      _paintDottedLine(canvas, radius, spacing, paint);
-    } else {
-      _paintLine(canvas, paint);
+    for (Face face in faces) {
+      _paintFace(face, canvas, size);
     }
-
-    canvas.restore();
   }
 
-  void _paintLine(Canvas canvas, Paint paint) {
+  void _paintFace(Face face, Canvas canvas, Size size) {
+    if (paintLandmark && landmarkColor != null) {
+      for (FaceLandmarkType type in face.landmarks.keys) {
+        FaceLandmark? landmark = face.landmarks[type];
+
+        if (landmark != null) {
+          _paintLandmark(landmark.point, canvas, size);
+        }
+      }
+    }
+
+    if (paintContour && contourColor != null) {
+      for (FaceContourType type in face.countours.keys) {
+        FaceContour? contour = face.countours[type];
+
+        if (contour != null) {
+          _paintContour(contour.points, canvas, size);
+        }
+      }
+    }
+
+    _paintBoundingBox(
+      Rect.fromLTRB(
+        transformX(face.boundingBox.left, size),
+        transformY(face.boundingBox.top, size),
+        transformX(face.boundingBox.right, size),
+        transformY(face.boundingBox.bottom, size),
+      ),
+      canvas,
+    );
+  }
+
+  void _paintLandmark(Offset point, Canvas canvas, Size size) {
+    final paint = Paint()
+      ..style = PaintingStyle.fill
+      ..color = landmarkColor!;
+
+    canvas.drawCircle(
+      Offset(
+        transformX(point.dx, size),
+        transformY(point.dy, size),
+      ),
+      landmarkRadius,
+      paint,
+    );
+  }
+
+  void _paintContour(List<Offset> points, Canvas canvas, Size size) {
+    _paintContourLine(points, canvas, size);
+    /* for (Offset point in points) {
+      _paintContourDot(point, canvas);
+    } */
+  }
+
+  /* void _paintContourDot(Offset point, Canvas canvas) {
+    final paint = Paint()
+      ..style = PaintingStyle.fill
+      ..color = contourColor!;
+
+    canvas.drawCircle(
+      Offset(
+        transformX(point.dx),
+        transformY(point.dy),
+      ),
+      contourDotRadius,
+      paint,
+    );
+  } */
+
+  void _paintContourLine(List<Offset> points, Canvas canvas, Size size) {
+    final path = Path()..fillType = PathFillType.evenOdd;
     final start = points.first;
-    final path = Path()..fillType = pathFillType!;
+
+    final paint = Paint()
+      ..color = contourColor!
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = contourStrokeWidth
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round
+      ..blendMode = BlendMode.srcOver;
+
+    path.moveTo(
+      transformX(start.dx, size),
+      transformY(start.dy, size),
+    );
+
+    for (var i = 1; i < points.length; i++) {
+      path.lineTo(
+        transformX(points[i].dx, size),
+        transformY(points[i].dy, size),
+      );
+    }
+
+    canvas.drawPath(path, paint);
+  }
+
+  void _paintBoundingBox(Rect rect, Canvas canvas) {
+    List<Offset> points = [
+      rect.topLeft,
+      rect.topRight,
+      rect.bottomRight,
+      rect.bottomLeft,
+    ];
+
+    if (boundStroke) {
+      _paintBoundingBoxStroke(points, canvas);
+    }
+
+    if (boundFill) {
+      _paintBoundingBoxFill(points, canvas);
+    }
+  }
+
+  void _paintBoundingBoxStroke(List<Offset> points, Canvas canvas) {
+    final paint = Paint()
+      ..color = boundStrokeColor!
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = boundStrokeWidth
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round
+      ..blendMode = BlendMode.srcOver;
+
+    final path = Path();
+    final start = points.first;
 
     path.moveTo(start.dx, start.dy);
 
@@ -133,215 +185,43 @@ class PolylinePainter extends CustomPainter {
       path.lineTo(points[i].dx, points[i].dy);
     }
 
+    path.close();
     canvas.drawPath(path, paint);
   }
 
-  void _paintDottedLine(
-      Canvas canvas, double radius, double stepLength, Paint paint) {
-    num startDistance = 0.0;
-    final path = Path()..fillType = pathFillType!;
-
-    for (var i = 0; i < points.length - 1; i++) {
-      var current = points[i];
-      var next = points[i + 1];
-      var totalDistance = _distance(current, next);
-      var distance = startDistance;
-
-      while (distance < totalDistance) {
-        var f1 = distance / totalDistance;
-        var f0 = 1.0 - f1;
-
-        var offset = Offset(
-          current.dx * f0 + next.dx * f1,
-          current.dy * f0 + next.dy * f1,
-        );
-
-        path.addOval(Rect.fromCircle(center: offset, radius: radius));
-        distance += stepLength;
-      }
-
-      startDistance = distance < totalDistance
-          ? stepLength - (totalDistance - distance)
-          : distance - totalDistance;
-    }
-
-    path.addOval(Rect.fromCircle(center: points.last, radius: radius));
-    canvas.drawPath(path, paint);
-  }
-
-  // pure trigonometry to calculate distance between a and b
-  double _distance(Offset a, Offset b) {
-    final dx = a.dx - b.dx;
-    final dy = a.dy - b.dy;
-    return sqrt(dx * dx + dy * dy);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => false;
-}
-
-class PolygonPainter extends CustomPainter {
-  final List<Offset> points;
-  final List<List<Offset>> holesPoints;
-
-  final bool? culling;
-  final bool? stroke;
-  final bool? isDotted;
-  final Color? strokeColor;
-  final double? strokeWidth;
-  final double? strokeOpacity;
-  final StrokeCap? strokeCap;
-  final StrokeJoin? strokeJoin;
-  final PathFillType? pathFillType;
-  final Color? fillColor;
-  final double? fillOpacity;
-
-  PolygonPainter({
-    this.points = const [],
-    this.holesPoints = const [],
-    this.culling,
-    this.stroke,
-    this.isDotted,
-    this.strokeColor,
-    this.strokeWidth,
-    this.strokeOpacity,
-    this.strokeCap,
-    this.strokeJoin,
-    this.pathFillType,
-    this.fillColor,
-    this.fillOpacity,
-  });
-
-  bool get hasPoints => points.isNotEmpty;
-  bool get noPoints => !hasPoints;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final rect = Offset.zero & size;
-    canvas.clipRect(rect);
-
-    if (noPoints) {
-      return;
-    }
-
-    final isPaintStroke =
-        stroke! && (strokeWidth! > 0) && (strokeColor != null);
-    final isPaintHoles = holesPoints is List && holesPoints.length > 0;
-
-    final paint = Paint()..style = PaintingStyle.fill;
-
-    paint.color = fillColor!.withOpacity(fillOpacity ?? 1.0);
-
-    if (isPaintHoles) {
-      canvas.saveLayer(rect, paint);
-
-      for (final hole in holesPoints) {
-        final path = Path();
-        path.addPolygon(hole, true);
-        canvas.drawPath(path, paint);
-      }
-
-      paint.blendMode = BlendMode.srcOut;
-
-      final path = Path();
-      path.addPolygon(points, true);
-      canvas.drawPath(path, paint);
-
-      if (isPaintStroke) {
-        _paintStroke(canvas);
-      }
-
-      canvas.restore();
-    } else {
-      final path = Path();
-      path.addPolygon(points, true);
-      canvas.drawPath(path, paint);
-
-      if (isPaintStroke) {
-        _paintStroke(canvas);
-      }
-    }
-  }
-
-  void _paintStroke(Canvas canvas) {
-    final radius = strokeWidth! / 2;
-    final spacing = strokeWidth! * 1.5;
-
+  void _paintBoundingBoxFill(List<Offset> points, Canvas canvas) {
     final paint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = strokeWidth!
-      ..strokeCap = strokeCap!
-      ..strokeJoin = strokeJoin!
-      ..blendMode = BlendMode.srcOver;
+      ..color = boundFillColor!
+      ..style = PaintingStyle.fill;
 
-    paint.color = strokeColor!.withOpacity(strokeOpacity ?? 1.0);
-
-    if (isDotted!) {
-      paint.style = PaintingStyle.fill;
-      _paintDottedLine(canvas, points, radius, spacing, paint);
-    } else {
-      _paintLine(canvas, points, paint);
-    }
-  }
-
-  void _paintLine(Canvas canvas, List<Offset>? points, Paint paint) {
-    if (points != null && points.isNotEmpty) {
-      final path = Path();
-      final start = points.first;
-
-      path.moveTo(start.dx, start.dy);
-
-      for (var i = 1; i < points.length; i++) {
-        path.lineTo(points[i].dx, points[i].dy);
-      }
-
-      path.close();
-      canvas.drawPath(path, paint);
-    }
-  }
-
-  void _paintDottedLine(Canvas canvas, List<Offset> points, double radius,
-      double stepLength, Paint paint) {
     final path = Path();
-
-    double startDistance = 0.0;
-    points = [points.first, ...points];
-
-    for (var i = 0; i < points.length - 1; i++) {
-      var current = points[i];
-      var next = points[i + 1];
-      var totalDistance = _distance(current, next);
-      var distance = startDistance;
-
-      while (distance < totalDistance) {
-        var f1 = distance / totalDistance;
-        var f0 = 1.0 - f1;
-
-        var offset = Offset(
-          current.dx * f0 + next.dx * f1,
-          current.dy * f0 + next.dy * f1,
-        );
-
-        path.addOval(Rect.fromCircle(center: offset, radius: radius));
-        distance += stepLength;
-      }
-
-      startDistance = distance < totalDistance
-          ? stepLength - (totalDistance - distance)
-          : distance - totalDistance;
-    }
-
-    path.addOval(Rect.fromCircle(center: points.last, radius: radius));
+    path.addPolygon(points, true);
     canvas.drawPath(path, paint);
   }
 
-  // pure trigonometry to calculate distance between a and b
-  double _distance(Offset a, Offset b) {
-    final dx = a.dx - b.dx;
-    final dy = a.dy - b.dy;
-    return sqrt(dx * dx + dy * dy);
+  double transformX(double x, Size size) {
+    switch (rotation) {
+      case InputImageRotation.ROTATION_90:
+        return x * size.width / imageSize.height;
+      case InputImageRotation.ROTATION_270:
+        return size.width - x * size.width / imageSize.height;
+      default:
+        return x * size.width / imageSize.width;
+    }
+  }
+
+  double transformY(double y, Size size) {
+    switch (rotation) {
+      case InputImageRotation.ROTATION_90:
+      case InputImageRotation.ROTATION_270:
+        return y * size.height / imageSize.width;
+      default:
+        return y * size.height / imageSize.height;
+    }
   }
 
   @override
-  bool shouldRepaint(PolygonPainter oldPainter) => false;
+  bool shouldRepaint(FacePainter oldPainter) {
+    return oldPainter.faces != faces;
+  }
 }
