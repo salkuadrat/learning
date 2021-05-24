@@ -9,7 +9,6 @@ dependencies:
   flutter:
     sdk: flutter
   
-  learning_input_image: ^0.0.1
   learning_text_recognition:
     path: ../
 
