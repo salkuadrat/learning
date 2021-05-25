@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         primaryTextTheme: TextTheme(headline6: TextStyle(color: Colors.white)),
       ),
       home: ChangeNotifierProvider(
-        create: (_) => ImageLabelingData(),
+        create: (_) => ImageLabelingState(),
         child: ImageLabelingPage(),
       ),
     );
@@ -31,8 +31,8 @@ class ImageLabelingPage extends StatefulWidget {
 }
 
 class _ImageLabelingPageState extends State<ImageLabelingPage> {
-  ImageLabelingData get data =>
-      Provider.of<ImageLabelingData>(context, listen: false);
+  ImageLabelingState get state =>
+      Provider.of<ImageLabelingState>(context, listen: false);
 
   ImageLabeling _imageLabeling = ImageLabeling();
 
@@ -43,11 +43,11 @@ class _ImageLabelingPageState extends State<ImageLabelingPage> {
   }
 
   Future<void> _processLabeling(InputImage image) async {
-    if (data.isNotProcessing) {
-      data.startProcessing();
-      data.image = image;
-      data.labels = await _imageLabeling.process(image);
-      data.stopProcessing();
+    if (state.isNotProcessing) {
+      state.startProcessing();
+      state.image = image;
+      state.labels = await _imageLabeling.process(image);
+      state.stopProcessing();
     }
   }
 
@@ -58,13 +58,13 @@ class _ImageLabelingPageState extends State<ImageLabelingPage> {
       cameraDefault: InputCameraType.rear,
       title: 'Image Labeling',
       onImage: _processLabeling,
-      overlay: Consumer<ImageLabelingData>(
-        builder: (_, data, __) {
-          if (data.isEmpty) {
+      overlay: Consumer<ImageLabelingState>(
+        builder: (_, state, __) {
+          if (state.isEmpty) {
             return Container();
           }
 
-          if (data.isProcessing && data.notFromLive) {
+          if (state.isProcessing && state.notFromLive) {
             return Center(
               child: Container(
                 width: 32,
@@ -77,7 +77,7 @@ class _ImageLabelingPageState extends State<ImageLabelingPage> {
           return Center(
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-              child: Text(data.toString(),
+              child: Text(state.toString(),
                   style: TextStyle(fontWeight: FontWeight.w500)),
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.8),
@@ -91,7 +91,7 @@ class _ImageLabelingPageState extends State<ImageLabelingPage> {
   }
 }
 
-class ImageLabelingData extends ChangeNotifier {
+class ImageLabelingState extends ChangeNotifier {
   InputImage? _image;
   List _labels = [];
   bool _isProcessing = false;
