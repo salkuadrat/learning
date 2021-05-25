@@ -3,22 +3,40 @@ import 'package:learning_input_image/learning_input_image.dart';
 import 'dart:async';
 
 import 'package:learning_language/learning_language.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.lightBlue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        primaryTextTheme: TextTheme(headline6: TextStyle(color: Colors.white)),
+      ),
+      home: ChangeNotifierProvider(
+        create: (_) => IdentifyLanguageState(),
+        child: IdentifyLanguagePage(),
+      ),
+    );
+  }
 }
 
-class _MyAppState extends State<MyApp> {
+class IdentifyLanguagePage extends StatefulWidget {
+  @override
+  _IdentifyLanguagePageState createState() => _IdentifyLanguagePageState();
+}
+
+class _IdentifyLanguagePageState extends State<IdentifyLanguagePage> {
   TextEditingController _controller = TextEditingController();
   LanguageIdentifier _identifier = LanguageIdentifier();
 
-  String _result = '';
-  bool _isProcessing = false;
+  IdentifyLanguageState get state => Provider.of(context, listen: false);
 
   @override
   void initState() {
@@ -32,7 +50,7 @@ class _MyAppState extends State<MyApp> {
     super.dispose();
   }
 
-  Future<void> identify() async {
+  /* Future<void> identify() async {
     String text = 'Baby, you light up my world like nobody else';
 
     List<IdentifiedLanguage> possibleLanguages =
@@ -42,104 +60,111 @@ class _MyAppState extends State<MyApp> {
 
     String language = await _identifier.identify(text);
     print('Language: $language');
-  }
+  } */
 
   Future<void> _startIdentifying() async {
-    setState(() {
-      _isProcessing = true;
-    });
+    state.startProcessing();
 
-    String text = _controller.text;
-    String language = await _identifier.identify(text);
-
-    setState(() {
-      _result = language.toUpperCase();
-      _isProcessing = false;
-    });
+    String language = await _identifier.identify(_controller.text);
+    state.data = language == 'und' ? 'Not Identified' : language.toUpperCase();
+    state.stopProcessing();
   }
 
   Future<void> _startIdentifyingPossibleLanguages() async {
-    setState(() {
-      _isProcessing = true;
-    });
+    state.startProcessing();
 
-    String text = _controller.text;
-    List<IdentifiedLanguage> langs =
-        await _identifier.idenfityPossibleLanguages(text);
+    List<IdentifiedLanguage> languages =
+        await _identifier.idenfityPossibleLanguages(_controller.text);
 
     String result = '';
-    for (IdentifiedLanguage lang in langs) {
-      result +=
-          '${lang.language.toUpperCase()} (${lang.confidence.toString()})\n';
+    for (IdentifiedLanguage l in languages) {
+      result += '${l.language.toUpperCase()} (${l.confidence.toString()})\n';
     }
 
-    setState(() {
-      _result = result;
-      _isProcessing = false;
-    });
-  }
-
-  void _clearResult() {
-    setState(() {
-      _result = '';
-    });
+    state.data = result;
+    state.stopProcessing();
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.lightBlue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        primaryTextTheme: TextTheme(headline6: TextStyle(color: Colors.white)),
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('Language Identification'),
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text('Language Identification'),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              SizedBox(height: 20),
-              TextField(
-                autofocus: true,
-                controller: _controller,
-                textAlign: TextAlign.center,
-                textAlignVertical: TextAlignVertical.center,
-                keyboardType: TextInputType.multiline,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 18),
-                ),
-                minLines: 5,
-                maxLines: 10,
-                style: TextStyle(fontSize: 18, color: Colors.blueGrey[700]),
-                onChanged: (_) => _clearResult(),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            SizedBox(height: 20),
+            TextField(
+              autofocus: true,
+              controller: _controller,
+              textAlign: TextAlign.center,
+              textAlignVertical: TextAlignVertical.center,
+              keyboardType: TextInputType.multiline,
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.symmetric(horizontal: 18),
               ),
-              SizedBox(height: 15),
-              NormalBlueButton(
-                text: 'Identify Language',
-                onPressed: _startIdentifying,
-              ),
-              SizedBox(height: 8),
-              NormalBlueButton(
-                text: 'Idenfity Possible Languages',
-                onPressed: _startIdentifyingPossibleLanguages,
-              ),
-              SizedBox(height: 25),
-              Center(
+              minLines: 5,
+              maxLines: 10,
+              style: TextStyle(fontSize: 18, color: Colors.blueGrey[700]),
+              onChanged: (_) => state.clear(),
+            ),
+            SizedBox(height: 15),
+            NormalBlueButton(
+              text: 'Identify Language',
+              onPressed: _startIdentifying,
+            ),
+            SizedBox(height: 8),
+            NormalBlueButton(
+              text: 'Idenfity Possible Languages',
+              onPressed: _startIdentifyingPossibleLanguages,
+            ),
+            SizedBox(height: 25),
+            Consumer<IdentifyLanguageState>(
+              builder: (_, state, __) => Center(
                 child: Text(
-                  _isProcessing ? 'Processing identification...' : _result,
+                  state.isProcessing ? 'Identifying language...' : state.data,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
+  }
+}
+
+class IdentifyLanguageState extends ChangeNotifier {
+  String _data = '';
+  bool _isProcessing = false;
+
+  String get data => _data;
+  bool get isProcessing => _isProcessing;
+
+  void startProcessing() {
+    _isProcessing = true;
+    notifyListeners();
+  }
+
+  void stopProcessing() {
+    _isProcessing = false;
+    notifyListeners();
+  }
+
+  set data(String data) {
+    _data = data;
+    notifyListeners();
+  }
+
+  void clear() {
+    _data = '';
+    notifyListeners();
   }
 }
