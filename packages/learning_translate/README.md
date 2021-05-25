@@ -2,6 +2,8 @@
 
 The easy way to use ML Kit for on-device text translation in Flutter. With ML Kit's on-device Translation, you can dynamically translate text between more than 50 languages.
 
+<img src="https://github.com/salkuadrat/learning/raw/master/packages/learning_translate/screenshot.jpg" alt="universe" width="280">
+
 ## Limitations
 
 On-device translation is intended for casual and simple translations. The translation quality depends on the source and target languages. We recommend that you evaluate the quality of the translations for your specific use case. 
@@ -20,7 +22,7 @@ or
 
 ```yaml
 dependencies:
-  learning_translate: ^0.0.1
+  learning_translate: ^0.0.2
 ```
 
 Then run `flutter pub get`.
