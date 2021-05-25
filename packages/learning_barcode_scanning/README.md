@@ -100,7 +100,7 @@ Here is a list of `BarcodeType` values.
   <tr>
     <td>TEXT</td>
     <td>BarcodeText</td>
-    <td>`displayValue`</td>
+    <td><code>displayValue</code></td>
   </tr>
   <tr>
     <td>URL</td>
@@ -159,6 +159,7 @@ Here is a list of `BarcodeType` values.
   </tr>
   <tr>
     <td>UNKNOWN</td>
+    <td></td>
     <td></td>
   </tr>
 <table>
