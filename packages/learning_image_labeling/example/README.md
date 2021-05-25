@@ -1,5 +1,4 @@
-# Learning Image Labeling Example Project
+# ML Image Labeling Example
 
 Demonstrates how to use the learning_image_labeling plugin.
 
-## Getting Started

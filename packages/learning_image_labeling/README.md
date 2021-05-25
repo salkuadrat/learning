@@ -1,4 +1,4 @@
-# Learning Image Labeling
+# ML Image Labeling
 
 The easy way to use ML Kit for image labeling in Flutter.
 
