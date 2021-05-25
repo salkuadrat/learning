@@ -121,6 +121,15 @@ RIGHT_FOOT_INDEX
 
 To make it easy to paint from `Pose` object to the screen, we provide `PoseOverlay` which you can pass to parameter `overlay` of `InputCameraView`. For more detail about how to use this painting, you can see at the [working example code here](example/lib/main.dart).
 
+```dart
+PoseOverlay(
+  size: size,
+  originalSize: originalSize,
+  rotation: rotation,
+  pose: pose,
+)
+```
+
 ### Dispose
 
 ```dart
