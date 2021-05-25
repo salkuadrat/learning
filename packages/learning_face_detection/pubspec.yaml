@@ -1,6 +1,6 @@
 name: learning_face_detection
 description: The easy way to use ML Kit for face detection in Flutter.
-version: 0.0.1
+version: 0.0.2
 # author: Salman S
 homepage: https://github.com/salkuadrat/learning/tree/master/packages/learning_face_detection
 
