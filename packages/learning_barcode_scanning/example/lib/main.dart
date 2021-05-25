@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         primaryTextTheme: TextTheme(headline6: TextStyle(color: Colors.white)),
       ),
       home: ChangeNotifierProvider(
-        create: (_) => BarcodeScanningData(),
+        create: (_) => BarcodeScanningState(),
         child: BarcodeScanningPage(),
       ),
     );
@@ -31,8 +31,8 @@ class BarcodeScanningPage extends StatefulWidget {
 }
 
 class _BarcodeScanningPageState extends State<BarcodeScanningPage> {
-  BarcodeScanningData get data =>
-      Provider.of<BarcodeScanningData>(context, listen: false);
+  BarcodeScanningState get state =>
+      Provider.of<BarcodeScanningState>(context, listen: false);
 
   BarcodeScanner _scanner = BarcodeScanner(formats: [
     BarcodeFormat.QR_CODE,
@@ -56,12 +56,12 @@ class _BarcodeScanningPageState extends State<BarcodeScanningPage> {
   }
 
   Future<void> _scan(InputImage image) async {
-    if (data.isNotProcessing) {
-      data.startProcessing();
-      data.image = image;
-      data.result = await _scanner.scan(image);
-      data.image = image;
-      data.stopProcessing();
+    if (state.isNotProcessing) {
+      state.startProcessing();
+      state.image = image;
+      state.data = await _scanner.scan(image);
+      state.image = image;
+      state.stopProcessing();
     }
   }
 
@@ -72,9 +72,9 @@ class _BarcodeScanningPageState extends State<BarcodeScanningPage> {
       cameraDefault: InputCameraType.rear,
       title: 'Barcode Scanning',
       onImage: _scan,
-      overlay: Consumer<BarcodeScanningData>(
-        builder: (_, data, __) {
-          if (data.isEmpty) {
+      overlay: Consumer<BarcodeScanningState>(
+        builder: (_, state, __) {
+          if (state.isEmpty) {
             return Container();
           }
 
@@ -85,7 +85,7 @@ class _BarcodeScanningPageState extends State<BarcodeScanningPage> {
               borderRadius: BorderRadius.all(Radius.circular(4.0)),
             ),
             child: Text(
-              data.value,
+              state.toString(),
               style: TextStyle(
                 fontWeight: FontWeight.w500,
               ),
@@ -97,14 +97,13 @@ class _BarcodeScanningPageState extends State<BarcodeScanningPage> {
   }
 }
 
-class BarcodeScanningData extends ChangeNotifier {
+class BarcodeScanningState extends ChangeNotifier {
   InputImage? _image;
-  List _result = [];
+  List _data = [];
   bool _isProcessing = false;
 
   InputImage? get image => _image;
-  List get result => _result;
-  String get value => _result.isNotEmpty ? _result.first['value'] : '';
+  List get data => _data;
 
   String? get type => _image?.type;
   InputImageRotation? get rotation => _image?.metadata?.rotation;
@@ -112,7 +111,7 @@ class BarcodeScanningData extends ChangeNotifier {
 
   bool get isProcessing => _isProcessing;
   bool get isNotProcessing => !_isProcessing;
-  bool get isEmpty => _result.isEmpty;
+  bool get isEmpty => _data.isEmpty;
 
   void startProcessing() {
     _isProcessing = true;
@@ -134,8 +133,17 @@ class BarcodeScanningData extends ChangeNotifier {
     notifyListeners();
   }
 
-  set result(List result) {
-    _result = result;
+  set data(List data) {
+    _data = data;
     notifyListeners();
+  }
+
+  @override
+  String toString() {
+    if (_data.first is Barcode) {
+      return _data.first.value;
+    }
+
+    return '';
   }
 }

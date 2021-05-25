@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 enum BarcodeFormat {
   CODE_128,
   CODE_39,
@@ -12,6 +14,43 @@ enum BarcodeFormat {
   PDF417,
   AZTEC,
   DATA_MATRIX
+}
+
+enum BarcodeType {
+  WIFI,
+  URL,
+  TEXT,
+  SMS,
+  EMAIL,
+  PHONE,
+  CALENDAR_EVENT,
+  CONTACT_INFO,
+  DRIVER_LICENSE,
+  GEO,
+  ISBN,
+  PRODUCT,
+  UNKNOWN,
+}
+
+enum BarcodeEmailType {
+  WORK,
+  HOME,
+  UNKNOWN,
+}
+
+enum BarcodePhoneType {
+  FAX,
+  HOME,
+  MOBILE,
+  WORK,
+  UNKNOWN,
+}
+
+enum BarcodeWifiType {
+  OPEN,
+  WEP,
+  WPA,
+  UNKNOWN,
 }
 
 String formatsToString(List<BarcodeFormat> formats) {
@@ -59,4 +98,90 @@ String formatToString(BarcodeFormat format) {
     default:
       return '';
   }
+}
+
+BarcodeType toBarcodeType(String type) {
+  switch (type) {
+    case 'WIFI':
+      return BarcodeType.WIFI;
+    case 'URL':
+      return BarcodeType.URL;
+    case 'TEXT':
+      return BarcodeType.TEXT;
+    case 'SMS':
+      return BarcodeType.SMS;
+    case 'EMAIL':
+      return BarcodeType.EMAIL;
+    case 'PHONE':
+      return BarcodeType.PHONE;
+    case 'CALENDAR_EVENT':
+      return BarcodeType.CALENDAR_EVENT;
+    case 'CONTACT_INFO':
+      return BarcodeType.CONTACT_INFO;
+    case 'DRIVER_LICENSE':
+      return BarcodeType.DRIVER_LICENSE;
+    case 'GEO':
+      return BarcodeType.GEO;
+    case 'ISBN':
+      return BarcodeType.ISBN;
+    case 'PRODUCT':
+      return BarcodeType.PRODUCT;
+    default:
+      return BarcodeType.UNKNOWN;
+  }
+}
+
+BarcodeEmailType toBarcodeEmailType(String type) {
+  switch (type) {
+    case 'WORK':
+      return BarcodeEmailType.WORK;
+    case 'HOME':
+      return BarcodeEmailType.HOME;
+    default:
+      return BarcodeEmailType.UNKNOWN;
+  }
+}
+
+BarcodePhoneType toBarcodePhoneType(String type) {
+  switch (type) {
+    case 'FAX':
+      return BarcodePhoneType.FAX;
+    case 'HOME':
+      return BarcodePhoneType.HOME;
+    case 'MOBILE':
+      return BarcodePhoneType.MOBILE;
+    case 'WORK':
+      return BarcodePhoneType.WORK;
+    default:
+      return BarcodePhoneType.UNKNOWN;
+  }
+}
+
+BarcodeWifiType toBarcodeWifiType(String type) {
+  switch (type) {
+    case 'OPEN':
+      return BarcodeWifiType.OPEN;
+    case 'WEP':
+      return BarcodeWifiType.WEP;
+    case 'WPA':
+      return BarcodeWifiType.WPA;
+    default:
+      return BarcodeWifiType.UNKNOWN;
+  }
+}
+
+Rect toRect(Map json) => Rect.fromLTRB(
+      (json['left'] as int).toDouble(),
+      (json['top'] as int).toDouble(),
+      (json['right'] as int).toDouble(),
+      (json['right'] as int).toDouble(),
+    );
+
+Offset toPoint(Map json) => Offset(
+      json['x'] as double,
+      json['y'] as double,
+    );
+
+List<Offset> toPoints(List points) {
+  return points.map((point) => toPoint(point)).toList();
 }

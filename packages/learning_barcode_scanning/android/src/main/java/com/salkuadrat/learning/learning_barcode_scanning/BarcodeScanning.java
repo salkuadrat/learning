@@ -162,7 +162,7 @@ public class BarcodeScanning {
                     break;
                 case Barcode.TYPE_CONTACT_INFO:
                     if (barcode.getContactInfo() != null) {
-                        item.put("type", "CONTACT");
+                        item.put("type", "CONTACT_INFO");
                         item.put("title", barcode.getContactInfo().getTitle());
                         item.put("name", barcode.getContactInfo().getName().getFormattedName());
                         item.put("organization", barcode.getContactInfo().getOrganization());
@@ -175,7 +175,7 @@ public class BarcodeScanning {
                     break;
                 case Barcode.TYPE_DRIVER_LICENSE:
                     if (barcode.getDriverLicense() != null) {
-                        item.put("type", "DRIVER");
+                        item.put("type", "DRIVER_LICENSE");
                         item.put("documentType", barcode.getDriverLicense().getDocumentType());
                         item.put("licenseNumber", barcode.getDriverLicense().getLicenseNumber());
                         item.put("firstName", barcode.getDriverLicense().getFirstName());
