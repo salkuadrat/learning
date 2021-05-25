@@ -188,6 +188,21 @@ LOWER_LIP_TOP
 LOWER_LIP_BOTTOM
 ```
 
+### Face Painting
+
+To make it easy to paint from `Face` object to the screen, we provide `FaceOverlay` which you can pass to parameter `overlay` of `InputCameraView`. For more detail about how to use this painting, you can see at the [working example code here](example/lib/main.dart).
+
+```dart
+FaceOverlay(
+  size: size,
+  originalSize: originalSize,
+  rotation: rotation,
+  faces: faces,
+  contourColor: Colors.white.withOpacity(0.8),
+  landmarkColor: Colors.lightBlue.withOpacity(0.8),
+)
+```
+
 ### Dispose
 
 ```dart
