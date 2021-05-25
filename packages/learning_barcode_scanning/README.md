@@ -1,4 +1,4 @@
-# Learning Barcode Scanning
+# ML Barcode Scanning
 
 The easy way to use ML Kit for barcode scanning in Flutter.
 
