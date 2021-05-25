@@ -65,6 +65,7 @@ class ObjectDetectionPage extends StatefulWidget {
 class _ObjectDetectionPageState extends State<ObjectDetectionPage> {
   ObjectDetectionData get data =>
       Provider.of<ObjectDetectionData>(context, listen: false);
+
   bool _isProcessing = false;
 
   ObjectDetector _detector = ObjectDetector(
@@ -89,16 +90,18 @@ class _ObjectDetectionPageState extends State<ObjectDetectionPage> {
 
       List<DetectedObject> result = await _detector.detect(image);
 
-      _isProcessing = false;
       data.image = image;
       data.objects = result;
+      
+      _isProcessing = false;
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return InputCameraView(
-      title: 'Face Detection',
+      mode: InputCameraMode.gallery,
+      title: 'Object Detection',
       onImage: _detectObjects,
       cameraDefault: InputCameraType.rear,
       overlay: Consumer<ObjectDetectionData>(
@@ -120,7 +123,12 @@ class _ObjectDetectionPageState extends State<ObjectDetectionPage> {
             }
           }
 
-          return Container();
+          return ObjectOverlay(
+            size: size,
+            originalSize: originalSize,
+            objects: data.objects,
+            rotation: data.rotation,
+          );
         },
       ),
     );

@@ -123,7 +123,8 @@ public class LearningFaceDetectionPlugin implements FlutterPlugin, MethodCallHan
                     return null;
                 }
             } else if (type.equals("bytes")) {
-                Map<String, Object> metaData = (Map<String, Object>) data.get("metadata");
+                Map metaData = (Map) data.get("metadata");
+                
                 if (metaData != null) {
                     Object _bytes = data.get("bytes");
                     Double _width = (Double) metaData.get("width");

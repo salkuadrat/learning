@@ -119,7 +119,7 @@ class _PoseDetectionPageState extends State<PoseDetectionPage> {
           return PoseOverlay(
             size: size,
             originalSize: originalSize,
-            rotation: data.rotation!,
+            rotation: data.rotation,
             pose: data.pose!,
           );
         },

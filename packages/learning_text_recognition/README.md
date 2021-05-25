@@ -63,6 +63,8 @@ RecognizedText result = await textRecognition.process(image);
 
 The result of text recognition is a `RecognizedText` that contains nested elements describing the details of the recognized text from input image. Here is example of structure data inside `RecognizedText`.
 
+<img src="https://github.com/salkuadrat/learning/raw/master/packages/learning_text_recognition/example.jpg" alt="universe" width="280">
+
 **RecognizedText**
 
 <table>

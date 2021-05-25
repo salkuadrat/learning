@@ -143,7 +143,7 @@ packages:
     source: hosted
     version: "0.6.3"
   learning_input_image:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: learning_input_image
       url: "https://pub.dartlang.org"

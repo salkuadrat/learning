@@ -124,7 +124,7 @@ class _FaceDetectionPageState extends State<FaceDetectionPage> {
           return FaceOverlay(
             size: size,
             originalSize: originalSize,
-            rotation: data.rotation!,
+            rotation: data.rotation,
             faces: data.faces,
             contourColor: Colors.white.withOpacity(0.8),
             landmarkColor: Colors.lightBlue.withOpacity(0.8),

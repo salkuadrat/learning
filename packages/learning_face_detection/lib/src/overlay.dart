@@ -12,13 +12,13 @@ class FaceOverlay extends StatelessWidget {
   final Color? landmarkColor;
   final Color? contourColor;
   final Color? boundStrokeColor;
-  final InputImageRotation rotation;
+  final InputImageRotation? rotation;
 
   const FaceOverlay({
     Key? key,
     required this.size,
     this.originalSize,
-    this.rotation = InputImageRotation.ROTATION_0,
+    this.rotation,
     this.faces = const [],
     this.landmarkColor,
     this.contourColor,
@@ -31,7 +31,7 @@ class FaceOverlay extends StatelessWidget {
       painter: FacePainter(
         faces: faces,
         imageSize: originalSize ?? size,
-        rotation: rotation,
+        rotation: rotation ?? InputImageRotation.ROTATION_0,
         landmarkColor: landmarkColor ?? Colors.red,
         contourColor: contourColor ?? Theme.of(context).primaryColor,
         boundStrokeColor: boundStrokeColor ?? Colors.red,
