@@ -16,7 +16,7 @@ or
 
 ```yaml
 dependencies:
-  learning_smart_reply: ^0.0.1+1
+  learning_smart_reply: ^0.0.2
 ```
 
 Then run `flutter pub get`.

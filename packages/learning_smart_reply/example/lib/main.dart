@@ -6,12 +6,27 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.lightBlue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        primaryTextTheme: TextTheme(headline6: TextStyle(color: Colors.white)),
+      ),
+      home: SmartReplyPage(),
+    );
+  }
 }
 
-class _MyAppState extends State<MyApp> {
+class SmartReplyPage extends StatefulWidget {
+  @override
+  _SmartReplyPageState createState() => _SmartReplyPageState();
+}
+
+class _SmartReplyPageState extends State<SmartReplyPage> {
   SmartReplyGenerator _smartReply = SmartReplyGenerator();
 
   @override
