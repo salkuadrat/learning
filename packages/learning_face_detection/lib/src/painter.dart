@@ -36,7 +36,7 @@ class FacePainter extends CustomPainter {
     this.landmarkRadius = 2.0,
     this.landmarkColor,
     this.paintContour = true,
-    this.contourStrokeWidth = 0.5,
+    this.contourStrokeWidth = 0.8,
     this.contourColor,
   });
 

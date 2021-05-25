@@ -86,6 +86,9 @@ class _FaceDetectionPageState extends State<FaceDetectionPage> {
             originalSize: originalSize,
             rotation: state.rotation,
             faces: state.data,
+            boundStrokeWidth: 2.0,
+            contourStrokeWidth: 1.6,
+            landmarkRadius: 2.8,
             contourColor: Colors.white.withOpacity(0.8),
             landmarkColor: Colors.lightBlue.withOpacity(0.8),
           );
