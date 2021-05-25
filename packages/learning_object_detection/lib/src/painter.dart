@@ -5,7 +5,6 @@ import 'package:learning_input_image/learning_input_image.dart';
 import 'object.dart';
 
 class ObjectPainter extends CustomPainter {
-
   final Size imageSize;
   final List<DetectedObject> objects;
   final InputImageRotation rotation;
@@ -15,7 +14,6 @@ class ObjectPainter extends CustomPainter {
     this.objects = const [],
     this.rotation = InputImageRotation.ROTATION_0,
   });
-  
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -37,12 +35,14 @@ class ObjectPainter extends CustomPainter {
       ..color = Colors.red
       ..style = PaintingStyle.stroke;
 
-    canvas.drawRect(Rect.fromLTRB(
-      transformX(object.boundingBox.left, size),
-      transformY(object.boundingBox.top, size),
-      transformX(object.boundingBox.right, size),
-      transformY(object.boundingBox.bottom, size),
-    ), paint);
+    canvas.drawRect(
+        Rect.fromLTRB(
+          transformX(object.boundingBox.left, size),
+          transformY(object.boundingBox.top, size),
+          transformX(object.boundingBox.right, size),
+          transformY(object.boundingBox.bottom, size),
+        ),
+        paint);
   }
 
   double transformX(double x, Size size) {

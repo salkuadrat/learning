@@ -7,39 +7,6 @@ void main() {
   runApp(MyApp());
 }
 
-class BarcodeScanningData extends ChangeNotifier {
-  InputImage? _image;
-  List _result = [];
-
-  InputImage? get image => _image;
-  List get result => _result;
-  String get value => _result.isNotEmpty ? _result.first['value'] : '';
-
-  String? get type => _image?.type;
-  InputImageRotation? get rotation => _image?.metadata?.rotation;
-  Size? get size => _image?.metadata?.size;
-
-  bool get isEmpty => _result.isEmpty;
-  bool get isFromLive => type == 'bytes';
-  bool get notFromLive => !isFromLive;
-
-  set image(InputImage? image) {
-    _image = image;
-    notifyListeners();
-  }
-
-  set result(List result) {
-    _result = result;
-    notifyListeners();
-  }
-
-  void clear() {
-    _result.clear();
-    _image = null;
-    notifyListeners();
-  }
-}
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -66,7 +33,6 @@ class BarcodeScanningPage extends StatefulWidget {
 class _BarcodeScanningPageState extends State<BarcodeScanningPage> {
   BarcodeScanningData get data =>
       Provider.of<BarcodeScanningData>(context, listen: false);
-  bool _isProcessing = false;
 
   BarcodeScanner _scanner = BarcodeScanner(formats: [
     BarcodeFormat.QR_CODE,
@@ -90,18 +56,12 @@ class _BarcodeScanningPageState extends State<BarcodeScanningPage> {
   }
 
   Future<void> _scan(InputImage image) async {
-    if (!_isProcessing) {
-      _isProcessing = true;
-
-      if (image.type != 'bytes') {
-        data.result = [];
-      }
-
-      List result = await _scanner.scan(image);
-
-      data.result = result;
+    if (data.isNotProcessing) {
+      data.startProcessing();
       data.image = image;
-      _isProcessing = false;
+      data.result = await _scanner.scan(image);
+      data.image = image;
+      data.stopProcessing();
     }
   }
 
@@ -120,11 +80,64 @@ class _BarcodeScanningPageState extends State<BarcodeScanningPage> {
 
           return Container(
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-            color: Colors.white.withOpacity(0.9),
-            child: Text(data.value),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.8),
+              borderRadius: BorderRadius.all(Radius.circular(4.0)),
+            ),
+            child: Text(
+              data.value,
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+              ),
+            ),
           );
         },
       ),
     );
+  }
+}
+
+class BarcodeScanningData extends ChangeNotifier {
+  InputImage? _image;
+  List _result = [];
+  bool _isProcessing = false;
+
+  InputImage? get image => _image;
+  List get result => _result;
+  String get value => _result.isNotEmpty ? _result.first['value'] : '';
+
+  String? get type => _image?.type;
+  InputImageRotation? get rotation => _image?.metadata?.rotation;
+  Size? get size => _image?.metadata?.size;
+
+  bool get isProcessing => _isProcessing;
+  bool get isNotProcessing => !_isProcessing;
+  bool get isEmpty => _result.isEmpty;
+  bool get isFromLive => type == 'bytes';
+  bool get notFromLive => !isFromLive;
+
+  void startProcessing() {
+    _isProcessing = true;
+    notifyListeners();
+  }
+
+  void stopProcessing() {
+    _isProcessing = false;
+    notifyListeners();
+  }
+
+  set isProcessing(bool isProcessing) {
+    _isProcessing = isProcessing;
+    notifyListeners();
+  }
+
+  set image(InputImage? image) {
+    _image = image;
+    notifyListeners();
+  }
+
+  set result(List result) {
+    _result = result;
+    notifyListeners();
   }
 }

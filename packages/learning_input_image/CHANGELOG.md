@@ -1,3 +1,7 @@
+## [0.0.5] - 25 May 2021
+
+* Change package description
+
 ## [0.0.4] - 24 May 2021
 
 * Restructure back widget _live inside InputCameraView

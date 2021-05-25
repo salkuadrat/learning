@@ -92,7 +92,7 @@ class _ObjectDetectionPageState extends State<ObjectDetectionPage> {
 
       data.image = image;
       data.objects = result;
-      
+
       _isProcessing = false;
     }
   }

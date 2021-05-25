@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   
-  learning_input_image: ^0.0.3
+  learning_input_image: ^0.0.4
 
 dev_dependencies:
   flutter_test:

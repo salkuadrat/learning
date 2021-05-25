@@ -6,7 +6,6 @@ import 'object.dart';
 import 'painter.dart';
 
 class ObjectOverlay extends StatelessWidget {
-
   final Size size;
   final Size originalSize;
   final List<DetectedObject> objects;
@@ -18,7 +17,7 @@ class ObjectOverlay extends StatelessWidget {
     this.objects = const [],
     this.rotation,
   });
-  
+
   @override
   Widget build(BuildContext context) {
     return CustomPaint(

@@ -1,6 +1,6 @@
 name: learning_input_image
-description: Input Image to be used by vision learning packages.
-version: 0.0.4
+description: Input image package to be used by other learning plugins.
+version: 0.0.5
 # author: Salman S
 homepage: https://github.com/salkuadrat/learning/tree/master/packages/learning_input_image
 
