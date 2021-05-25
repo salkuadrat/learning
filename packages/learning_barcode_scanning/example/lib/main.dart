@@ -60,7 +60,6 @@ class _BarcodeScanningPageState extends State<BarcodeScanningPage> {
       state.startProcessing();
       state.image = image;
       state.data = await _scanner.scan(image);
-      state.image = image;
       state.stopProcessing();
     }
   }
@@ -78,16 +77,18 @@ class _BarcodeScanningPageState extends State<BarcodeScanningPage> {
             return Container();
           }
 
-          return Container(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.8),
-              borderRadius: BorderRadius.all(Radius.circular(4.0)),
-            ),
-            child: Text(
-              state.toString(),
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
+          return Center(
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.8),
+                borderRadius: BorderRadius.all(Radius.circular(4.0)),
+              ),
+              child: Text(
+                state.toString(),
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
           );

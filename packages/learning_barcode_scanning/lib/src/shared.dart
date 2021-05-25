@@ -178,8 +178,8 @@ Rect toRect(Map json) => Rect.fromLTRB(
     );
 
 Offset toPoint(Map json) => Offset(
-      json['x'] as double,
-      json['y'] as double,
+      (json['x'] as int).toDouble(),
+      (json['y'] as int).toDouble(),
     );
 
 List<Offset> toPoints(List points) {

@@ -6,6 +6,8 @@ With ML Kit's barcode scanning, we can read data encoded using most standard bar
 
 Barcodes are a convenient way to pass information from the real world to our application. In particular, when using 2D formats such as QR code, we can encode structured data such as contact information or WiFi network credentials. Because it can automatically recognize and parse this data, the application can respond intelligently when a user scans a barcode.
 
+<img src="https://github.com/salkuadrat/learning/raw/master/packages/learning_barcode_scanning/screenshot.jpg" alt="universe" width="280">
+
 **Supported formats**
 
 Linear: Codabar, Code 39, Code 93, Code 128, EAN-8, EAN-13, ITF, UPC-A, UPC-E\
@@ -23,7 +25,7 @@ or
 
 ```yaml
 dependencies:
-  learning_barcode_scanning: ^0.0.1
+  learning_barcode_scanning: ^0.0.2
 ```
 
 Then run `flutter pub get`.
@@ -80,7 +82,7 @@ List result = await scanner.scan(image);
 
 Output of barcode scanning process is a list of `Barcode` object, which is divided into many subclasses depending of its type.
 
-Here is a general information contains within a `Barcode` object.
+Here is a general data contains within a `Barcode` object.
 
 ```dart
 BarcodeType type // type of the Barcode object
@@ -89,7 +91,7 @@ Rect? boundingBox // bounding box of barcode position in image
 List<Offset> corners // list of points representing the corners position of this barcode
 ```
 
-Here is a list of `BarcodeType` values.
+Here is a list of `BarcodeType` values with its corresponding `Barcode` object. Each Barcode object is a direct subclass of `Barcode`.
 
 <table>
   <tr>
