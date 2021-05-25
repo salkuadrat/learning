@@ -116,7 +116,7 @@ But we can override this by passing other values.
 
 ### Output
 
-The result of face detection process is a list of `Face` object, in each contains the following:
+The result of face detection process is a list of `Face` object, in each contains the following.
 
 ```dart
 Rect boundingBox // showing the rectangle of the detected face

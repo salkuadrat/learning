@@ -83,8 +83,8 @@ class _ObjectDetectionPageState extends State<ObjectDetectionPage> {
           return ObjectOverlay(
             size: size,
             originalSize: originalSize,
-            objects: state.data,
             rotation: state.rotation,
+            objects: state.data,
           );
         },
       ),

@@ -53,12 +53,82 @@ InputCameraView(
 After getting the `InputImage`, we can start detecting objetcs by calling method `detect` from an instance of `ObjectDetector`.
 
 ```dart
+ObjectDetector detector = ObjectDetector();
+List<DetectedObject> result = await detector.detect(image);
+```
+
+`ObjectDetector` is instantiated with default parameters as following.
+
+```dart
 ObjectDetector detector = ObjectDetector(
   isStream: false,
   enableClassification: true,
   enableMultipleObjects: true,
-);
-
-List<DetectedObject> result = await detector.detect(image);
+)
 ```
 
+But we can override this by passing other values.
+
+<table>
+  <tr>
+    <th>Parameter</th>
+    <th>Value</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td>isStream</td>
+    <td>false / true</td>
+    <td>false</td>
+  </tr>
+  <tr>
+    <td>enableClassification</td>
+    <td>false / true</td>
+    <td>true</td>
+  </tr>
+  <tr>
+    <td>enableMultipleObjects</td>
+    <td>false, true</td>
+    <td>true</td>
+  </tr>
+</table>
+
+### Output
+
+The result of face detection process is a list of `DetectedObject`, in each contains the following.
+
+```dart
+int? trackingId // Tracking ID of the object. The value is null when isStream is false.
+Rect boundingBox // showing the rectangle of the detected object
+List<DetectedLabel> labels // the list of possible labels for the detected object
+```
+
+Each object of `DetectedLabel` contains the following data.
+
+```dart
+int index // index of this label
+String label // the label of the object
+double confidence // the value representing the probability that the label is correct
+```
+
+### Object Painting
+
+To make it easy to paint from `DetectedObject` to the screen, we provide `ObjectOverlay` which you can pass to parameter `overlay` of `InputCameraView`. For more detail about how to use this painting, you can see at the [working example code here](example/lib/main.dart).
+
+```dart
+ObjectOverlay(
+  size: size,
+  originalSize: originalSize,
+  rotation: rotation,
+  objects: objects,
+)
+```
+
+### Dispose
+
+```dart
+detector.dispose();
+```
+
+## Example Project
+
+You can learn more from example project [here](example).
