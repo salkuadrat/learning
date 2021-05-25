@@ -2,7 +2,7 @@
 
 The easy way to use ML Kit for object detection & tracking in Flutter.
 
-With ML Kit's on-device object detection and tracking, we can detect and track objects in an image or live camera feed. Optionally, we can classify detected objects, either by using the built-in coarse classifier, or using your own custom image classification model.
+With ML Kit's on-device object detection and tracking, we can detect and track objects in an image or live camera feed. Optionally, we can classify detected objects, either by using the built-in coarse classifier, or using custom image classification model.
 
 <img src="https://github.com/salkuadrat/learning/raw/master/packages/learning_object_detection/screenshot.jpg" alt="universe" width="280">
 
