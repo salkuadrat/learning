@@ -7,38 +7,6 @@ void main() {
   runApp(MyApp());
 }
 
-class FaceDetectionData extends ChangeNotifier {
-  InputImage? _image;
-  List<Face> _faces = [];
-
-  InputImage? get image => _image;
-  List<Face> get faces => _faces;
-
-  String? get type => _image?.type;
-  InputImageRotation? get rotation => _image?.metadata?.rotation;
-  Size? get size => _image?.metadata?.size;
-
-  bool get isEmpty => _image == null || _faces.isEmpty;
-  bool get isFromLive => type == 'bytes';
-  bool get notFromLive => !isFromLive;
-
-  set image(InputImage? image) {
-    _image = image;
-    notifyListeners();
-  }
-
-  set faces(List<Face> faces) {
-    _faces = faces;
-    notifyListeners();
-  }
-
-  void clear() {
-    _faces.clear();
-    _image = null;
-    notifyListeners();
-  }
-}
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -50,7 +18,7 @@ class MyApp extends StatelessWidget {
         primaryTextTheme: TextTheme(headline6: TextStyle(color: Colors.white)),
       ),
       home: ChangeNotifierProvider(
-        create: (_) => FaceDetectionData(),
+        create: (_) => FaceDetectionState(),
         child: FaceDetectionPage(),
       ),
     );
@@ -63,10 +31,9 @@ class FaceDetectionPage extends StatefulWidget {
 }
 
 class _FaceDetectionPageState extends State<FaceDetectionPage> {
-  FaceDetectionData get data =>
-      Provider.of<FaceDetectionData>(context, listen: false);
-  bool _isProcessing = false;
-
+  FaceDetectionState get state =>
+      Provider.of<FaceDetectionState>(context, listen: false);
+  
   FaceDetector _detector = FaceDetector(
     mode: FaceDetectorMode.accurate,
     detectLandmark: true,
@@ -82,18 +49,11 @@ class _FaceDetectionPageState extends State<FaceDetectionPage> {
   }
 
   Future<void> _detectFaces(InputImage image) async {
-    if (!_isProcessing) {
-      _isProcessing = true;
-
-      if (image.type != 'bytes') {
-        data.faces = [];
-      }
-
-      List<Face> result = await _detector.detect(image);
-
-      _isProcessing = false;
-      data.image = image;
-      data.faces = result;
+    if (state.isNotProcessing) {
+      state.startProcessing();
+      state.image = image;
+      state.data = await _detector.detect(image);
+      state.stopProcessing();
     }
   }
 
@@ -102,18 +62,18 @@ class _FaceDetectionPageState extends State<FaceDetectionPage> {
     return InputCameraView(
       title: 'Face Detection',
       onImage: _detectFaces,
-      overlay: Consumer<FaceDetectionData>(
-        builder: (_, data, __) {
-          if (data.isEmpty) {
+      overlay: Consumer<FaceDetectionState>(
+        builder: (_, state, __) {
+          if (state.isEmpty) {
             return Container();
           }
 
-          Size originalSize = data.size!;
+          Size originalSize = state.size!;
           Size size = MediaQuery.of(context).size;
 
           // if image source from gallery
           // image display size is scaled to 360x360 with retaining aspect ratio
-          if (data.notFromLive) {
+          if (state.notFromLive) {
             if (originalSize.aspectRatio > 1) {
               size = Size(360.0, 360.0 / originalSize.aspectRatio);
             } else {
@@ -124,13 +84,55 @@ class _FaceDetectionPageState extends State<FaceDetectionPage> {
           return FaceOverlay(
             size: size,
             originalSize: originalSize,
-            rotation: data.rotation,
-            faces: data.faces,
+            rotation: state.rotation,
+            faces: state.data,
             contourColor: Colors.white.withOpacity(0.8),
             landmarkColor: Colors.lightBlue.withOpacity(0.8),
           );
         },
       ),
     );
+  }
+}
+
+class FaceDetectionState extends ChangeNotifier {
+  InputImage? _image;
+  List<Face> _data = [];
+  bool _isProcessing = false;
+
+  InputImage? get image => _image;
+  List<Face> get data => _data;
+
+  String? get type => _image?.type;
+  InputImageRotation? get rotation => _image?.metadata?.rotation;
+  Size? get size => _image?.metadata?.size;
+  
+  bool get isNotProcessing => !_isProcessing;
+  bool get isEmpty => data.isEmpty;
+  bool get isFromLive => type == 'bytes';
+  bool get notFromLive => !isFromLive;
+
+  void startProcessing() {
+    _isProcessing = true;
+    notifyListeners();
+  }
+
+  void stopProcessing() {
+    _isProcessing = false;
+    notifyListeners();
+  }
+
+  set image(InputImage? image) {
+    _image = image;
+
+    if (notFromLive) {
+      _data = [];
+    }
+    notifyListeners();
+  }
+
+  set data(List<Face> data) {
+    _data = data;
+    notifyListeners();
   }
 }
