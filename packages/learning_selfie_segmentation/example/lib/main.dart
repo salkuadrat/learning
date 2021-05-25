@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_image/flutter_native_image.dart';
 
 import 'package:learning_input_image/learning_input_image.dart';
 import 'package:learning_selfie_segmentation/learning_selfie_segmentation.dart';
@@ -51,33 +54,30 @@ class _SelfieSegmentationPageState extends State<SelfieSegmentationPage> {
       state.startProcessing();
       state.isFromLive = image.type == 'bytes';
 
-      /* if (image.type != 'bytes') {
-        img.Image? originalImage =
-            img.decodeImage(File(image.path!).readAsBytesSync());
+      if (state.notFromLive) {
+        ImageProperties properties =
+            await FlutterNativeImage.getImageProperties(image.path!);
 
-        if (originalImage != null) {
-          img.Image scaledImage = originalImage;
-          InputImageRotation rotation =
-              image.metadata?.rotation ?? InputImageRotation.ROTATION_0;
-          Size size = Size(
-              originalImage.width.toDouble(), originalImage.height.toDouble());
-          double aspectRatio = originalImage.width / originalImage.height;
+        double aspectRatio = properties.width! / properties.height!;
+        int targetWidth = aspectRatio > 1.0 ? 360 : (360 * aspectRatio).round();
+        int targetHeight =
+            aspectRatio > 1.0 ? (360 / aspectRatio).round() : 360;
 
-          if (aspectRatio > 0) {
-            scaledImage = img.copyResize(originalImage, width: 360);
-            size = Size(360.0, 360.0 / aspectRatio);
-          } else {
-            scaledImage = img.copyResize(originalImage, height: 360);
-            size = Size(360.0 * aspectRatio, 360.0);
-          }
+        File scaledImage = await FlutterNativeImage.compressImage(
+          image.path!,
+          quality: 90,
+          targetWidth: aspectRatio > 1.0 ? 360 : (360 * aspectRatio).round(),
+          targetHeight: aspectRatio > 1.0 ? (360 / aspectRatio).round() : 360,
+        );
 
-          image = InputImage(
-            type: 'bytes',
-            bytes: scaledImage.getBytes(),
-            metadata: InputImageData(size: size, rotation: rotation),
-          );
-        }
-      } */
+        image = InputImage.fromFile(
+          scaledImage,
+          metadata: InputImageData(
+            size: Size(targetWidth.toDouble(), targetHeight.toDouble()),
+            rotation: image.metadata?.rotation ?? InputImageRotation.ROTATION_0,
+          ),
+        );
+      }
 
       state.image = image;
       SegmentationMask? mask = await _segmenter.process(image);
@@ -100,17 +100,8 @@ class _SelfieSegmentationPageState extends State<SelfieSegmentationPage> {
           }
 
           Size originalSize = state.size!;
-          Size size = MediaQuery.of(context).size;
-
-          // if image source from gallery
-          // image display size is scaled to 360x360 with retaining aspect ratio
-          if (state.notFromLive) {
-            if (originalSize.aspectRatio > 1) {
-              size = Size(360.0, 360.0 / originalSize.aspectRatio);
-            } else {
-              size = Size(360.0 * originalSize.aspectRatio, 360.0);
-            }
-          }
+          Size size =
+              state.isFromLive ? MediaQuery.of(context).size : originalSize;
 
           return SegmentationOverlay(
             size: size,

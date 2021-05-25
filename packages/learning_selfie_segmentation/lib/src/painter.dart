@@ -28,25 +28,16 @@ class SegmentationPainter extends CustomPainter {
     final height = mask.height;
     final confidences = mask.confidences;
 
-    final paint = Paint()
-      ..style = PaintingStyle.fill;
-
-    Map<String, bool> isPainted = {};
+    final paint = Paint()..style = PaintingStyle.fill;
 
     for (int y = 0; y < height; y++) {
       for (int x = 0; x < width; x++) {
         int tx = transformX(x.toDouble(), size).round();
         int ty = transformY(y.toDouble(), size).round();
-        String key = '$tx,$ty';
 
-        bool ip = isPainted[key] ?? false;
-        
-        if(!ip) {
-          double opacity = confidences[(y * width) + x] * 0.08;
-          paint..color = color.withOpacity(opacity);
-          canvas.drawCircle(Offset(tx.toDouble(), ty.toDouble()), 1, paint);
-          isPainted[key] = true;
-        }
+        double opacity = confidences[(y * width) + x] * 0.25;
+        paint..color = color.withOpacity(opacity);
+        canvas.drawCircle(Offset(tx.toDouble(), ty.toDouble()), 1, paint);
       }
     }
   }

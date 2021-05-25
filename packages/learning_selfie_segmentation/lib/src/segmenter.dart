@@ -9,7 +9,7 @@ class SelfieSegmenter {
   final bool enableRawSizeMask;
 
   SelfieSegmenter({
-    this.isStream = false,
+    this.isStream = true,
     this.enableRawSizeMask = false,
   });
 

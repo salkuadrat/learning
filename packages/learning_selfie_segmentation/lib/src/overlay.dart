@@ -29,7 +29,7 @@ class SegmentationOverlay extends StatelessWidget {
         size: size,
         imageSize: originalSize,
         rotation: rotation ?? InputImageRotation.ROTATION_0,
-        color: color ?? Colors.red,
+        color: color ?? Colors.purple,
       ),
       child: Container(
         width: size.width,
