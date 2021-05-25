@@ -113,8 +113,6 @@ class BarcodeScanningData extends ChangeNotifier {
   bool get isProcessing => _isProcessing;
   bool get isNotProcessing => !_isProcessing;
   bool get isEmpty => _result.isEmpty;
-  bool get isFromLive => type == 'bytes';
-  bool get notFromLive => !isFromLive;
 
   void startProcessing() {
     _isProcessing = true;
