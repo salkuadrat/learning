@@ -93,12 +93,11 @@ class _ImageLabelingPageState extends State<ImageLabelingPage> {
 
 class ImageLabelingState extends ChangeNotifier {
   InputImage? _image;
-  List _labels = [];
+  List<Label> _labels = [];
   bool _isProcessing = false;
 
   InputImage? get image => _image;
-  List get labels => _labels;
-  String get label => _labels.isNotEmpty ? _labels.first['label'] : '';
+  List<Label> get labels => _labels;
 
   String? get type => _image?.type;
   InputImageRotation? get rotation => _image?.metadata?.rotation;
@@ -129,17 +128,14 @@ class ImageLabelingState extends ChangeNotifier {
     notifyListeners();
   }
 
-  set labels(List labels) {
+  set labels(List<Label> labels) {
     _labels = labels;
     notifyListeners();
   }
 
   @override
   String toString() {
-    List<String> result = [];
-    for (Map label in labels) {
-      result.add(label['label']);
-    }
+    List<String> result = labels.map((label) => label.label).toList();
     return result.join(', ');
   }
 }
