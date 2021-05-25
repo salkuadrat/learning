@@ -105,47 +105,47 @@ Here is a list of `BarcodeType` values.
   <tr>
     <td>URL</td>
     <td>BarcodeUrl</td>
-    <td>`title`, `url`</td>
+    <td><code>title</code> <code>url</code></td>
   </tr>
   <tr>
     <td>EMAIL</td>
     <td>BarcodeEmail</td>
-    <td>`emailType`, `address`, `subject`, `body`</td>
+    <td><code>emailType</code> <code>address</code> <code>subject</code> <code>body</code></td>
   </tr>
   <tr>
     <td>PHONE</td>
     <td>BarcodePhone</td>
-    <td>`phoneType`, `number`</td>
+    <td><code>phoneType</code> <code>number</code></td>
   </tr>
   <tr>
     <td>SMS</td>
     <td>BarcodeSms</td>
-    <td>`number`, `message`</td>
+    <td><code>number</code> <code>message</code></td>
   </tr>
   <tr>
     <td>WIFI</td>
     <td>BarcodeWifi</td>
-    <td>`wifiType`, `ssid`, `password`</td>
+    <td><code>wifiType</code> <code>ssid</code> <code>password</code></td>
   </tr>
   <tr>
     <td>CALENDAR_EVENT</td>
     <td>BarcodeCalendarEvent</td>
-    <td>`status`, `summary`, `description`, `location`, `start`, `end`, `organizer`</td>
+    <td><code>status</code> <code>summary</code> <code>description</code> <code>location</code> <code>start</code> <code>end</code> <code>organizer</code></td>
   </tr>
   <tr>
     <td>CONTACT_INFO</td>
     <td>BarcodeContactInfo</td>
-    <td>`title`, `name`, `organization`, `emails`, `phones`, `addresses`, `urls`</td>
+    <td><code>title</code> <code>name</code> <code>organization</code> <code>emails</code> <code>phones</code> <code>addresses</code> <code>urls</code></td>
   </tr>
   <tr>
     <td>DRIVER_LICENSE</td>
     <td>BarcodeDriverLicense</td>
-    <td>`documentType`, `licenseNumber`, `firstName`, `middleName`, `lastName`, `gender`, `birthDate`, `street`, `city`, `state`, `zip`, `issueDate`, `expiryDate`, `issuingCountry`</td>
+    <td><code>documentType</code> <code>licenseNumber</code> <code>firstName</code> <code>middleName</code> <code>lastName</code> <code>gender</code> <code>birthDate</code> <code>street</code> <code>city</code> <code>state</code> <code>zip</code> <code>issueDate</code> <code>expiryDate</code> <code>issuingCountry</code></td>
   </tr>
   <tr>
     <td>GEO</td>
     <td>BarcodeGeo</td>
-    <td>`latitude`, `longitude`</td>
+    <td><code>latitude</code> <code>longitude</code></td>
   </tr>
   <tr>
     <td>ISBN</td>
