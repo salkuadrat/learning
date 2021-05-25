@@ -116,4 +116,84 @@ But we can override this by passing other values.
 
 ### Output
 
-The result of face detection process is a list of `Face` object, which contains 
+The result of face detection process is a list of `Face` object, in each contains the following:
+
+```dart
+Rect boundingBox // showing the rectangle of the detected face
+
+double headAngleY // Head is rotated to the right at headAngleY degrees
+
+double headAngleZ // Head is tilted sideways at headAngleZ degrees
+
+int? trackingId // Tracking ID
+
+double? smilingProbability // the probability that the face is smiling
+
+double? leftEyeOpenProbability // the probability that the left eye is open
+
+double? rightEyeOpenProbability // the probability that the right eye is open
+
+Map<FaceLandmarkType, FaceLandmark> landmarks // Map object representing the list of FaceLandmark
+
+Map<FaceContourType, FaceContour> countours // Map object representing the list of FaceContour
+
+```
+
+The object of `FaceLandmark` contains two kinds of information: type and point.
+
+```dart
+FaceLandmarkType type
+Offset point
+```
+
+Here is the list of `FaceLandmarkType`:
+
+```dart
+LEFT_EYE
+RIGHT_EYE
+LEFT_EAR
+RIGHT_EAR
+LEFT_CHEEK
+RIGHT_CHEEK
+NOSE_BASE
+MOUTH_LEFT
+MOUTH_RIGHT
+MOUTH_BOTTOM
+```
+
+Each instance of `FaceContour` contains two information: type and points.
+
+```dart
+FaceContourType type
+List<Offset> points
+```
+
+Here is the list of `FaceContourType`:
+
+```dart
+FACE
+LEFT_EYE
+RIGHT_EYE
+LEFT_EYEBROW_TOP
+LEFT_EYEBROW_BOTTOM
+RIGHT_EYEBROW_TOP
+RIGHT_EYEBROW_BOTTOM
+NOSE_BRIDGE
+NOSE_BOTTOM
+LEFT_CHEEK
+RIGHT_CHEEK
+UPPER_LIP_TOP
+UPPER_LIP_BOTTOM
+LOWER_LIP_TOP
+LOWER_LIP_BOTTOM
+```
+
+### Dispose
+
+```dart
+detector.dispose();
+```
+
+## Example Project
+
+You can learn more from example project [here](example).
