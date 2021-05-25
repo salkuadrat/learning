@@ -65,3 +65,68 @@ Pose? pose = await detector.detect(image);
 
 ### Output
 
+Output of pose detection process is a `Pose` object which contains the following information.
+
+```dart
+Map<PoseLandmarkType, PoseLandmark> landmarks // Map object representing the list of PoseLandmark
+```
+
+Each `PoseLandmark` contains the following data.
+
+```dart
+PoseLandmarkType type // the type of detected landmark
+Offset position // the x, y position of detected landmark
+double inFrameLikelihood // the probability of the detected landmark to be inside the frame
+```
+
+And here is the list of `PoseLandmarkType` values.
+
+```dart
+LEFT_EYE
+LEFT_EYE_INNER
+LEFT_EYE_OUTER
+RIGHT_EYE
+RIGHT_EYE_INNER
+RIGHT_EYE_OUTER
+LEFT_EAR
+RIGHT_EAR
+NOSE
+LEFT_MOUTH
+RIGHT_MOUTH
+LEFT_SHOULDER
+RIGHT_SHOULDER
+LEFT_ELBOW
+RIGHT_ELBOW
+LEFT_WRIST
+RIGHT_WRIST
+LEFT_THUMB
+RIGHT_THUMB
+LEFT_INDEX
+RIGHT_INDEX
+LEFT_PINKY
+RIGHT_PINKY
+LEFT_HIP
+RIGHT_HIP
+LEFT_KNEE
+RIGHT_KNEE
+LEFT_ANKLE
+RIGHT_ANKLE
+LEFT_HEEL
+RIGHT_HEEL
+LEFT_FOOT_INDEX
+RIGHT_FOOT_INDEX
+```
+
+### Pose Painting
+
+To make it easy to paint from `Pose` object to the screen, we provide `PoseOverlay` which you can pass to parameter `overlay` of `InputCameraView`. For more detail about how to use this painting, you can see at the [working example code here](example/lib/main.dart).
+
+### Dispose
+
+```dart
+detector.dispose();
+```
+
+## Example Project
+
+You can learn more from example project [here](example).
