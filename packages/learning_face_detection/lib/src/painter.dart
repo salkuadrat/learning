@@ -23,7 +23,7 @@ class FacePainter extends CustomPainter {
   final double contourStrokeWidth;
   final Color? contourColor;
 
-  FacePainter({
+  const FacePainter({
     this.faces = const [],
     required this.imageSize,
     required this.rotation,

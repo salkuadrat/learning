@@ -1,4 +1,5 @@
 library learning_selfie_segmentation;
 
-export 'src/learning.dart';
-export 'src/selfie_segmentation.dart';
+export 'src/segmenter.dart';
+export 'src/overlay.dart';
+export 'src/mask.dart';

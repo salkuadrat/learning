@@ -31,8 +31,7 @@ class FaceDetectionPage extends StatefulWidget {
 }
 
 class _FaceDetectionPageState extends State<FaceDetectionPage> {
-  FaceDetectionState get state =>
-      Provider.of<FaceDetectionState>(context, listen: false);
+  FaceDetectionState get state => Provider.of(context, listen: false);
 
   FaceDetector _detector = FaceDetector(
     mode: FaceDetectorMode.accurate,
