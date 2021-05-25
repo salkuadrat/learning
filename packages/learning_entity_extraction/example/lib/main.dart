@@ -1,22 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:learning_entity_extraction/learning_entity_extraction.dart';
 import 'package:learning_input_image/learning_input_image.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.lightBlue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        primaryTextTheme: TextTheme(headline6: TextStyle(color: Colors.white)),
+      ),
+      home: ChangeNotifierProvider(
+        create: (_) => EntityExtractionState(),
+        child: EntityExtractionPage(),
+      ),
+    );
+  }
 }
 
-class _MyAppState extends State<MyApp> {
+class EntityExtractionPage extends StatefulWidget {
+  @override
+  _EntityExtractionPageState createState() => _EntityExtractionPageState();
+}
+
+class _EntityExtractionPageState extends State<EntityExtractionPage> {
   TextEditingController _controller = TextEditingController();
   EntityExtractor _extractor = EntityExtractor();
 
-  String _result = '';
-  bool _isProcessing = false;
+  EntityExtractionState get state => Provider.of(context, listen: false);
 
   @override
   void initState() {
@@ -41,7 +59,7 @@ class _MyAppState extends State<MyApp> {
     print(result);
   } */
 
-  Future<void> testModelManager() async {
+  /* Future<void> testModelManager() async {
     var models = await EntityModelManager.list();
     print(models);
     var downloaded = await EntityModelManager.download(ENGLISH);
@@ -54,39 +72,19 @@ class _MyAppState extends State<MyApp> {
     print('Deleted: $deleted');
     models = await EntityModelManager.list();
     print(models);
-  }
+  } */
 
   Future<void> _extract() async {
-    String text = _controller.text;
+    state.startProcessing();
+    List extractedItems = await _extractor.extract(_controller.text);
 
-    setState(() {
-      _isProcessing = true;
-    });
-
-    List result = await _extractor.extract(text);
-
-    _result = '';
-    for (var item in result) {
-      _result += '${item.toString()}\n\n';
+    String result = '';
+    for (var item in extractedItems) {
+      result += '${item.toString()}\n\n';
     }
 
-    setState(() {
-      _isProcessing = false;
-    });
-  }
-
-  void _clearResult() {
-    setState(() {
-      _result = '';
-    });
-  }
-
-  String get _displayText {
-    if (_isProcessing) {
-      return 'Processing...';
-    }
-
-    return _result;
+    state.data = result;
+    state.stopProcessing();
   }
 
   @override
@@ -120,7 +118,7 @@ class _MyAppState extends State<MyApp> {
                 minLines: 5,
                 maxLines: 10,
                 style: TextStyle(fontSize: 18, color: Colors.blueGrey[700]),
-                onChanged: (_) => _clearResult(),
+                onChanged: (_) => state.clear(),
               ),
               SizedBox(height: 15),
               NormalBlueButton(
@@ -128,11 +126,16 @@ class _MyAppState extends State<MyApp> {
                 onPressed: _extract,
               ),
               SizedBox(height: 25),
-              Center(
-                child: Text(
-                  _displayText,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 14),
+              Consumer<EntityExtractionState>(
+                builder: (_, state, __) => Center(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    child: Text(
+                      state.data,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 13),
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -140,5 +143,34 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
     );
+  }
+}
+
+class EntityExtractionState extends ChangeNotifier {
+  String _data = '';
+  bool _isProcessing = false;
+
+  String get data => _data;
+  bool get isProcessing => _isProcessing;
+
+  void startProcessing() {
+    _data = 'Extracting...';
+    _isProcessing = true;
+    notifyListeners();
+  }
+
+  void stopProcessing() {
+    _isProcessing = false;
+    notifyListeners();
+  }
+
+  set data(String data) {
+    _data = data;
+    notifyListeners();
+  }
+
+  void clear() {
+    _data = '';
+    notifyListeners();
   }
 }

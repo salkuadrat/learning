@@ -6,55 +6,69 @@ Most apps offer users very little interaction with text beyond the basic cut/cop
 
 The Entity Extraction allows you to recognize specific entities within static text and while you're typing. Once an entity is identified, you can easily enable different actions for the user based on the entity type.
 
+<img src="https://github.com/salkuadrat/learning/raw/master/packages/learning_entity_extraction/screenshot.jpg" alt="universe" width="280">
+
 ### Supported Entities
 
 <table>
   <tr>
-    <td>Entity</td>
-    <td>Example</td>
+    <th>Entity</th>
+    <th>Index Type</th>
+    <th>Example</th>
   </tr>
   <tr>
     <td>Address</td>
+    <td>address</td>
     <td>350 third street, Cambridge MA</td>
   </tr>
   <tr>
     <td>Date-Time</td>
+    <td>datetime</td>
     <td>2019/09/29, let's meet tomorrow at 6pm</td>
   </tr>
   <tr>
     <td>Email address</td>
+    <td>email</td>
     <td>salkuadrat@gmail.com</td>
   </tr>
   <tr>
     <td>Flight Number (IATA flight codes only)</td>
+    <td>flight</td>
     <td>LX37</td>
   </tr>
   <tr>
     <td>IBAN</td>
+    <td>iban</td>
     <td>CH52 0483 0000 0000 0000 9</td>
   </tr>
   <tr>
     <td>ISBN (version 13 only)</td>
+    <td>isbn</td>
     <td>978-1101904190</td>
   </tr>
   <tr>
     <td>Money/Currency (Arabic numerals only)</td>
+    <td>money</td>
     <td>$12, 25 USD</td>
   </tr>
   <tr>
     <td>Payment / Credit Cards</td>
+    <td>payment</td>
     <td>4111 1111 1111 1111</td>
   </tr>
   <tr>
     <td>Phone Number</td>
+    <td>phone</td>
     <td>(555) 225-3556</td>
   </tr>
   <tr>
     <td>Tracking Number (standardized international formats)</td>
+    <td>tracking</td>
     <td>1Z204E380338943508</td>
   </tr>
   <tr>
     <td>URL</td>
+    <td>url</td>
     <td>https://github.com/salkuadrat/learning</td>
   </tr>
 </table>
@@ -72,7 +86,7 @@ or
 
 ```yaml
 dependencies:
-  learning_entity_extraction: ^0.0.1+1
+  learning_entity_extraction: ^0.0.2
 ```
 
 Then run `flutter pub get`.

@@ -1,3 +1,7 @@
+## [0.0.2] - 25 May 2021
+
+* Edit example project
+
 ## [0.0.1+1] - 23 May 2021
 
 * Edit documentation
