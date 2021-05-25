@@ -56,8 +56,7 @@ After getting the `InputImage`, we can start detecting faces by calling method `
 
 ```dart
 FaceDetector detector = FaceDetector();
-final result = await detector.detect(image);
-print(result);
+List<Face> result = await detector.detect(image);
 ```
 
 `FaceDetector` is instantiated with default parameters as following.
