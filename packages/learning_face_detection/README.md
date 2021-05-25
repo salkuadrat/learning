@@ -6,6 +6,8 @@ With ML Kit's face detection, we can detect faces in an image, identify key faci
 
 With face detection, we can get the information to perform tasks like embellishing selfies and portraits, or generating avatars from user's photo. Because it can perform face detection in real time, we can use it in applications like video chat, games, or TikTok that respond to user's expressions.
 
+<img src="https://github.com/salkuadrat/learning/raw/master/packages/learning_face_detection/screenshot.jpg" alt="universe" width="280">
+
 ## Getting Started
 
 Add dependency to your flutter project:

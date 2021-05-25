@@ -33,7 +33,7 @@ class FaceDetectionPage extends StatefulWidget {
 class _FaceDetectionPageState extends State<FaceDetectionPage> {
   FaceDetectionState get state =>
       Provider.of<FaceDetectionState>(context, listen: false);
-  
+
   FaceDetector _detector = FaceDetector(
     mode: FaceDetectorMode.accurate,
     detectLandmark: true,
@@ -106,7 +106,7 @@ class FaceDetectionState extends ChangeNotifier {
   String? get type => _image?.type;
   InputImageRotation? get rotation => _image?.metadata?.rotation;
   Size? get size => _image?.metadata?.size;
-  
+
   bool get isNotProcessing => !_isProcessing;
   bool get isEmpty => data.isEmpty;
   bool get isFromLive => type == 'bytes';
