@@ -54,7 +54,7 @@ InputCameraView(
 
 ### Selfie Segmentation
 
-After getting the `InputImage`, we can start detecting objetcs by calling method `process` from an instance of `SelfieSegmenter`.
+After getting the `InputImage`, we can start doing selfie segmentation by calling method `process` from an instance of `SelfieSegmenter`.
 
 ```dart
 SelfieSegmenter segmenter = SelfieSegmenter();
