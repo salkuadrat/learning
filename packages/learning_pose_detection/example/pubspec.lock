@@ -152,9 +152,9 @@ packages:
   learning_pose_detection:
     dependency: "direct main"
     description:
-      path: ".."
-      relative: true
-    source: path
+      name: learning_pose_detection
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.0.1"
   matcher:
     dependency: transitive
