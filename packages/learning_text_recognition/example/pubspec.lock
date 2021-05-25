@@ -152,9 +152,9 @@ packages:
   learning_text_recognition:
     dependency: "direct main"
     description:
-      path: ".."
-      relative: true
-    source: path
+      name: learning_text_recognition
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.0.1"
   matcher:
     dependency: transitive
