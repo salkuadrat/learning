@@ -51,3 +51,14 @@ InputCameraView(
 ### Object Detection
 
 After getting the `InputImage`, we can start detecting objetcs by calling method `detect` from an instance of `ObjectDetector`.
+
+```dart
+ObjectDetector detector = ObjectDetector(
+  isStream: false,
+  enableClassification: true,
+  enableMultipleObjects: true,
+);
+
+List<DetectedObject> result = await detector.detect(image);
+```
+
