@@ -54,6 +54,8 @@ class _ImageLabelingPageState extends State<ImageLabelingPage> {
   @override
   Widget build(BuildContext context) {
     return InputCameraView(
+      mode: InputCameraMode.gallery,
+      cameraDefault: InputCameraType.rear,
       title: 'Image Labeling',
       onImage: _processLabeling,
       overlay: Consumer<ImageLabelingData>(
@@ -105,8 +107,7 @@ class ImageLabelingData extends ChangeNotifier {
   bool get isProcessing => _isProcessing;
   bool get isNotProcessing => !_isProcessing;
   bool get isEmpty => _labels.isEmpty;
-  bool get isFromLive => type == 'bytes';
-  bool get notFromLive => !isFromLive;
+  bool get notFromLive => type != 'bytes';
 
   void startProcessing() {
     _isProcessing = true;
