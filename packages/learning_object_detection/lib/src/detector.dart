@@ -7,12 +7,12 @@ class ObjectDetector {
   final MethodChannel channel = MethodChannel('LearningObjectDetection');
   final bool isStream;
   final bool enableClassification;
-  final bool enableTracking;
+  final bool enableMultipleObjects;
 
   ObjectDetector({
     this.isStream = false,
-    this.enableClassification = false,
-    this.enableTracking = false,
+    this.enableClassification = true,
+    this.enableMultipleObjects = true,
   });
 
   Future<List<DetectedObject>> detect(InputImage image) async {
@@ -21,7 +21,7 @@ class ObjectDetector {
         'image': image.json,
         'isStream': isStream,
         'enableClassification': enableClassification,
-        'enableTracking': enableTracking,
+        'enableMultipleObjects': enableMultipleObjects,
       });
 
       return result.map((object) => DetectedObject.from(object)).toList();

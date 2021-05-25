@@ -7,38 +7,6 @@ void main() {
   runApp(MyApp());
 }
 
-class ObjectDetectionData extends ChangeNotifier {
-  InputImage? _image;
-  List<DetectedObject> _objects = [];
-
-  InputImage? get image => _image;
-  List<DetectedObject> get objects => _objects;
-
-  String? get type => _image?.type;
-  InputImageRotation? get rotation => _image?.metadata?.rotation;
-  Size? get size => _image?.metadata?.size;
-
-  bool get isEmpty => _objects.isEmpty;
-  bool get isFromLive => type == 'bytes';
-  bool get notFromLive => !isFromLive;
-
-  set image(InputImage? image) {
-    _image = image;
-    notifyListeners();
-  }
-
-  set objects(List<DetectedObject> objects) {
-    _objects = objects;
-    notifyListeners();
-  }
-
-  void clear() {
-    _objects.clear();
-    _image = null;
-    notifyListeners();
-  }
-}
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -50,7 +18,7 @@ class MyApp extends StatelessWidget {
         primaryTextTheme: TextTheme(headline6: TextStyle(color: Colors.white)),
       ),
       home: ChangeNotifierProvider(
-        create: (_) => ObjectDetectionData(),
+        create: (_) => ObjectDetectionState(),
         child: ObjectDetectionPage(),
       ),
     );
@@ -63,15 +31,12 @@ class ObjectDetectionPage extends StatefulWidget {
 }
 
 class _ObjectDetectionPageState extends State<ObjectDetectionPage> {
-  ObjectDetectionData get data =>
-      Provider.of<ObjectDetectionData>(context, listen: false);
-
-  bool _isProcessing = false;
+  ObjectDetectionState get state => Provider.of(context, listen: false);
 
   ObjectDetector _detector = ObjectDetector(
-    isStream: true,
+    isStream: false,
     enableClassification: true,
-    enableTracking: true,
+    enableMultipleObjects: true,
   );
 
   @override
@@ -81,19 +46,11 @@ class _ObjectDetectionPageState extends State<ObjectDetectionPage> {
   }
 
   Future<void> _detectObjects(InputImage image) async {
-    if (!_isProcessing) {
-      _isProcessing = true;
-
-      if (image.type != 'bytes') {
-        data.objects = [];
-      }
-
-      List<DetectedObject> result = await _detector.detect(image);
-
-      data.image = image;
-      data.objects = result;
-
-      _isProcessing = false;
+    if (state.isNotProcessing) {
+      state.startProcessing();
+      state.image = image;
+      state.data = await _detector.detect(image);
+      state.stopProcessing();
     }
   }
 
@@ -104,18 +61,18 @@ class _ObjectDetectionPageState extends State<ObjectDetectionPage> {
       title: 'Object Detection',
       onImage: _detectObjects,
       cameraDefault: InputCameraType.rear,
-      overlay: Consumer<ObjectDetectionData>(
-        builder: (_, data, __) {
-          if (data.isEmpty) {
+      overlay: Consumer<ObjectDetectionState>(
+        builder: (_, state, __) {
+          if (state.isEmpty) {
             return Container();
           }
 
-          Size originalSize = data.size!;
+          Size originalSize = state.size!;
           Size size = MediaQuery.of(context).size;
 
           // if image source from gallery
           // image display size is scaled to 360x360 with retaining aspect ratio
-          if (data.notFromLive) {
+          if (state.notFromLive) {
             if (originalSize.aspectRatio > 1) {
               size = Size(360.0, 360.0 / originalSize.aspectRatio);
             } else {
@@ -126,11 +83,53 @@ class _ObjectDetectionPageState extends State<ObjectDetectionPage> {
           return ObjectOverlay(
             size: size,
             originalSize: originalSize,
-            objects: data.objects,
-            rotation: data.rotation,
+            objects: state.data,
+            rotation: state.rotation,
           );
         },
       ),
     );
+  }
+}
+
+class ObjectDetectionState extends ChangeNotifier {
+  InputImage? _image;
+  List<DetectedObject> _data = [];
+  bool _isProcessing = false;
+
+  InputImage? get image => _image;
+  List<DetectedObject> get data => _data;
+
+  String? get type => _image?.type;
+  InputImageRotation? get rotation => _image?.metadata?.rotation;
+  Size? get size => _image?.metadata?.size;
+
+  bool get isNotProcessing => !_isProcessing;
+  bool get isEmpty => _data.isEmpty;
+  bool get isFromLive => type == 'bytes';
+  bool get notFromLive => !isFromLive;
+
+  void startProcessing() {
+    _isProcessing = true;
+    notifyListeners();
+  }
+
+  void stopProcessing() {
+    _isProcessing = false;
+    notifyListeners();
+  }
+
+  set image(InputImage? image) {
+    _image = image;
+
+    if (notFromLive) {
+      _data = [];
+    }
+    notifyListeners();
+  }
+
+  set data(List<DetectedObject> data) {
+    _data = data;
+    notifyListeners();
   }
 }

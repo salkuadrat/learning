@@ -43,6 +43,26 @@ class ObjectPainter extends CustomPainter {
           transformY(object.boundingBox.bottom, size),
         ),
         paint);
+
+    TextSpan span = new TextSpan(
+      style: TextStyle(
+          color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
+      text: object.labels.map((label) => label.label).toList().join(', '),
+    );
+    TextPainter painter = new TextPainter(
+      text: span,
+      textAlign: TextAlign.left,
+      textDirection: TextDirection.ltr,
+    );
+
+    painter.layout();
+    painter.paint(
+      canvas,
+      Offset(
+        transformX(object.boundingBox.left, size) + 5.0,
+        transformY(object.boundingBox.top, size) + 4.0,
+      ),
+    );
   }
 
   double transformX(double x, Size size) {

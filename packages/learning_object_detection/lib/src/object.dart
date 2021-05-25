@@ -22,8 +22,10 @@ class DetectedObject {
       }
     }
 
+    final trackingId = json['trackingId'];
+
     return DetectedObject(
-      trackingId: json['trackingId'] as int,
+      trackingId: trackingId != null ? trackingId as int : null,
       boundingBox: toRect(json['boundingBox']),
       labels: labels,
     );
