@@ -73,7 +73,7 @@ FaceDetector detector = FaceDetector(
 )
 ```
 
-But we can override this by passing other values to `FaceDetector`.
+But we can override this by passing other values.
 
 <table>
   <tr>
