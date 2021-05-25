@@ -7,38 +7,6 @@ void main() {
   runApp(MyApp());
 }
 
-class PoseDetectionData extends ChangeNotifier {
-  InputImage? _image;
-  Pose? _pose;
-
-  InputImage? get image => _image;
-  Pose? get pose => _pose;
-
-  String? get type => _image?.type;
-  InputImageRotation? get rotation => _image?.metadata?.rotation;
-  Size? get size => _image?.metadata?.size;
-
-  bool get isEmpty => _pose == null;
-  bool get isFromLive => type == 'bytes';
-  bool get notFromLive => !isFromLive;
-
-  set image(InputImage? image) {
-    _image = image;
-    notifyListeners();
-  }
-
-  set pose(Pose? pose) {
-    _pose = pose;
-    notifyListeners();
-  }
-
-  void clear() {
-    _pose = null;
-    _image = null;
-    notifyListeners();
-  }
-}
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -50,7 +18,7 @@ class MyApp extends StatelessWidget {
         primaryTextTheme: TextTheme(headline6: TextStyle(color: Colors.white)),
       ),
       home: ChangeNotifierProvider(
-        create: (_) => PoseDetectionData(),
+        create: (_) => PoseDetectionState(),
         child: PoseDetectionPage(),
       ),
     );
@@ -63,10 +31,7 @@ class PoseDetectionPage extends StatefulWidget {
 }
 
 class _PoseDetectionPageState extends State<PoseDetectionPage> {
-  PoseDetectionData get data =>
-      Provider.of<PoseDetectionData>(context, listen: false);
-  bool _isProcessing = false;
-
+  PoseDetectionState get state => Provider.of(context, listen: false);
   PoseDetector _detector = PoseDetector(isStream: false);
 
   @override
@@ -76,39 +41,32 @@ class _PoseDetectionPageState extends State<PoseDetectionPage> {
   }
 
   Future<void> _detectPose(InputImage image) async {
-    if (!_isProcessing) {
-      _isProcessing = true;
-
-      if (image.type != 'bytes') {
-        data.pose = null;
-      }
-
-      Pose? pose = await _detector.detect(image);
-
-      _isProcessing = false;
-      data.image = image;
-      data.pose = pose;
+    if (state.isNotProcessing) {
+      state.startProcessing();
+      state.image = image;
+      state.data = await _detector.detect(image);
+      state.stopProcessing();
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return InputCameraView(
-      mode: InputCameraMode.gallery,
+      cameraDefault: InputCameraType.rear,
       title: 'Pose Detection',
       onImage: _detectPose,
-      overlay: Consumer<PoseDetectionData>(
-        builder: (_, data, __) {
-          if (data.isEmpty) {
+      overlay: Consumer<PoseDetectionState>(
+        builder: (_, state, __) {
+          if (state.isEmpty) {
             return Container();
           }
 
-          Size originalSize = data.size!;
+          Size originalSize = state.size!;
           Size size = MediaQuery.of(context).size;
 
           // if image source from gallery
           // image display size is scaled to 360x360 with retaining aspect ratio
-          if (data.notFromLive) {
+          if (state.notFromLive) {
             if (originalSize.aspectRatio > 1) {
               size = Size(360.0, 360.0 / originalSize.aspectRatio);
             } else {
@@ -119,11 +77,53 @@ class _PoseDetectionPageState extends State<PoseDetectionPage> {
           return PoseOverlay(
             size: size,
             originalSize: originalSize,
-            rotation: data.rotation,
-            pose: data.pose!,
+            rotation: state.rotation,
+            pose: state.data!,
           );
         },
       ),
     );
+  }
+}
+
+class PoseDetectionState extends ChangeNotifier {
+  InputImage? _image;
+  Pose? _data;
+  bool _isProcessing = false;
+
+  InputImage? get image => _image;
+  Pose? get data => _data;
+
+  String? get type => _image?.type;
+  InputImageRotation? get rotation => _image?.metadata?.rotation;
+  Size? get size => _image?.metadata?.size;
+
+  bool get isNotProcessing => !_isProcessing;
+  bool get isEmpty => _data == null;
+  bool get isFromLive => type == 'bytes';
+  bool get notFromLive => !isFromLive;
+
+  void startProcessing() {
+    _isProcessing = true;
+    notifyListeners();
+  }
+
+  void stopProcessing() {
+    _isProcessing = false;
+    notifyListeners();
+  }
+
+  set image(InputImage? image) {
+    _image = image;
+
+    if (notFromLive) {
+      _data = null;
+    }
+    notifyListeners();
+  }
+
+  set data(Pose? data) {
+    _data = data;
+    notifyListeners();
   }
 }
