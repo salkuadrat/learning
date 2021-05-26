@@ -64,7 +64,7 @@ SegmentationMask? mask = await segmenter.process(image);
 `SelfieSegmenter` is instantiated with default parameters as following.
 
 ```dart
-ObjectDetector detector = ObjectDetector(
+SelfieSegmenter segmenter = SelfieSegmenter(
   isStream: true,
   enableRawSizeMask: false,
 )
