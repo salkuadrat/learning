@@ -62,6 +62,13 @@ Learning consists of 13 different plugins that we can add separately depending o
     <td>https://github.com/salkuadrat/learning/tree/master/packages/learning_selfie_segmentation</td>
   </tr>
   <tr>
+    <td>learning_image_labeling</td>
+    <td><b>Published</b></td>
+    <td>^0.0.1</td>
+    <td>https://pub.dev/packages/learning_image_labeling</td>
+    <td>https://github.com/salkuadrat/learning/tree/master/packages/learning_image_labeling</td>
+  </tr>
+  <tr>
     <td>learning_barcode_scanning</td>
     <td><b>Published</b></td>
     <td>^0.0.2</td>
