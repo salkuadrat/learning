@@ -204,4 +204,4 @@ Learning consists of 13 different sub-packages that we can add separately based 
 
 ## Example Project
 
-You can learn more from example project [here](example). Also, you can learn the example code while running the working application from [learning.apk].(https://drive.google.com/file/d/1qX5HED9j2YSpxUE7Xloq5waCPcQFpkDM/view?usp=sharing).
+You can learn more from example project [here](example). Also, you can learn the example code while running the working application from [learning.apk](https://drive.google.com/file/d/1qX5HED9j2YSpxUE7Xloq5waCPcQFpkDM/view?usp=sharing).
