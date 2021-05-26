@@ -142,19 +142,33 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.3"
+  learning_barcode_scanning:
+    dependency: "direct main"
+    description:
+      name: learning_barcode_scanning
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.2"
   learning_entity_extraction:
     dependency: "direct main"
     description:
       name: learning_entity_extraction
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.1+1"
+    version: "0.0.2"
   learning_face_detection:
     dependency: "direct main"
     description:
-      path: "packages/learning_face_detection"
-      relative: true
-    source: path
+      name: learning_face_detection
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.2"
+  learning_image_labeling:
+    dependency: "direct main"
+    description:
+      name: learning_image_labeling
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.0.1"
   learning_input_image:
     dependency: "direct main"
@@ -162,11 +176,32 @@ packages:
       name: learning_input_image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.3"
+    version: "0.0.5"
   learning_language:
     dependency: "direct main"
     description:
       name: learning_language
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.2"
+  learning_object_detection:
+    dependency: "direct main"
+    description:
+      name: learning_object_detection
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
+  learning_pose_detection:
+    dependency: "direct main"
+    description:
+      name: learning_pose_detection
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
+  learning_selfie_segmentation:
+    dependency: "direct main"
+    description:
+      name: learning_selfie_segmentation
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.1"
@@ -176,13 +211,13 @@ packages:
       name: learning_smart_reply
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.1+1"
+    version: "0.0.2"
   learning_text_recognition:
     dependency: "direct main"
     description:
-      path: "packages/learning_text_recognition"
-      relative: true
-    source: path
+      name: learning_text_recognition
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.0.1"
   learning_translate:
     dependency: "direct main"
@@ -190,7 +225,7 @@ packages:
       name: learning_translate
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.1"
+    version: "0.0.2"
   matcher:
     dependency: transitive
     description:
