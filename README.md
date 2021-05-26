@@ -21,7 +21,7 @@ Then run `flutter pub get`.
 
 **Optimization**
 
-For best practice (and reducing application size), it's better to add dependency directly from each of sub-plugins you want to use in your application. 
+For best practice (and minimize application size), it's better to add dependency directly from each of sub-plugins you want to use in your application. 
 
 ## Usage
 
