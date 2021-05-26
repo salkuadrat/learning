@@ -88,8 +88,10 @@ public class DigitalInkRecognition {
         Ink ink = inkBuilder.build();
         RecognitionContext.Builder builder = RecognitionContext.builder();
 
-        if (preContext != null && !preContext.isEmpty()) {
+        if (preContext != null) {
             builder.setPreContext(preContext);
+        } else {
+            builder.setPreContext("");
         }
 
         if (width > 0.0f && height > 0.0f) {

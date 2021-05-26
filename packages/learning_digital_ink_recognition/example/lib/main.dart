@@ -49,21 +49,19 @@ class _DigitalInkRecognitionPageState extends State<DigitalInkRecognitionPage> {
 
   Future<void> _reset(BuildContext context) async {
     double width = MediaQuery.of(context).size.width;
-    print('WritingArea: ($width, $_height)');
-
+    //print('WritingArea: ($width, $_height)');
     state.reset();
     await _recognition.start(writingArea: Size(width, _height));
   }
 
   Future<void> _actionDown(Offset point) async {
-    print('actionDown (${point.dx}, ${point.dy})');
-
+    //print('actionDown (${point.dx}, ${point.dy})');
     state.startWriting(point);
     await _recognition.actionDown(point);
   }
 
   Future<void> _actionMove(Offset point) async {
-    print('actionMove (${point.dx}, ${point.dy})');
+    //print('actionMove (${point.dx}, ${point.dy})');
     state.writePoint(point);
     await _recognition.actionMove(point);
   }
@@ -73,7 +71,7 @@ class _DigitalInkRecognitionPageState extends State<DigitalInkRecognitionPage> {
     state.stopWriting();
 
     if (point != null) {
-      print('actionUp (${point.dx}, ${point.dy})');
+      //print('actionUp (${point.dx}, ${point.dy})');
       await _recognition.actionUp(point);
     }
   }
@@ -82,6 +80,7 @@ class _DigitalInkRecognitionPageState extends State<DigitalInkRecognitionPage> {
     if (state.isNotProcessing) {
       state.startProcessing();
       state.data = await _recognition.process();
+      print(state.toCompleteString());
       state.stopProcessing();
     }
   }
@@ -107,7 +106,7 @@ class _DigitalInkRecognitionPageState extends State<DigitalInkRecognitionPage> {
                 onScaleEnd: (details) async => await _actionUp(),
                 child: Consumer<DigitalInkRecognitionState>(
                   builder: (_, state, __) => CustomPaint(
-                    painter: DigitalInkPainter(),
+                    painter: DigitalInkPainter(writings: state.writings),
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       height: _height,
