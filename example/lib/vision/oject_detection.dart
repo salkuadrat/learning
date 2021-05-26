@@ -12,7 +12,8 @@ class LearningObjectDetection extends StatefulWidget {
 }
 
 class _LearningObjectDetectionState extends State<LearningObjectDetection> {
-  LearningObjectDetectionState get state => Provider.of(context, listen: false);
+  LearningObjectDetectionState get state =>
+      Provider.of<LearningObjectDetectionState>(context, listen: false);
 
   ObjectDetector _detector = ObjectDetector(
     isStream: false,

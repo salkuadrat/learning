@@ -11,10 +11,11 @@ class LearningTranslate extends StatefulWidget {
 }
 
 class _LearningTranslateState extends State<LearningTranslate> {
+  LearningTranslateState get state =>
+      Provider.of<LearningTranslateState>(context, listen: false);
+
   TextEditingController _controller = TextEditingController();
   Translator _translator = Translator(from: FRENCH, to: ENGLISH);
-
-  LearningTranslateState get state => Provider.of(context, listen: false);
 
   @override
   void initState() {

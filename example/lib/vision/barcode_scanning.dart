@@ -12,7 +12,8 @@ class LearningBarcodeScanning extends StatefulWidget {
 }
 
 class _LearningBarcodeScanningState extends State<LearningBarcodeScanning> {
-  LearningBarcodeScanningState get state => Provider.of(context, listen: false);
+  LearningBarcodeScanningState get state =>
+      Provider.of<LearningBarcodeScanningState>(context, listen: false);
 
   BarcodeScanner _scanner = BarcodeScanner(formats: [
     BarcodeFormat.QR_CODE,

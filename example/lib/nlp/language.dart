@@ -11,10 +11,11 @@ class LearningLanguage extends StatefulWidget {
 }
 
 class _LearningLanguageState extends State<LearningLanguage> {
+  LearningLanguageState get state =>
+      Provider.of<LearningLanguageState>(context, listen: false);
+
   TextEditingController _controller = TextEditingController();
   LanguageIdentifier _identifier = LanguageIdentifier();
-
-  LearningLanguageState get state => Provider.of(context, listen: false);
 
   @override
   void dispose() {

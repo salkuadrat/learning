@@ -21,7 +21,8 @@ class _LearningTextRecognitionState extends State<LearningTextRecognition> {
   }
 
   Future<void> _startRecognition(InputImage image) async {
-    LearningTextRecognitionState state = Provider.of(context, listen: false);
+    LearningTextRecognitionState state =
+        Provider.of<LearningTextRecognitionState>(context, listen: false);
 
     if (state.isNotProcessing) {
       state.startProcessing();

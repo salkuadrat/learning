@@ -17,7 +17,7 @@ class LearningSelfieSegmentation extends StatefulWidget {
 class _LearningSelfieSegmentationState
     extends State<LearningSelfieSegmentation> {
   LearningSelfieSegmentationState get state =>
-      Provider.of(context, listen: false);
+      Provider.of<LearningSelfieSegmentationState>(context, listen: false);
 
   SelfieSegmenter _segmenter = SelfieSegmenter(
     isStream: true,

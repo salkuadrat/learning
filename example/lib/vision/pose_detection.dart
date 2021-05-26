@@ -11,7 +11,8 @@ class LearningPoseDetection extends StatefulWidget {
 }
 
 class _LearningPoseDetectionState extends State<LearningPoseDetection> {
-  LearningPoseDetectionState get state => Provider.of(context, listen: false);
+  LearningPoseDetectionState get state =>
+      Provider.of<LearningPoseDetectionState>(context, listen: false);
   PoseDetector _detector = PoseDetector(isStream: false);
 
   @override

@@ -57,10 +57,14 @@ class LearningHome extends StatefulWidget {
 
 class _LearningHomeState extends State<LearningHome> {
   Widget _menuItem(String text, Widget page) {
-    return ListTile(
-      title: Text(text),
-      onTap: () =>
-          Navigator.push(context, MaterialPageRoute(builder: (_) => page)),
+    return Card(
+      elevation: 3,
+      margin: EdgeInsets.symmetric(vertical: 7),
+      child: ListTile(
+        title: Text(text),
+        onTap: () =>
+            Navigator.push(context, MaterialPageRoute(builder: (_) => page)),
+      ),
     );
   }
 

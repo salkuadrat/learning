@@ -161,18 +161,6 @@ Learning consists of 13 different sub-packages that we can add separately based 
     </td>
   </tr>
   <tr>
-    <td><code>learning_smart_reply</code></td>
-    <td><b>Published</b></td>
-    <td>^0.0.2</td>
-    <td>
-      https://pub.dev/packages/learning_smart_reply<br>
-      https://github.com/salkuadrat/learning/tree/master/packages/learning_smart_reply
-    </td>
-    <td>
-      <a href="https://github.com/salkuadrat/learning_apk/raw/master/smart_reply.apk">smart_reply.apk</a>
-    </td>
-  </tr>
-  <tr>
     <td><code>learning_entity_extraction</code></td>
     <td><b>Published</b></td>
     <td>^0.0.2</td>
@@ -183,6 +171,16 @@ Learning consists of 13 different sub-packages that we can add separately based 
     <td>
       <a href="https://github.com/salkuadrat/learning_apk/raw/master/entity_extraction.apk">entity_extraction.apk</a>
     </td>
+  </tr>
+  <tr>
+    <td><code>learning_smart_reply</code></td>
+    <td><b>Published</b></td>
+    <td>^0.0.2</td>
+    <td>
+      https://pub.dev/packages/learning_smart_reply<br>
+      https://github.com/salkuadrat/learning/tree/master/packages/learning_smart_reply
+    </td>
+    <td></td>
   </tr>
 </table>
 <br>

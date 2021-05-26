@@ -11,7 +11,9 @@ class LearningImageLabeling extends StatefulWidget {
 }
 
 class _LearningImageLabelingState extends State<LearningImageLabeling> {
-  LearningImageLabelingState get state => Provider.of(context, listen: false);
+  LearningImageLabelingState get state =>
+      Provider.of<LearningImageLabelingState>(context, listen: false);
+
   ImageLabeling _imageLabeling = ImageLabeling();
 
   @override

@@ -11,7 +11,8 @@ class LearningFaceDetection extends StatefulWidget {
 }
 
 class _LearningFaceDetectionState extends State<LearningFaceDetection> {
-  LearningFaceDetectionState get state => Provider.of(context, listen: false);
+  LearningFaceDetectionState get state =>
+      Provider.of<LearningFaceDetectionState>(context, listen: false);
 
   FaceDetector _detector = FaceDetector(
     mode: FaceDetectorMode.accurate,
