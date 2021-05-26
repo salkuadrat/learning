@@ -62,7 +62,8 @@ public class LearningDigitalInkRecognitionPlugin implements FlutterPlugin, Metho
                 break;
             case "process":
                 if (digitalInkRecognition != null) {
-                    digitalInkRecognition.process(result);
+                    String preContext = call.argument("preContext");
+                    digitalInkRecognition.process(preContext, result);
                 }
                 break;
             case "dispose":

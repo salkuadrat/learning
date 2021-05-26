@@ -11,6 +11,7 @@ import com.google.mlkit.vision.digitalink.DigitalInkRecognizer;
 import com.google.mlkit.vision.digitalink.DigitalInkRecognizerOptions;
 import com.google.mlkit.vision.digitalink.Ink;
 import com.google.mlkit.vision.digitalink.RecognitionCandidate;
+import com.google.mlkit.vision.digitalink.RecognitionContext;
 import com.google.mlkit.vision.digitalink.RecognitionResult;
 
 import java.util.ArrayList;
@@ -76,13 +77,16 @@ public class DigitalInkRecognition {
         }
     }
 
-    public void process(@NonNull final MethodChannel.Result result) {
+    public void process(String preContext, @NonNull final MethodChannel.Result result) {
         initialize(result);
 
         Ink ink = inkBuilder.build();
+        RecognitionContext recognitionContext = RecognitionContext.builder()
+            .setPreContext(preContext)
+            .build();
 
         if (recognizer != null) {
-            recognizer.recognize(ink)
+            recognizer.recognize(ink, recognitionContext)
                 .addOnSuccessListener(new OnSuccessListener<RecognitionResult>() {
                     @Override
                     public void onSuccess(@NonNull RecognitionResult recognitionResult) {
