@@ -150,11 +150,11 @@ packages:
     source: path
     version: "0.0.1"
   learning_input_image:
-    dependency: transitive
+    dependency: "direct main"
     description:
-      path: "../../learning_input_image"
-      relative: true
-    source: path
+      name: learning_input_image
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.0.5"
   matcher:
     dependency: transitive

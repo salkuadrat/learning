@@ -7,14 +7,10 @@ import 'candidate.dart';
 class DigitalInkRecognition {
   final MethodChannel channel = MethodChannel('LearningDigitalInkRecognition');
   final String language;
-  final Size? writingArea;
 
-  DigitalInkRecognition({
-    this.language = 'en-US',
-    this.writingArea,
-  });
+  DigitalInkRecognition({this.language = 'en-US'});
 
-  Future<void> start() async {
+  Future<void> start({Size? writingArea}) async {
     await channel.invokeMethod('start', <String, dynamic>{
       'language': language,
       'width': writingArea?.width ?? 0.0,

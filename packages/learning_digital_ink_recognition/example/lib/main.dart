@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:learning_digital_ink_recognition/learning_digital_ink_recognition.dart';
+import 'package:learning_input_image/learning_input_image.dart';
 import 'package:provider/provider.dart';
+
+import 'painter.dart';
 
 void main() {
   runApp(MyApp());
@@ -36,13 +39,7 @@ class _DigitalInkRecognitionPageState extends State<DigitalInkRecognitionPage> {
   DigitalInkRecognitionState get state => Provider.of(context, listen: false);
   DigitalInkRecognition _recognition = DigitalInkRecognition();
 
-  Offset? _lastMovePoint;
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) async => await _reset());
-  }
+  double _height = 480;
 
   @override
   void dispose() {
@@ -50,24 +47,35 @@ class _DigitalInkRecognitionPageState extends State<DigitalInkRecognitionPage> {
     super.dispose();
   }
 
-  Future<void> _reset() async {
-    await _recognition.start();
+  Future<void> _reset(BuildContext context) async {
+    double width = MediaQuery.of(context).size.width;
+    print('WritingArea: ($width, $_height)');
+
+    state.reset();
+    await _recognition.start(writingArea: Size(width, _height));
   }
 
   Future<void> _actionDown(Offset point) async {
     print('actionDown (${point.dx}, ${point.dy})');
+
+    state.startWriting(point);
     await _recognition.actionDown(point);
   }
 
   Future<void> _actionMove(Offset point) async {
     print('actionMove (${point.dx}, ${point.dy})');
-    _lastMovePoint = point;
+    state.writePoint(point);
     await _recognition.actionMove(point);
   }
 
-  Future<void> _actionUp(Offset point) async {
-    print('actionUp (${point.dx}, ${point.dy})');
-    await _recognition.actionUp(point);
+  Future<void> _actionUp() async {
+    Offset? point = state.lastPoint;
+    state.stopWriting();
+
+    if (point != null) {
+      print('actionUp (${point.dx}, ${point.dy})');
+      await _recognition.actionUp(point);
+    }
   }
 
   Future<void> _startRecognition() async {
@@ -80,6 +88,7 @@ class _DigitalInkRecognitionPageState extends State<DigitalInkRecognitionPage> {
 
   @override
   Widget build(BuildContext context) {
+    _reset(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -87,16 +96,36 @@ class _DigitalInkRecognitionPageState extends State<DigitalInkRecognitionPage> {
           centerTitle: true,
           title: const Text('ML Digital Ink Recognition'),
         ),
-        body: Center(
-          child: GestureDetector(
-            onScaleStart: (details) async =>
-                await _actionDown(details.localFocalPoint),
-            onScaleUpdate: (details) async =>
-                await _actionMove(details.localFocalPoint),
-            onScaleEnd: (details) async => await _actionUp(_lastMovePoint!),
-            child: Container(
-              color: Colors.teal[100],
-            ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              GestureDetector(
+                onScaleStart: (details) async =>
+                    await _actionDown(details.localFocalPoint),
+                onScaleUpdate: (details) async =>
+                    await _actionMove(details.localFocalPoint),
+                onScaleEnd: (details) async => await _actionUp(),
+                child: Consumer<DigitalInkRecognitionState>(
+                  builder: (_, state, __) => CustomPaint(
+                    painter: DigitalInkPainter(),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: _height,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              NormalPinkButton(
+                text: 'Start Recognition',
+                onPressed: _startRecognition,
+              ),
+              SizedBox(height: 10),
+              NormalBlueButton(
+                text: 'Reset Canvas',
+                onPressed: () => _reset(context),
+              ),
+            ],
           ),
         ),
       ),
@@ -105,13 +134,42 @@ class _DigitalInkRecognitionPageState extends State<DigitalInkRecognitionPage> {
 }
 
 class DigitalInkRecognitionState extends ChangeNotifier {
+  List<List<Offset>> _writings = [];
   List<RecognitionCandidate> _data = [];
   bool _isProcessing = false;
 
+  List<List<Offset>> get writings => _writings;
   List<RecognitionCandidate> get data => _data;
   bool get isNotProcessing => !_isProcessing;
   bool get isEmpty => _data.isEmpty;
   bool get isNotEmpty => _data.isNotEmpty;
+
+  Offset? get lastPoint => _writings.last.last;
+
+  List<Offset> _writing = [];
+
+  void reset() {
+    _writings = [];
+    notifyListeners();
+  }
+
+  void startWriting(Offset point) {
+    _writing = [point];
+    _writings.add(_writing);
+    notifyListeners();
+  }
+
+  void writePoint(Offset point) {
+    if (_writings.isNotEmpty) {
+      _writings[_writings.length - 1].add(point);
+      notifyListeners();
+    }
+  }
+
+  void stopWriting() {
+    _writing = [];
+    notifyListeners();
+  }
 
   void startProcessing() {
     _isProcessing = true;

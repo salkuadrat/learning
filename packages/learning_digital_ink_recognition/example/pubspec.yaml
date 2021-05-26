@@ -10,6 +10,7 @@ dependencies:
     sdk: flutter
 
   provider: ^5.0.0
+  learning_input_image: ^0.0.5
   learning_digital_ink_recognition:
     path: ../
 
