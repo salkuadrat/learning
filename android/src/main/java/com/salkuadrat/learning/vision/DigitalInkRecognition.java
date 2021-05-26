@@ -1,3 +1,4 @@
+/*
 package com.salkuadrat.learning.vision;
 
 import androidx.annotation.NonNull;
@@ -23,3 +24,4 @@ public class DigitalInkRecognition implements VisionLearningInterface {
 
     }
 }
+*/

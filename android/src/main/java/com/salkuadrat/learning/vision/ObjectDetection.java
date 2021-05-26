@@ -1,3 +1,4 @@
+/*
 package com.salkuadrat.learning.vision;
 
 import android.graphics.Rect;
@@ -90,3 +91,4 @@ public class ObjectDetection implements VisionLearningInterface {
         }
     }
 }
+*/

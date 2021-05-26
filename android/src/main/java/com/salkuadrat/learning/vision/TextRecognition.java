@@ -1,3 +1,4 @@
+/*
 package com.salkuadrat.learning.vision;
 
 import android.graphics.Point;
@@ -75,3 +76,4 @@ public class TextRecognition implements VisionLearningInterface {
         }
     }
 }
+*/

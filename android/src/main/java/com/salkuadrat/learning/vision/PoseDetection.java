@@ -1,3 +1,4 @@
+/*
 package com.salkuadrat.learning.vision;
 
 import android.graphics.PointF;
@@ -160,3 +161,4 @@ public class PoseDetection implements VisionLearningInterface {
         }
     }
 }
+*/

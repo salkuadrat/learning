@@ -1,35 +1,28 @@
 package com.salkuadrat.learning;
 
-import android.content.Context;
-import android.net.Uri;
-
 import androidx.annotation.NonNull;
-
-import com.google.mlkit.vision.barcode.Barcode;
-import com.google.mlkit.vision.common.InputImage;
-import com.google.mlkit.vision.face.FaceDetectorOptions;
-//import com.salkuadrat.learning.nlp.EntityExtraction;
-//import com.salkuadrat.learning.nlp.LanguageIdentification;
-//import com.salkuadrat.learning.nlp.SmartReplies;
-//import com.salkuadrat.learning.nlp.TranslateText;
-import com.salkuadrat.learning.vision.BarcodeScanning;
-import com.salkuadrat.learning.vision.DigitalInkRecognition;
-import com.salkuadrat.learning.vision.FaceDetection;
-import com.salkuadrat.learning.vision.ImageLabeling;
-import com.salkuadrat.learning.vision.ObjectDetection;
-import com.salkuadrat.learning.vision.PoseDetection;
-import com.salkuadrat.learning.vision.SelfieSegmentation;
-import com.salkuadrat.learning.vision.TextRecognition;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Map;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
+
+//import com.google.mlkit.vision.barcode.Barcode;
+//import com.google.mlkit.vision.common.InputImage;
+//import com.google.mlkit.vision.face.FaceDetectorOptions;
+//import com.salkuadrat.learning.nlp.EntityExtraction;
+//import com.salkuadrat.learning.nlp.LanguageIdentification;
+//import com.salkuadrat.learning.nlp.SmartReplies;
+//import com.salkuadrat.learning.nlp.TranslateText;
+//import com.salkuadrat.learning.vision.BarcodeScanning;
+//import com.salkuadrat.learning.vision.DigitalInkRecognition;
+//import com.salkuadrat.learning.vision.FaceDetection;
+//import com.salkuadrat.learning.vision.ImageLabeling;
+//import com.salkuadrat.learning.vision.ObjectDetection;
+//import com.salkuadrat.learning.vision.PoseDetection;
+//import com.salkuadrat.learning.vision.SelfieSegmentation;
+//import com.salkuadrat.learning.vision.TextRecognition;
 
 /**
  * LearningPlugin
@@ -41,38 +34,38 @@ public class LearningPlugin implements FlutterPlugin, MethodCallHandler {
     //final String ENTITY_EXTRACTION = "EntityExtraction";
     //final String SMART_REPLIES = "SmartReplies";
     //final String SMART_REPLIES_PUSH = "PushSmartReplies";
-    final String TEXT_RECOGNITION = "TextRecognition";
-    final String FACE_DETECTION = "FaceDetection";
-    final String POSE_DETECTION = "PoseDetection";
-    final String SELFIE_SEGMENTATION = "SelfieSegmentation";
-    final String BARCODE_SCANNING = "BarcodeScanning";
-    final String IMAGE_LABELING = "ImageLabeling";
-    final String OBJECT_DETECTION = "ObjectDetection";
-    final String DIGITAL_INK_RECOGNITION = "DigitalInkRecognition";
+    //final String TEXT_RECOGNITION = "TextRecognition";
+    //final String FACE_DETECTION = "FaceDetection";
+    //final String POSE_DETECTION = "PoseDetection";
+    //final String SELFIE_SEGMENTATION = "SelfieSegmentation";
+    //final String BARCODE_SCANNING = "BarcodeScanning";
+    //final String IMAGE_LABELING = "ImageLabeling";
+    //final String OBJECT_DETECTION = "ObjectDetection";
+    //final String DIGITAL_INK_RECOGNITION = "DigitalInkRecognition";
 
     /// The MethodChannel that will the communication between Flutter and native Android
     ///
     /// This local reference serves to register the plugin with the Flutter Engine and unregister it
     /// when the Flutter Engine is detached from the Activity
     private MethodChannel channel;
-    private Context ctx;
+    //private Context ctx;
 
     //private LanguageIdentification languageIdentification;
     //private TranslateText translateText;
     //private SmartReplies smartReplies;
     //private EntityExtraction entityExtraction;
-    private TextRecognition textRecognition;
-    private FaceDetection faceDetection;
-    private PoseDetection poseDetection;
-    private SelfieSegmentation selfieSegmentation;
-    private BarcodeScanning barcodeScanning;
-    private ImageLabeling imageLabeling;
-    private ObjectDetection objectDetection;
-    private DigitalInkRecognition digitalInkRecognition;
+    //private TextRecognition textRecognition;
+    //private FaceDetection faceDetection;
+    //private PoseDetection poseDetection;
+    //private SelfieSegmentation selfieSegmentation;
+    //private BarcodeScanning barcodeScanning;
+    //private ImageLabeling imageLabeling;
+    //private ObjectDetection objectDetection;
+    //private DigitalInkRecognition digitalInkRecognition;
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
-        ctx = flutterPluginBinding.getApplicationContext();
+        //ctx = flutterPluginBinding.getApplicationContext();
         channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "Learning");
         channel.setMethodCallHandler(this);
     }
@@ -84,7 +77,7 @@ public class LearningPlugin implements FlutterPlugin, MethodCallHandler {
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
-        String method = call.method;
+        /*String method = call.method;
 
         if (method.startsWith("dispose")) {
             dispose(method);
@@ -96,10 +89,10 @@ public class LearningPlugin implements FlutterPlugin, MethodCallHandler {
             onMethodNLP(method, call, result);
         } else {
             result.notImplemented();
-        }
+        }*/
     }
 
-    private void onMethodVision(String method, @NonNull MethodCall call, Result result) {
+    /*private void onMethodVision(String method, @NonNull MethodCall call, Result result) {
         switch (method) {
             case TEXT_RECOGNITION:
                 handleTextRecognition(call, result);
@@ -128,7 +121,7 @@ public class LearningPlugin implements FlutterPlugin, MethodCallHandler {
             default:
                 break;
         }
-    }
+    }*/
 
     private void onMethodNLP(String method, @NonNull MethodCall call, Result result) {
         switch (method) {
@@ -207,16 +200,16 @@ public class LearningPlugin implements FlutterPlugin, MethodCallHandler {
         }
     }*/
 
-    private void handleTextRecognition(MethodCall call, Result result) {
+    /*private void handleTextRecognition(MethodCall call, Result result) {
         InputImage image = getInputImage(call, result);
 
         if (image != null) {
             textRecognition = new TextRecognition();
             textRecognition.start(image, result);
         }
-    }
+    }*/
 
-    private void handleFaceDetection(MethodCall call, Result result) {
+    /*private void handleFaceDetection(MethodCall call, Result result) {
         InputImage image = getInputImage(call, result);
         Float _minFaceSize = call.argument("minFaceSize");
         Boolean _tracking = call.argument("enableTracking");
@@ -249,9 +242,9 @@ public class LearningPlugin implements FlutterPlugin, MethodCallHandler {
                 performanceMode, classificationMode, landmarkMode, contourMode, tracking);
             faceDetection.start(image, result);
         }
-    }
+    }*/
 
-    private void handlePoseDetection(MethodCall call, Result result) {
+    /*private void handlePoseDetection(MethodCall call, Result result) {
         InputImage image = getInputImage(call, result);
         Boolean _isStream = call.argument("isStream");
         boolean isStream = _isStream != null && _isStream;
@@ -260,9 +253,9 @@ public class LearningPlugin implements FlutterPlugin, MethodCallHandler {
             poseDetection = new PoseDetection(isStream);
             poseDetection.start(image, result);
         }
-    }
+    }*/
 
-    private void handleSelfieSegmentation(MethodCall call, Result result) {
+    /*private void handleSelfieSegmentation(MethodCall call, Result result) {
         InputImage image = getInputImage(call, result);
         Boolean _isStream = call.argument("isStream");
         Boolean _enableRawSizeMask = call.argument("enableRawSizeMask");
@@ -274,9 +267,9 @@ public class LearningPlugin implements FlutterPlugin, MethodCallHandler {
             selfieSegmentation = new SelfieSegmentation(isStream, enableRawSizeMask);
             selfieSegmentation.start(image, result);
         }
-    }
+    }*/
 
-    private void handleBarcodeScanning(MethodCall call, Result result) {
+    /*private void handleBarcodeScanning(MethodCall call, Result result) {
         InputImage image = getInputImage(call, result);
         String formats = call.argument("formats");
 
@@ -337,9 +330,9 @@ public class LearningPlugin implements FlutterPlugin, MethodCallHandler {
                 barcodeScanning.start(image, result);
             }
         }
-    }
+    }*/
 
-    private void handleImageLabeling(MethodCall call, Result result) {
+    /*private void handleImageLabeling(MethodCall call, Result result) {
         InputImage image = getInputImage(call, result);
         Float _threshold = call.argument("confidenceThreshold");
 
@@ -349,9 +342,9 @@ public class LearningPlugin implements FlutterPlugin, MethodCallHandler {
             imageLabeling = new ImageLabeling(threshold);
             imageLabeling.start(image, result);
         }
-    }
+    }*/
 
-    private void handleObjectDetection(MethodCall call, Result result) {
+    /*private void handleObjectDetection(MethodCall call, Result result) {
         InputImage image = getInputImage(call, result);
         Boolean _isStream = call.argument("isStream");
         Boolean _multiple = call.argument("enableMultipleObjects");
@@ -365,13 +358,13 @@ public class LearningPlugin implements FlutterPlugin, MethodCallHandler {
             objectDetection = new ObjectDetection(isStream, classification, multiple);
             objectDetection.start(image, result);
         }
-    }
+    }*/
 
-    private void handleDigitalInkRecognition(MethodCall call, Result result) {
+    /*private void handleDigitalInkRecognition(MethodCall call, Result result) {
 
-    }
+    }*/
 
-    private InputImage getInputImage(MethodCall call, Result result) {
+    /*private InputImage getInputImage(MethodCall call, Result result) {
         Map<String, Object> data = call.argument("image");
 
         if (data != null) {
@@ -419,7 +412,7 @@ public class LearningPlugin implements FlutterPlugin, MethodCallHandler {
 
         result.error("Invalid Image Data", null, null);
         return null;
-    }
+    }*/
 
     private void dispose(String method) {
         method = method.replaceFirst("dispose", "");
@@ -445,7 +438,7 @@ public class LearningPlugin implements FlutterPlugin, MethodCallHandler {
                     smartReplies.dispose();
                 }
                 break;*/
-            case TEXT_RECOGNITION:
+            /*case TEXT_RECOGNITION:
                 if (textRecognition != null) {
                     textRecognition.dispose();
                 }
@@ -484,7 +477,7 @@ public class LearningPlugin implements FlutterPlugin, MethodCallHandler {
                 if (digitalInkRecognition != null) {
                     digitalInkRecognition.dispose();
                 }
-                break;
+                break;*/
             default:
                 break;
         }

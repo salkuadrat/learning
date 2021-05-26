@@ -8,7 +8,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  
+  provider: ^5.0.0
   learning:
     path: ../
   
@@ -18,3 +19,14 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+  - assets/barcode_scanning.png
+  - assets/face_detection.png
+  - assets/image_labeling.png
+  - assets/language_detection.png
+  - assets/object_detection.png
+  - assets/on_device_translate.png
+  - assets/selfie_segmentation.jpg
+  - assets/smart_reply.png
+  - assets/text_recognition.png

@@ -21,7 +21,7 @@ Then run `flutter pub get`.
 
 **Optimization**
 
-For best practice (and minimize application size), it's better to add dependency directly from each of sub-plugins you want to use in your application. 
+For best performance (and to minimize application size), it's better to add dependency directly from each of sub-plugins you want to use in your application. 
 
 ## Usage
 
@@ -137,8 +137,7 @@ Learning consists of 13 different plugins that we can add separately depending o
     <td></td>
   </tr>
 </table>
-
-
+<br>
 <table>
   <tr>
     <th>NLP Plugins</th>

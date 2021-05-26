@@ -1,3 +1,4 @@
+/*
 package com.salkuadrat.learning.vision;
 
 import androidx.annotation.NonNull;
@@ -62,3 +63,4 @@ public class SelfieSegmentation implements VisionLearningInterface {
         }
     }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.salkuadrat.learning.vision;
 
 import android.graphics.PointF;
@@ -319,3 +320,4 @@ public class FaceDetection implements VisionLearningInterface {
         }
     }
 }
+*/

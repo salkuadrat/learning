@@ -1,3 +1,4 @@
+/*
 package com.salkuadrat.learning.vision;
 
 import android.graphics.Point;
@@ -235,3 +236,4 @@ public class BarcodeScanning implements VisionLearningInterface {
         }
     }
 }
+*/

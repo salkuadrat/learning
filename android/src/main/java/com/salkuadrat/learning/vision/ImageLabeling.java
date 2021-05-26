@@ -1,3 +1,4 @@
+/*
 package com.salkuadrat.learning.vision;
 
 import androidx.annotation.NonNull;
@@ -69,3 +70,4 @@ public class ImageLabeling implements VisionLearningInterface {
         }
     }
 }
+*/
