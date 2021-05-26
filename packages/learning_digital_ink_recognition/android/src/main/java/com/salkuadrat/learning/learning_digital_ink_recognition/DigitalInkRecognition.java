@@ -13,6 +13,7 @@ import com.google.mlkit.vision.digitalink.Ink;
 import com.google.mlkit.vision.digitalink.RecognitionCandidate;
 import com.google.mlkit.vision.digitalink.RecognitionContext;
 import com.google.mlkit.vision.digitalink.RecognitionResult;
+import com.google.mlkit.vision.digitalink.WritingArea;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,9 +28,13 @@ public class DigitalInkRecognition {
     private Ink.Stroke.Builder strokeBuilder;
     private String language;
     private DigitalInkRecognizer recognizer;
+    private float width;
+    private float height;
 
-    public DigitalInkRecognition(String language) {
+    public DigitalInkRecognition(String language, float width, float height) {
         this.language = language;
+        this.width = width;
+        this.height = height;
     }
 
     public void start(@NonNull MethodChannel.Result result) {
@@ -81,9 +86,17 @@ public class DigitalInkRecognition {
         initialize(result);
 
         Ink ink = inkBuilder.build();
-        RecognitionContext recognitionContext = RecognitionContext.builder()
-            .setPreContext(preContext)
-            .build();
+        RecognitionContext.Builder builder = RecognitionContext.builder();
+
+        if (preContext != null && !preContext.isEmpty()) {
+            builder.setPreContext(preContext);
+        }
+
+        if (width > 0.0f && height > 0.0f) {
+            builder.setWritingArea(new WritingArea(width, height));
+        }
+
+        RecognitionContext recognitionContext = builder.build();
 
         if (recognizer != null) {
             recognizer.recognize(ink, recognitionContext)

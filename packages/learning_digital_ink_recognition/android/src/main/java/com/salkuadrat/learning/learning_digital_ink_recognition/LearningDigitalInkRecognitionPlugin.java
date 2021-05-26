@@ -42,7 +42,11 @@ public class LearningDigitalInkRecognitionPlugin implements FlutterPlugin, Metho
         switch (call.method) {
             case "start":
                 String language = call.argument("language");
-                digitalInkRecognition = new DigitalInkRecognition(language);
+                Double _width = (Double) call.argument("width");
+                Double _height = (Double) call.argument("height");
+                float width = _width != null ? _width.floatValue() : 0.0f;
+                float height = _height != null ? _height.floatValue() : 0.0f;
+                digitalInkRecognition = new DigitalInkRecognition(language, width, height);
                 digitalInkRecognition.start(result);
                 break;
             case "actionDown":
