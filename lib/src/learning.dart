@@ -1,8 +1,7 @@
 import 'dart:async';
 
 import 'package:learning_barcode_scanning/learning_barcode_scanning.dart';
-import 'package:learning_entity_extraction/learning_entity_extraction.dart'
-    as LEE;
+import 'package:learning_entity_extraction/learning_entity_extraction.dart';
 import 'package:learning_face_detection/learning_face_detection.dart';
 import 'package:learning_image_labeling/learning_image_labeling.dart';
 import 'package:learning_input_image/learning_input_image.dart';
@@ -49,8 +48,8 @@ class ML {
   }
 
   static Future<List> extractEntity(String text,
-      {String entityModel = LEE.ENGLISH}) async {
-    LEE.EntityExtractor extractor = LEE.EntityExtractor(model: entityModel);
+      {String entityModel = 'english'}) async {
+    EntityExtractor extractor = EntityExtractor(model: entityModel);
     List result = await extractor.extract(text);
     extractor.dispose();
     return result;

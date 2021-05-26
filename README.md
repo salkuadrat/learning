@@ -25,7 +25,7 @@ For best performance (and to minimize application size), it's better to add depe
 
 ## Usage
 
-Learning consists of 13 different plugins that we can add separately depending on our application needs.
+Learning consists of 13 different plugins that we can add separately based on our application needs.
 
 <table>
   <tr>
