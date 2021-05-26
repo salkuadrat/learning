@@ -59,61 +59,71 @@ class _LearningHomeState extends State<LearningHome> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            _menuItem('Text Recognition', 
+            _menuItem(
+              'Text Recognition',
               ChangeNotifierProvider(
                 create: (_) => LearningTextRecognitionState(),
                 child: LearningTextRecognition(),
               ),
             ),
-            _menuItem('Face Detection', 
+            _menuItem(
+              'Face Detection',
               ChangeNotifierProvider(
                 create: (_) => LearningFaceDetectionState(),
                 child: LearningFaceDetection(),
               ),
             ),
-            _menuItem('Pose Detection', 
+            _menuItem(
+              'Pose Detection',
               ChangeNotifierProvider(
                 create: (_) => LearningPoseDetectionState(),
                 child: LearningPoseDetection(),
               ),
             ),
-            _menuItem('Selfie Segmentation', 
+            _menuItem(
+              'Selfie Segmentation',
               ChangeNotifierProvider(
                 create: (_) => LearningSelfieSegmentationState(),
                 child: LearningSelfieSegmentation(),
               ),
             ),
-            _menuItem('Barcode Scanning', 
+            _menuItem(
+              'Barcode Scanning',
               ChangeNotifierProvider(
                 create: (_) => LearningBarcodeScanningState(),
                 child: LearningBarcodeScanning(),
               ),
             ),
-            _menuItem('Image Labeling', 
+            _menuItem(
+              'Image Labeling',
               ChangeNotifierProvider(
                 create: (_) => LearningImageLabelingState(),
                 child: LearningImageLabeling(),
               ),
             ),
-            _menuItem('Object Detection & Tracking', 
+            _menuItem(
+              'Object Detection & Tracking',
               ChangeNotifierProvider(
                 create: (_) => LearningObjectDetectionState(),
                 child: LearningObjectDetection(),
               ),
             ),
-            _menuItem('Language Detection', 
+            _menuItem(
+              'Language Detection',
               ChangeNotifierProvider(
                 create: (_) => LearningLanguageState(),
                 child: LearningLanguage(),
               ),
             ),
-            _menuItem('On-device Translation', 
+            _menuItem(
+              'On-device Translation',
               ChangeNotifierProvider(
                 create: (_) => LearningTranslateState(),
                 child: LearningTranslate(),
               ),
             ),
-            _menuItem('Entity Extraction', 
+            _menuItem(
+              'Entity Extraction',
               ChangeNotifierProvider(
                 create: (_) => LearningEntityExtractionState(),
                 child: LearningEntityExtraction(),
