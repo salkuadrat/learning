@@ -14,7 +14,7 @@ or
 
 ```yaml
 dependencies:
-  learning: ^0.0.2
+  learning: ^0.0.3
 ```
 
 Then run `flutter pub get`.
@@ -38,7 +38,7 @@ Learning consists of 13 different sub-packages that we can add separately based 
   <tr>
     <td><code>learning_text_recognition</code></td>
     <td><b>Published</b></td>
-    <td>^0.0.1</td>
+    <td>^0.0.2</td>
     <td>
       <a href="https://pub.dev/packages/learning_text_recognition">https://pub.dev/packages/learning_text_recognition</a><br>
       <a href="https://github.com/salkuadrat/learning/tree/master/packages/learning_text_recognition">https://github.com/salkuadrat/learning/tree/master/packages/learning_text_recognition</a>

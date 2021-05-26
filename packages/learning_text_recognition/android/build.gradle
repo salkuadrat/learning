@@ -37,5 +37,4 @@ android {
 dependencies {
     // MLKit Text Recognition
     implementation 'com.google.android.gms:play-services-mlkit-text-recognition:16.1.3'
-    implementation 'com.google.android.gms:play-services-mlkit-face-detection:16.1.6'
 }

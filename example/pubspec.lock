@@ -162,7 +162,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.0.2"
+    version: "0.0.3"
   learning_barcode_scanning:
     dependency: transitive
     description:
@@ -239,7 +239,7 @@ packages:
       name: learning_text_recognition
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.1"
+    version: "0.0.2"
   learning_translate:
     dependency: transitive
     description:

@@ -18,10 +18,26 @@ or
 
 ```yaml
 dependencies:
-  learning_text_recognition: ^0.0.1
+  learning_text_recognition: ^0.0.2
 ```
 
 Then run `flutter pub get`.
+
+## Configuration
+
+You can configure your app to automatically download the ML model to the device after your app is installed from the Play Store. To do so, add the following declaration to your app's AndroidManifest.xml file.
+
+```xml
+<application ...>
+  ...
+  <meta-data
+      android:name="com.google.mlkit.vision.DEPENDENCIES"
+      android:value="ocr" />
+  <!-- To use multiple models: android:value="ocr,model2,model3" -->
+</application>
+```
+
+If you do not enable install-time model downloads, the model will be downloaded the first time you run the text recognition process. Requests you make before the download has completed will produce no results.
 
 ## Usage
 
