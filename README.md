@@ -35,56 +35,56 @@ Learning consists of 13 different plugins that we can add separately depending o
   </tr>
   <tr>
     <td>learning_text_recognition</td>
-    <td>[Published](https://pub.dev/packages/learning_text_recognition)</td>
+    <td><b>Published</b></td>
     <td>^0.0.1</td>
     <td>https://pub.dev/packages/learning_text_recognition</td>
     <td>https://github.com/salkuadrat/learning/tree/master/packages/learning_text_recognition</td>
   </tr>
   <tr>
     <td>learning_face_detection</td>
-    <td>[Published](https://pub.dev/packages/learning_face_detection)</td>
+    <td><b>Published</b></td>
     <td>^0.0.2</td>
     <td>https://pub.dev/packages/learning_face_detection</td>
     <td>https://github.com/salkuadrat/learning/tree/master/packages/learning_face_detection</td>
   </tr>
   <tr>
     <td>learning_pose_detection</td>
-    <td>[Published](https://pub.dev/packages/learning_pose_detection)</td>
+    <td><b>Published</b></td>
     <td>^0.0.1</td>
     <td>https://pub.dev/packages/learning_pose_detection</td>
     <td>https://github.com/salkuadrat/learning/tree/master/packages/learning_pose_detection</td>
   </tr>
   <tr>
     <td>learning_selfie_segmentation</td>
-    <td>[Published](https://pub.dev/packages/learning_selfie_segmentation)</td>
+    <td><b>Published</b></td>
     <td>^0.0.1</td>
     <td>https://pub.dev/packages/learning_selfie_segmentation</td>
     <td>https://github.com/salkuadrat/learning/tree/master/packages/learning_selfie_segmentation</td>
   </tr>
   <tr>
     <td>learning_barcode_scanning</td>
-    <td>[Published](https://pub.dev/packages/learning_barcode_scanning)</td>
+    <td><b>Published</b></td>
     <td>^0.0.2</td>
     <td>https://pub.dev/packages/learning_barcode_scanning</td>
     <td>https://github.com/salkuadrat/learning/tree/master/packages/learning_barcode_scanning</td>
   </tr>
   <tr>
     <td>learning_object_detection</td>
-    <td>[Published](https://pub.dev/packages/learning_object_detection)</td>
+    <td><b>Published</b></td>
     <td>^0.0.1</td>
     <td>https://pub.dev/packages/learning_object_detection</td>
     <td>https://github.com/salkuadrat/learning/tree/master/packages/learning_object_detection</td>
   </tr>
   <tr>
     <td>learning_digital_ink_recognition</td>
-    <td>**Development**</td>
+    <td>Development</td>
     <td></td>
     <td></td>
     <td>https://github.com/salkuadrat/learning/tree/master/packages/learning_digital_ink_recognition</td>
   </tr>
   <tr>
     <td>learning_input_image</td>
-    <td>[Published](https://pub.dev/packages/learning_input_image)</td>
+    <td><b>Published</b></td>
     <td>^0.0.5</td>
     <td>https://pub.dev/packages/learning_input_image</td>
     <td>https://github.com/salkuadrat/learning/tree/master/packages/learning_input_image</td>
@@ -101,28 +101,28 @@ Learning consists of 13 different plugins that we can add separately depending o
   </tr>
   <tr>
     <td>learning_language</td>
-    <td>[Published](https://pub.dev/packages/learning_language)</td>
+    <td><b>Published</b></td>
     <td>^0.0.2</td>
     <td>https://pub.dev/packages/learning_language</td>
     <td>https://github.com/salkuadrat/learning/tree/master/packages/learning_language</td>
   </tr>
   <tr>
     <td>learning_translate</td>
-    <td>[Published](https://pub.dev/packages/learning_translate)</td>
+    <td><b>Published</b></td>
     <td>^0.0.2</td>
     <td>https://pub.dev/packages/learning_translate</td>
     <td>https://github.com/salkuadrat/learning/tree/master/packages/learning_translate</td>
   </tr>
   <tr>
     <td>learning_smart_reply</td>
-    <td>[Published](https://pub.dev/packages/learning_smart_reply)</td>
+    <td><b>Published</b></td>
     <td>^0.0.2</td>
     <td>https://pub.dev/packages/learning_smart_reply</td>
     <td>https://github.com/salkuadrat/learning/tree/master/packages/learning_smart_reply</td>
   </tr>
   <tr>
     <td>learning_entity_extraction</td>
-    <td>[Published](https://pub.dev/packages/learning_entity_extraction)</td>
+    <td><b>Published</b></td>
     <td>^0.0.2</td>
     <td>https://pub.dev/packages/learning_entity_extraction</td>
     <td>https://github.com/salkuadrat/learning/tree/master/packages/learning_entity_extraction</td>
