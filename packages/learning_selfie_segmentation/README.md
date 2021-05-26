@@ -92,7 +92,7 @@ But we can override this by passing other values.
 
 ### Output
 
-The result of selfie segmentation process is a `SegmentedMask` object that contains the following data.
+The result of selfie segmentation process is a `SegmentationMask` object that contains the following data.
 
 ```dart
 int width; // width of segmented mask
