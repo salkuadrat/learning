@@ -44,15 +44,51 @@ class LearningApp extends StatelessWidget {
           ChangeNotifierProvider(
               create: (_) => LearningDigitalInkRecognitionState()),
         ],
-        child: LearningHomePage(),
+        child: LearningHome(),
       ),
     );
   }
 }
 
-class LearningHomePage extends StatelessWidget {
+class LearningHome extends StatefulWidget {
+  @override
+  _LearningHomeState createState() => _LearningHomeState();
+}
+
+class _LearningHomeState extends State<LearningHome> {
+  Widget _menuItem(String text, Widget page) {
+    return ListTile(
+      title: Text(text),
+      onTap: () =>
+          Navigator.push(context, MaterialPageRoute(builder: (_) => page)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('Machine Learning Kit'),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            _menuItem('Text Recognition', LearningTextRecognition()),
+            _menuItem('Face Detection', LearningFaceDetection()),
+            _menuItem('Pose Detection', LearningPoseDetection()),
+            _menuItem('Selfie Segmentation', LearningSelfieSegmentation()),
+            _menuItem('Barcode Scanning', LearningBarcodeScanning()),
+            _menuItem('Image Labeling', LearningImageLabeling()),
+            _menuItem('Object Detection & Tracking', LearningObjectDetection()),
+            //_menuItem('Digital Ink Recognition', LearningDigitalInkRecognition()),
+            _menuItem('Language Detection', LearningLanguage()),
+            _menuItem('On-device Translation', LearningTranslate()),
+            //_menuItem('Smart Reply', LearningSmartReply()),
+            _menuItem('Entity Extraction', LearningEntityExtraction()),
+          ],
+        ),
+      ),
+    );
   }
 }
