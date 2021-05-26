@@ -117,7 +117,7 @@ Learning consists of 13 different plugins that we can add separately depending o
 
 <table>
   <tr>
-    <th>Natural Language Processing (NLP) Plugins</th>
+    <th>NLP Plugins</th>
     <th>Status</th>
     <th>Version</th>
     <th>Links</th>
