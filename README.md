@@ -26,7 +26,7 @@ For best performance (and to minimize application size), it's better to add depe
 ## Usage
 
 Learning consists of 13 different sub-packages that we can add separately based on our application needs.
-
+<br><br>
 <table>
   <tr>
     <th>Vision</th>
