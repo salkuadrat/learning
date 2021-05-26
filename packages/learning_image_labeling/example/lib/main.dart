@@ -31,9 +31,7 @@ class ImageLabelingPage extends StatefulWidget {
 }
 
 class _ImageLabelingPageState extends State<ImageLabelingPage> {
-  ImageLabelingState get state =>
-      Provider.of<ImageLabelingState>(context, listen: false);
-
+  ImageLabelingState get state => Provider.of(context, listen: false);
   ImageLabeling _imageLabeling = ImageLabeling();
 
   @override
@@ -54,7 +52,6 @@ class _ImageLabelingPageState extends State<ImageLabelingPage> {
   @override
   Widget build(BuildContext context) {
     return InputCameraView(
-      mode: InputCameraMode.gallery,
       cameraDefault: InputCameraType.rear,
       title: 'Image Labeling',
       onImage: _processLabeling,

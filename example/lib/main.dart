@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import 'nlp/entity_extraction.dart';
 import 'nlp/language.dart';
-import 'nlp/smart_reply.dart';
 import 'nlp/translate.dart';
 import 'vision/barcode_scanning.dart';
 import 'vision/digital_ink_recognition.dart';
@@ -32,7 +31,6 @@ class LearningApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(create: (_) => LearningLanguageState()),
           ChangeNotifierProvider(create: (_) => LearningTranslateState()),
-          ChangeNotifierProvider(create: (_) => LearningSmartReplyState()),
           ChangeNotifierProvider(
               create: (_) => LearningEntityExtractionState()),
           ChangeNotifierProvider(create: (_) => LearningTextRecognitionState()),

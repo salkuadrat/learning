@@ -42,8 +42,7 @@ class _TextRecognitionPageState extends State<TextRecognitionPage> {
   }
 
   Future<void> _startRecognition(InputImage image) async {
-    TextRecognitionState state =
-        Provider.of<TextRecognitionState>(context, listen: false);
+    TextRecognitionState state = Provider.of(context, listen: false);
 
     if (state.isNotProcessing) {
       state.startProcessing();

@@ -57,10 +57,9 @@ class _ObjectDetectionPageState extends State<ObjectDetectionPage> {
   @override
   Widget build(BuildContext context) {
     return InputCameraView(
-      mode: InputCameraMode.gallery,
+      cameraDefault: InputCameraType.rear,
       title: 'Object Detection & Tracking',
       onImage: _detectObjects,
-      cameraDefault: InputCameraType.rear,
       overlay: Consumer<ObjectDetectionState>(
         builder: (_, state, __) {
           if (state.isEmpty) {
