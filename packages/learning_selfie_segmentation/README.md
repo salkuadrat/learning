@@ -22,7 +22,7 @@ or
 
 ```yaml
 dependencies:
-  learning_selfie_segmentation: ^0.0.1
+  learning_selfie_segmentation: ^0.0.2
 ```
 
 Then run `flutter pub get`.
