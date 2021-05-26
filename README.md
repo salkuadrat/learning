@@ -31,7 +31,7 @@ Learning consists of 13 different plugins that we can add separately depending o
   <tr>
     <th>Vision Plugins</th>
     <th>Status</th>
-    <th>Current Version</th>
+    <th>Version</th>
     <th>Links</td>
   </tr>
   <tr>
@@ -119,35 +119,43 @@ Learning consists of 13 different plugins that we can add separately depending o
   <tr>
     <th>Natural Language Processing (NLP) Plugins</th>
     <th>Status</th>
-    <th>Current Version</th>
-    <th>Repository</th>
+    <th>Version</th>
+    <th>Links</th>
   </tr>
   <tr>
     <td>learning_language</td>
     <td><b>Published</b></td>
     <td>^0.0.2</td>
-    <td>https://pub.dev/packages/learning_language</td>
-    <td>https://github.com/salkuadrat/learning/tree/master/packages/learning_language</td>
+    <td>
+      https://pub.dev/packages/learning_language<br>
+      https://github.com/salkuadrat/learning/tree/master/packages/learning_language
+    </td>
   </tr>
   <tr>
     <td>learning_translate</td>
     <td><b>Published</b></td>
     <td>^0.0.2</td>
-    <td>https://pub.dev/packages/learning_translate</td>
-    <td>https://github.com/salkuadrat/learning/tree/master/packages/learning_translate</td>
+    <td>
+      https://pub.dev/packages/learning_translate<br>
+      https://github.com/salkuadrat/learning/tree/master/packages/learning_translate
+    </td>
   </tr>
   <tr>
     <td>learning_smart_reply</td>
     <td><b>Published</b></td>
     <td>^0.0.2</td>
-    <td>https://pub.dev/packages/learning_smart_reply</td>
-    <td>https://github.com/salkuadrat/learning/tree/master/packages/learning_smart_reply</td>
+    <td>
+      https://pub.dev/packages/learning_smart_reply<br>
+      https://github.com/salkuadrat/learning/tree/master/packages/learning_smart_reply
+    </td>
   </tr>
   <tr>
     <td>learning_entity_extraction</td>
     <td><b>Published</b></td>
     <td>^0.0.2</td>
-    <td>https://pub.dev/packages/learning_entity_extraction</td>
-    <td>https://github.com/salkuadrat/learning/tree/master/packages/learning_entity_extraction</td>
+    <td>
+      https://pub.dev/packages/learning_entity_extraction<br>
+      https://github.com/salkuadrat/learning/tree/master/packages/learning_entity_extraction
+    </td>
   </tr>
 </table>
