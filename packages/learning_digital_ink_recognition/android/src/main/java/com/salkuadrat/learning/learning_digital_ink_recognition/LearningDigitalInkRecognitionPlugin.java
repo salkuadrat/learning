@@ -4,12 +4,6 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import com.google.mlkit.vision.common.InputImage;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Map;
-
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -37,9 +31,39 @@ public class LearningDigitalInkRecognitionPlugin implements FlutterPlugin, Metho
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
+        Double _x = (Double) call.argument("x");
+        Double _y = (Double) call.argument("y");
+        Integer _time = (Integer) call.argument("time");
+
+        float x = _x != null ? _x.floatValue() : 0.0f;
+        float y = _y != null ? _y.floatValue() : 0.0f;
+        long t = System.currentTimeMillis();
+
         switch (call.method) {
+            case "start":
+                String language = call.argument("language");
+                digitalInkRecognition = new DigitalInkRecognition(language);
+                digitalInkRecognition.start(result);
+                break;
+            case "actionDown":
+                if (digitalInkRecognition != null) {
+                    digitalInkRecognition.actionDown(x, y, t, result);
+                }
+                break;
+            case "actionMove":
+                if (digitalInkRecognition != null) {
+                    digitalInkRecognition.actionMove(x, y, t, result);
+                }
+                break;
+            case "actionUp":
+                if (digitalInkRecognition != null) {
+                    digitalInkRecognition.actionUp(x, y, t, result);
+                }
+                break;
             case "process":
-                process(call, result);
+                if (digitalInkRecognition != null) {
+                    digitalInkRecognition.process(result);
+                }
                 break;
             case "dispose":
                 dispose(result);
@@ -48,74 +72,6 @@ public class LearningDigitalInkRecognitionPlugin implements FlutterPlugin, Metho
                 result.notImplemented();
                 break;
         }
-    }
-
-    private void process(@NonNull MethodCall call, @NonNull Result result) {
-
-    }
-
-    private InputImage getInputImage(MethodCall call, Result result) {
-        Map<String, Object> data = call.argument("image");
-
-        if (data != null) {
-            try {
-                return getInputImage(data, result);
-            } catch (Exception e) {
-                e.printStackTrace();
-                result.error("Image data invalid!", e.getMessage(), e);
-            }
-        }
-
-        return null;
-    }
-
-    private InputImage getInputImage(@NonNull Map<String, Object> data, Result result) {
-        // file or bytes
-        String type = (String) data.get("type");
-        InputImage inputImage;
-
-        if (type != null) {
-            if (type.equals("file")) {
-                try {
-                    String path = (String) data.get("path");
-                    if (path != null) {
-                        File file = new File(path);
-                        Uri uri = Uri.fromFile(file);
-                        inputImage = InputImage.fromFilePath(applicationContext, uri);
-                        return inputImage;
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    result.error("Image data error", e.getMessage(), e);
-                    return null;
-                }
-            } else if (type.equals("bytes")) {
-                Map metaData = (Map) data.get("metadata");
-
-                if (metaData != null) {
-                    Object _bytes = data.get("bytes");
-                    Double _width = (Double) metaData.get("width");
-                    Double _height = (Double) metaData.get("height");
-                    Integer _rotation = (Integer) metaData.get("rotation");
-                    Integer _imageFormat = (Integer) metaData.get("imageFormat");
-
-                    if (_bytes != null) {
-                        inputImage = InputImage.fromByteArray(
-                            (byte[]) _bytes,
-                            _width != null ? _width.intValue() : 0,
-                            _height != null ? _height.intValue() : 0,
-                            _rotation != null ? _rotation : 0,
-                            _imageFormat != null ? _imageFormat : 0
-                        );
-
-                        return inputImage;
-                    }
-                }
-            }
-        }
-
-        result.error("Invalid Image Data", null, null);
-        return null;
     }
 
     private void dispose(@NonNull Result result) {

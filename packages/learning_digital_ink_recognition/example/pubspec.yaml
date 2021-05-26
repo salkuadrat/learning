@@ -9,6 +9,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  provider: ^5.0.0
   learning_digital_ink_recognition:
     path: ../
 
