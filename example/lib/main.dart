@@ -5,7 +5,6 @@ import 'nlp/entity_extraction.dart';
 import 'nlp/language.dart';
 import 'nlp/translate.dart';
 import 'vision/barcode_scanning.dart';
-import 'vision/digital_ink_recognition.dart';
 import 'vision/face_detection.dart';
 import 'vision/image_labeling.dart';
 import 'vision/oject_detection.dart';
@@ -27,25 +26,7 @@ class LearningApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         primaryTextTheme: TextTheme(headline6: TextStyle(color: Colors.white)),
       ),
-      home: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => LearningLanguageState()),
-          ChangeNotifierProvider(create: (_) => LearningTranslateState()),
-          ChangeNotifierProvider(
-              create: (_) => LearningEntityExtractionState()),
-          ChangeNotifierProvider(create: (_) => LearningTextRecognitionState()),
-          ChangeNotifierProvider(create: (_) => LearningFaceDetectionState()),
-          ChangeNotifierProvider(create: (_) => LearningPoseDetectionState()),
-          ChangeNotifierProvider(create: (_) => LearningImageLabelingState()),
-          ChangeNotifierProvider(create: (_) => LearningBarcodeScanningState()),
-          ChangeNotifierProvider(create: (_) => LearningObjectDetectionState()),
-          ChangeNotifierProvider(
-              create: (_) => LearningSelfieSegmentationState()),
-          ChangeNotifierProvider(
-              create: (_) => LearningDigitalInkRecognitionState()),
-        ],
-        child: LearningHome(),
-      ),
+      home: LearningHome(),
     );
   }
 }
@@ -78,18 +59,66 @@ class _LearningHomeState extends State<LearningHome> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            _menuItem('Text Recognition', LearningTextRecognition()),
-            _menuItem('Face Detection', LearningFaceDetection()),
-            _menuItem('Pose Detection', LearningPoseDetection()),
-            _menuItem('Selfie Segmentation', LearningSelfieSegmentation()),
-            _menuItem('Barcode Scanning', LearningBarcodeScanning()),
-            _menuItem('Image Labeling', LearningImageLabeling()),
-            _menuItem('Object Detection & Tracking', LearningObjectDetection()),
-            //_menuItem('Digital Ink Recognition', LearningDigitalInkRecognition()),
-            _menuItem('Language Detection', LearningLanguage()),
-            _menuItem('On-device Translation', LearningTranslate()),
-            //_menuItem('Smart Reply', LearningSmartReply()),
-            _menuItem('Entity Extraction', LearningEntityExtraction()),
+            _menuItem('Text Recognition', 
+              ChangeNotifierProvider(
+                create: (_) => LearningTextRecognitionState(),
+                child: LearningTextRecognition(),
+              ),
+            ),
+            _menuItem('Face Detection', 
+              ChangeNotifierProvider(
+                create: (_) => LearningFaceDetectionState(),
+                child: LearningFaceDetection(),
+              ),
+            ),
+            _menuItem('Pose Detection', 
+              ChangeNotifierProvider(
+                create: (_) => LearningPoseDetectionState(),
+                child: LearningPoseDetection(),
+              ),
+            ),
+            _menuItem('Selfie Segmentation', 
+              ChangeNotifierProvider(
+                create: (_) => LearningSelfieSegmentationState(),
+                child: LearningSelfieSegmentation(),
+              ),
+            ),
+            _menuItem('Barcode Scanning', 
+              ChangeNotifierProvider(
+                create: (_) => LearningBarcodeScanningState(),
+                child: LearningBarcodeScanning(),
+              ),
+            ),
+            _menuItem('Image Labeling', 
+              ChangeNotifierProvider(
+                create: (_) => LearningImageLabelingState(),
+                child: LearningImageLabeling(),
+              ),
+            ),
+            _menuItem('Object Detection & Tracking', 
+              ChangeNotifierProvider(
+                create: (_) => LearningObjectDetectionState(),
+                child: LearningObjectDetection(),
+              ),
+            ),
+            _menuItem('Language Detection', 
+              ChangeNotifierProvider(
+                create: (_) => LearningLanguageState(),
+                child: LearningLanguage(),
+              ),
+            ),
+            _menuItem('On-device Translation', 
+              ChangeNotifierProvider(
+                create: (_) => LearningTranslateState(),
+                child: LearningTranslate(),
+              ),
+            ),
+            _menuItem('Entity Extraction', 
+              ChangeNotifierProvider(
+                create: (_) => LearningEntityExtractionState(),
+                child: LearningEntityExtraction(),
+              ),
+            ),
           ],
         ),
       ),

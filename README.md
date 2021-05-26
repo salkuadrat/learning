@@ -25,7 +25,7 @@ For best performance (and to minimize application size), it's better to add depe
 
 ## Usage
 
-Learning consists of 13 different sub-packages that we can add separately based on our application needs.
+Learning consists of 13 different sub-packages that we can add separately based on our application needs. Please reference to each link below to learn more about the usage of each learning package.
 <br><br>
 <table>
   <tr>
@@ -201,3 +201,7 @@ Learning consists of 13 different sub-packages that we can add separately based 
     </td>
   </tr>
 </table>
+
+## Example Project
+
+You can learn more from example project [here](example). Also, you can learn while running application from [learning.apk](https://drive.google.com/file/d/1qX5HED9j2YSpxUE7Xloq5waCPcQFpkDM/view?usp=sharing).
