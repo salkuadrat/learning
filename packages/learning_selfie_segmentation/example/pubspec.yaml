@@ -12,8 +12,7 @@ dependencies:
   provider: ^5.0.0
   flutter_native_image: ^0.0.6
   learning_input_image: ^0.0.5
-  learning_selfie_segmentation:
-    path: ../
+  learning_selfie_segmentation: ^0.0.1
 
 dev_dependencies:
   flutter_test:
