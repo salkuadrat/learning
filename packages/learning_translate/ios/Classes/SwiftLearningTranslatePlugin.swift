@@ -21,6 +21,10 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
     }
   }
 
+  func dispose(result: @escaping FlutterResult) {
+    result(true)
+  }
+
   func translate(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
 
     guard let args = call.arguments else {
@@ -44,10 +48,15 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
       return
     }
 
-    let options = TranslatorOptions(sourceLanguage: source, targetLanguage: target)
+    let options = TranslatorOptions(sourceLanguage: source!, targetLanguage: target!)
     let translator = Translator.translator(options: options)
 
-    translator.downloadModelIfNeeded { error in
+    let conditions = ModelDownloadConditions(
+      allowsCellularAccess: !isDownloadRequireWifi,
+      allowsBackgroundDownloading: true
+    )
+
+    translator.downloadModelIfNeeded(with: conditions) { error in
       guard error == nil else {
         result(FlutterError(
           code: "FAILED", 
@@ -56,8 +65,8 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
         return
       }
 
-      translator.translate(text!) { translated, error in
-        guard error == nil else {
+      translator.translate(text!) { translatedText, error in
+        guard error == nil, let translatedText = translatedText else {
           result(FlutterError(
             code: "FAILED", 
             message: "Translate text failed with error: \(error!)",
@@ -65,7 +74,7 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
           return
         }
         
-        result(translated)
+        result(translatedText)
       }
     }
   }
