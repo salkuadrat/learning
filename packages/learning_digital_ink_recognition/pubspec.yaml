@@ -3,7 +3,6 @@ description: The easy way to use ML Kit for digital ink recognition in Flutter.
 version: 0.0.1
 # author: Salman S
 homepage: https://github.com/salkuadrat/learning/tree/master/packages/learning_digital_ink_recognition
-publish_to: none
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
