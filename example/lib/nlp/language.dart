@@ -19,6 +19,7 @@ class _LearningLanguageState extends State<LearningLanguage> {
 
   @override
   void dispose() {
+    _controller.dispose();
     _identifier.dispose();
     super.dispose();
   }

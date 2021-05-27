@@ -28,6 +28,7 @@ class _LearningTranslateState extends State<LearningTranslate> {
 
   @override
   void dispose() {
+    _controller.dispose();
     _translator.dispose();
     super.dispose();
   }
