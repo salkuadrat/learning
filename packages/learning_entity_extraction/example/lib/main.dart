@@ -78,13 +78,8 @@ class _EntityExtractionPageState extends State<EntityExtractionPage> {
   Future<void> _extract() async {
     state.startProcessing();
     List extractedItems = await _extractor.extract(_controller.text);
-
-    String result = '';
-    for (var item in extractedItems) {
-      result += '${item.toString()}\n\n';
-    }
-
-    state.data = result;
+    state.data =
+        extractedItems.map((item) => item.toString()).toList().join('\n\n');
     state.stopProcessing();
   }
 
