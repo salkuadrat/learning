@@ -8,6 +8,7 @@ public class SwiftLearningLanguagePlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(name: "LearningLanguage", binaryMessenger: registrar.messenger())
     let instance = SwiftLearningLanguagePlugin()
+    
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
 
@@ -22,6 +23,14 @@ public class SwiftLearningLanguagePlugin: NSObject, FlutterPlugin {
   }
 
   func identify(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
+
+    guard let args = call.arguments else {
+      result(FlutterError(
+        code: "NOARGUMENTS", 
+        message: "No arguments",
+        details: nil))
+      return
+    }
 
     let text: String? = args["text"]
     let threshold: Float = args["confidenceThreshold"] ?? 0.5

@@ -2,6 +2,7 @@ import Flutter
 import UIKit
 
 public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
+
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(name: "LearningTranslate", binaryMessenger: registrar.messenger())
     let instance = SwiftLearningTranslatePlugin()
@@ -9,6 +10,16 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-    result("iOS " + UIDevice.current.systemVersion)
+    if call.method == "translate" {
+      translate(call, result)
+    } else if call.method == "dispose" {
+      dispose(result)
+    } else {
+      result(FlutterMethodNotImplemented)
+    }
+  }
+
+  func translate(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
+
   }
 }
