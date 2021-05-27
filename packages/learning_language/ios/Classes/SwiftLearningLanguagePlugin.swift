@@ -8,7 +8,6 @@ public class SwiftLearningLanguagePlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(name: "LearningLanguage", binaryMessenger: registrar.messenger())
     let instance = SwiftLearningLanguagePlugin()
-    
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
 
@@ -48,11 +47,11 @@ public class SwiftLearningLanguagePlugin: NSObject, FlutterPlugin {
     let languageId = NaturalLanguage.languageIdentification(options: options)
 
     if multi {
-      languageId.identifyPossibleLanguages(for: text) { (identifiedLanguages, error) in
+      languageId.identifyPossibleLanguages(for: text!) { (identifiedLanguages, error) in
         if let error = error {
           result(FlutterError(
             code: "FAILED", 
-            message: "Language identification failed with error: \(error)",
+            message: "Language identification failed with error: \(error!)",
             details: error))
           return
         }
@@ -78,7 +77,7 @@ public class SwiftLearningLanguagePlugin: NSObject, FlutterPlugin {
         if let error = error {
           result(FlutterError(
             code: "FAILED", 
-            message: "Language identification failed with error: \(error)",
+            message: "Language identification failed with error: \(error!)",
             details: error))
           return
         }
