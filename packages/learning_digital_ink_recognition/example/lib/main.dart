@@ -39,6 +39,7 @@ class _DigitalInkRecognitionPageState extends State<DigitalInkRecognitionPage> {
   DigitalInkRecognitionState get state => Provider.of(context, listen: false);
   DigitalInkRecognition _recognition = DigitalInkRecognition();
 
+  double get _width => MediaQuery.of(context).size.width;
   double _height = 480;
 
   @override
@@ -47,21 +48,24 @@ class _DigitalInkRecognitionPageState extends State<DigitalInkRecognitionPage> {
     super.dispose();
   }
 
-  Future<void> _reset(BuildContext context) async {
-    double width = MediaQuery.of(context).size.width;
-    //print('WritingArea: ($width, $_height)');
+  // need to call start() at the first time before painting the ink
+  Future<void> _init() async {
+    //print('Writing Area: ($_width, $_height)');
+    await _recognition.start(writingArea: Size(_width, _height));
+  }
+
+  // reset the ink recognition
+  Future<void> _reset() async {
     state.reset();
-    await _recognition.start(writingArea: Size(width, _height));
+    await _recognition.start(writingArea: Size(_width, _height));
   }
 
   Future<void> _actionDown(Offset point) async {
-    //print('actionDown (${point.dx}, ${point.dy})');
     state.startWriting(point);
     await _recognition.actionDown(point);
   }
 
   Future<void> _actionMove(Offset point) async {
-    //print('actionMove (${point.dx}, ${point.dy})');
     state.writePoint(point);
     await _recognition.actionMove(point);
   }
@@ -71,7 +75,6 @@ class _DigitalInkRecognitionPageState extends State<DigitalInkRecognitionPage> {
     state.stopWriting();
 
     if (point != null) {
-      //print('actionUp (${point.dx}, ${point.dy})');
       await _recognition.actionUp(point);
     }
   }
@@ -87,7 +90,6 @@ class _DigitalInkRecognitionPageState extends State<DigitalInkRecognitionPage> {
 
   @override
   Widget build(BuildContext context) {
-    _reset(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -98,21 +100,27 @@ class _DigitalInkRecognitionPageState extends State<DigitalInkRecognitionPage> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              GestureDetector(
-                onScaleStart: (details) async =>
-                    await _actionDown(details.localFocalPoint),
-                onScaleUpdate: (details) async =>
-                    await _actionMove(details.localFocalPoint),
-                onScaleEnd: (details) async => await _actionUp(),
-                child: Consumer<DigitalInkRecognitionState>(
-                  builder: (_, state, __) => CustomPaint(
-                    painter: DigitalInkPainter(writings: state.writings),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: _height,
+              Builder(
+                builder: (buildContext) {
+                  _init();
+
+                  return GestureDetector(
+                    onScaleStart: (details) async =>
+                        await _actionDown(details.localFocalPoint),
+                    onScaleUpdate: (details) async =>
+                        await _actionMove(details.localFocalPoint),
+                    onScaleEnd: (details) async => await _actionUp(),
+                    child: Consumer<DigitalInkRecognitionState>(
+                      builder: (_, state, __) => CustomPaint(
+                        painter: DigitalInkPainter(writings: state.writings),
+                        child: Container(
+                          width: _width,
+                          height: _height,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
               SizedBox(height: 20),
               NormalPinkButton(
@@ -122,7 +130,7 @@ class _DigitalInkRecognitionPageState extends State<DigitalInkRecognitionPage> {
               SizedBox(height: 10),
               NormalBlueButton(
                 text: 'Reset Canvas',
-                onPressed: () => _reset(context),
+                onPressed: _reset,
               ),
             ],
           ),

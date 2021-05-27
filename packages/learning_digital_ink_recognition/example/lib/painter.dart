@@ -19,8 +19,6 @@ class DigitalInkPainter extends CustomPainter {
     canvas.clipRect(rect);
     canvas.drawColor(Colors.teal[100]!, BlendMode.multiply);
 
-    //print('Inside painter $rect');
-
     final paint = Paint()
       ..color = strokeColor
       ..style = PaintingStyle.stroke
@@ -49,4 +47,5 @@ class DigitalInkPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(DigitalInkPainter oldPainter) => true;
+  
 }
