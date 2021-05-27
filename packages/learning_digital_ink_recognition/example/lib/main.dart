@@ -36,11 +36,19 @@ class DigitalInkRecognitionPage extends StatefulWidget {
 }
 
 class _DigitalInkRecognitionPageState extends State<DigitalInkRecognitionPage> {
+  final String _model = 'en-US';
+
   DigitalInkRecognitionState get state => Provider.of(context, listen: false);
-  DigitalInkRecognition _recognition = DigitalInkRecognition();
+  late DigitalInkRecognition _recognition;
 
   double get _width => MediaQuery.of(context).size.width;
   double _height = 480;
+
+  @override
+  void initState() {
+    _recognition = DigitalInkRecognition(model: _model);
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -52,12 +60,22 @@ class _DigitalInkRecognitionPageState extends State<DigitalInkRecognitionPage> {
   Future<void> _init() async {
     //print('Writing Area: ($_width, $_height)');
     await _recognition.start(writingArea: Size(_width, _height));
+    // always check the availability of model before being used for recognition
+    await _checkModel();
   }
 
   // reset the ink recognition
   Future<void> _reset() async {
     state.reset();
     await _recognition.start(writingArea: Size(_width, _height));
+  }
+
+  Future<void> _checkModel() async {
+    bool isDownloaded = await DigitalInkModelManager.isDownloaded(_model);
+
+    if (!isDownloaded) {
+      await DigitalInkModelManager.download(_model);
+    }
   }
 
   Future<void> _actionDown(Offset point) async {
@@ -82,6 +100,8 @@ class _DigitalInkRecognitionPageState extends State<DigitalInkRecognitionPage> {
   Future<void> _startRecognition() async {
     if (state.isNotProcessing) {
       state.startProcessing();
+      // always check the availability of model before being used for recognition
+      await _checkModel();
       state.data = await _recognition.process();
       print(state.toCompleteString());
       state.stopProcessing();
@@ -132,6 +152,7 @@ class _DigitalInkRecognitionPageState extends State<DigitalInkRecognitionPage> {
                 text: 'Reset Canvas',
                 onPressed: _reset,
               ),
+              
             ],
           ),
         ),

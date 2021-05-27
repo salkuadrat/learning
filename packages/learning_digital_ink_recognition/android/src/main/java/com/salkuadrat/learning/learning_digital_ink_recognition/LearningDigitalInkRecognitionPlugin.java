@@ -4,6 +4,15 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.mlkit.common.MlKitException;
+import com.google.mlkit.common.model.DownloadConditions;
+import com.google.mlkit.common.model.RemoteModelManager;
+import com.google.mlkit.vision.digitalink.DigitalInkRecognitionModel;
+import com.google.mlkit.vision.digitalink.DigitalInkRecognitionModelIdentifier;
+import com.google.mlkit.vision.digitalink.DigitalInkRecognizerOptions;
+
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -19,14 +28,18 @@ public class LearningDigitalInkRecognitionPlugin implements FlutterPlugin, Metho
     /// This local reference serves to register the plugin with the Flutter Engine and unregister it
     /// when the Flutter Engine is detached from the Activity
     private MethodChannel channel;
+    private MethodChannel modelManagerChannel;
     private DigitalInkRecognition digitalInkRecognition;
     private Context applicationContext;
+
+    private RemoteModelManager remoteModelManager = RemoteModelManager.getInstance();
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
         applicationContext = flutterPluginBinding.getApplicationContext();
         channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "LearningDigitalInkRecognition");
         channel.setMethodCallHandler(this);
+        setModelManager(flutterPluginBinding);
     }
 
     @Override
@@ -84,6 +97,116 @@ public class LearningDigitalInkRecognitionPlugin implements FlutterPlugin, Metho
             digitalInkRecognition.dispose();
         }
         result.success(true);
+    }
+
+    private void setModelManager(@NonNull FlutterPluginBinding flutterPluginBinding) {
+        modelManagerChannel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "LearningDigitalInkModelManager");
+        modelManagerChannel.setMethodCallHandler(new MethodCallHandler() {
+            @Override
+            public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
+                switch (call.method) {
+                    case "check":
+                        checkModel(call, result);
+                        break;
+                    case "download":
+                        downloadModel(call, result);
+                        break;
+                    case "delete":
+                        deleteModel(call, result);
+                        break;
+                    default:
+                        result.notImplemented();
+                        break;
+                }
+            }
+        });
+    }
+
+    private void checkModel(@NonNull MethodCall call, @NonNull final Result result) {
+        String language = call.argument("model");
+
+        try {
+            DigitalInkRecognitionModelIdentifier modelIdentifier =
+                DigitalInkRecognitionModelIdentifier.fromLanguageTag(language);
+
+            DigitalInkRecognitionModel model = DigitalInkRecognitionModel
+                .builder(modelIdentifier)
+                .build();
+
+            remoteModelManager.isModelDownloaded(model)
+                .addOnSuccessListener(new OnSuccessListener<Boolean>() {
+                    @Override
+                    public void onSuccess(@NonNull Boolean isDownloaded) {
+                        result.success(isDownloaded);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        result.error("Check model failed!", e.getMessage(), e);
+                    }
+                });
+        } catch (MlKitException e) {
+            result.error("MLKitException", e.getMessage(), e);
+        }
+    }
+
+    private void downloadModel(@NonNull MethodCall call, @NonNull final Result result) {
+        String language = call.argument("model");
+
+        try {
+            DigitalInkRecognitionModelIdentifier modelIdentifier =
+                DigitalInkRecognitionModelIdentifier.fromLanguageTag(language);
+
+            DigitalInkRecognitionModel model = DigitalInkRecognitionModel
+                .builder(modelIdentifier)
+                .build();
+
+            remoteModelManager.download(model, new DownloadConditions.Builder().build())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(@NonNull Void unused) {
+                        result.success(true);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        result.error("Download model failed!", e.getMessage(), e);
+                    }
+                });
+        } catch (MlKitException e) {
+            result.error("MLKitException", e.getMessage(), e);
+        }
+    }
+
+    private void deleteModel(@NonNull MethodCall call, @NonNull final Result result) {
+        String language = call.argument("model");
+
+        try {
+            DigitalInkRecognitionModelIdentifier modelIdentifier =
+                DigitalInkRecognitionModelIdentifier.fromLanguageTag(language);
+
+            DigitalInkRecognitionModel model = DigitalInkRecognitionModel
+                .builder(modelIdentifier)
+                .build();
+
+            remoteModelManager.deleteDownloadedModel(model)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(@NonNull Void unused) {
+                        result.success(true);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        result.error("Check model failed!", e.getMessage(), e);
+                    }
+                });
+        } catch (MlKitException e) {
+            result.error("MLKitException", e.getMessage(), e);
+        }
     }
 
     @Override
