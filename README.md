@@ -126,7 +126,9 @@ Learning consists of 13 different sub-packages that we can add separately based 
     <td>
       <a href="https://github.com/salkuadrat/learning/tree/master/packages/learning_digital_ink_recognition">https://github.com/salkuadrat/learning/tree/master/packages/learning_digital_ink_recognition</a>
     </td>
-    <td></td>
+    <td>
+      <a href="https://github.com/salkuadrat/learning_apk/raw/master/digital_ink_recognition.apk">digital_ink_recognition.apk</a>
+    </td>
   </tr>
 </table>
 <br>
