@@ -192,7 +192,7 @@ class DigitalInkRecognitionState extends ChangeNotifier {
   bool get isNotProcessing => !isProcessing;
   bool get isEmpty => _data.isEmpty;
   bool get isNotEmpty => _data.isNotEmpty;
-  
+
   List<Offset> _writing = [];
 
   void reset() {

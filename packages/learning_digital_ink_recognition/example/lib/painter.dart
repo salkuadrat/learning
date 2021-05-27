@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class DigitalInkPainter extends CustomPainter {
-
   final List<List<Offset>> writings;
   final double strokeWidth;
   final Color strokeColor;
@@ -47,5 +46,4 @@ class DigitalInkPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(DigitalInkPainter oldPainter) => true;
-  
 }

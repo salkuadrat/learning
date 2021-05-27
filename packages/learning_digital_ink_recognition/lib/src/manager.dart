@@ -1,7 +1,8 @@
 import 'package:flutter/services.dart';
 
 class DigitalInkModelManager {
-  static MethodChannel channel = MethodChannel('LearningDigitalInkModelManager');
+  static MethodChannel channel =
+      MethodChannel('LearningDigitalInkModelManager');
 
   static Future<bool> isDownloaded(String model) async {
     try {

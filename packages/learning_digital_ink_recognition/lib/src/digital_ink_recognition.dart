@@ -46,9 +46,8 @@ class DigitalInkRecognition {
 
   Future<List<RecognitionCandidate>> process({String preContext = ''}) async {
     try {
-      List result = await channel.invokeMethod('process', <String, dynamic>{
-        'preContext' : preContext
-      });
+      List result = await channel
+          .invokeMethod('process', <String, dynamic>{'preContext': preContext});
       return result.map((item) => RecognitionCandidate.from(item)).toList();
     } on PlatformException catch (e) {
       print(e.message);
