@@ -89,12 +89,8 @@ class _DigitalInkRecognitionPageState extends State<DigitalInkRecognitionPage> {
   }
 
   Future<void> _actionUp() async {
-    Offset? point = state.lastPoint;
     state.stopWriting();
-
-    if (point != null) {
-      await _recognition.actionUp(point);
-    }
+    await _recognition.actionUp();
   }
 
   Future<void> _startRecognition() async {
@@ -196,9 +192,7 @@ class DigitalInkRecognitionState extends ChangeNotifier {
   bool get isNotProcessing => !isProcessing;
   bool get isEmpty => _data.isEmpty;
   bool get isNotEmpty => _data.isNotEmpty;
-
-  Offset? get lastPoint => _writings.last.last;
-
+  
   List<Offset> _writing = [];
 
   void reset() {

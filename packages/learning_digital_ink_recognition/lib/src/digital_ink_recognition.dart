@@ -10,6 +10,8 @@ class DigitalInkRecognition {
 
   DigitalInkRecognition({this.model = 'en-US'});
 
+  Offset? _lastPoint;
+
   Future<void> start({Size? writingArea}) async {
     await channel.invokeMethod('start', <String, dynamic>{
       'language': model,
@@ -26,17 +28,20 @@ class DigitalInkRecognition {
   }
 
   Future<void> actionMove(Offset point) async {
+    _lastPoint = point;
     await channel.invokeMethod('actionMove', <String, dynamic>{
       'x': point.dx,
       'y': point.dy,
     });
   }
 
-  Future<void> actionUp(Offset point) async {
-    await channel.invokeMethod('actionUp', <String, dynamic>{
-      'x': point.dx,
-      'y': point.dy,
-    });
+  Future<void> actionUp() async {
+    if (_lastPoint != null) {
+      await channel.invokeMethod('actionUp', <String, dynamic>{
+        'x': _lastPoint!.dx,
+        'y': _lastPoint!.dy,
+      });
+    }
   }
 
   Future<List<RecognitionCandidate>> process({String preContext = ''}) async {

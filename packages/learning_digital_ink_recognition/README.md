@@ -35,11 +35,90 @@ import 'package:learning_digital_ink_recognition/learning_digital_ink_recognitio
 
 ### Initialization 
 
+Before using digital ink recognition, we need to define the recognition object with the model we want to use.
+
+```dart
+DigitalInkRecognition recognition = DigitalInkRecognition(model: 'en-US');
+```
+
+For a complete list of base models supported by digital ink recognition, please [read here](https://developers.google.com/ml-kit/vision/digital-ink-recognition/base-models).
+
+Then we need to initialize the recognition object by passing writingArea to the start method. Make sure the width and height we pass to writingArea is the correct width / height of our canvas.
+
+```dart
+await recognition.start(writingArea: Size(width, height));
+```
+
+We also need to ensure the availability of digital ink recognition model that we want to use.
+
+```dart
+// model is a string value, e.g. 'en-US'
+bool isDownloaded = await DigitalInkModelManager.isDownloaded(model);
+
+// download the model first if it's not downloaded yet
+if (!isDownloaded) {
+  await DigitalInkModelManager.download(model);
+}
+```
+
 ### Gesture Detection
+
+The cycle of digital ink recognition start by detecting movement on our canvas. It can be done by using `onScaleStart`, `onScaleUpdate`, and `onScaleEnd` from `GestureDetector` widget.
+
+When the user start writing on canvas, it wil trigger `onScaleStart` which includes data about the touching position that we need to pass to digital ink recognition.
+
+```dart
+// send Offset point from onScaleStart to method actionDown
+await recognition.actionDown(point);
+```
+
+Then the user continue writing on canvas, and it is detected by `onScaleUpdate` that also contains data about the touching point. We should pass this point again to digital ink recognition.
+
+```dart
+// send Offset point from onScaleUpdate to method actionMove
+await recognition.actionMove(point);
+```
+
+And then when the user stop touching the screen, it will trigger `onScaleEnd` which is the cue to call `actionUp` to inform digital ink recognition that the user has stopped writing.
+
+```dart
+await recognition.actionUp();
+```
+
+The cycle of calling `actionDown`, `actionMove` and `actionUp` can continues several times before we start the process of digital ink recognition.
 
 ### Digital Ink Recognition
 
+After every stroke that the user do on our canvas is recorded, we can start the process of digital ink recognition by calling method `process`.
+
+```dart
+List<RecognitionCandidate> result = await recognition.process();
+```
+
+It's always good practice to ensure the availability of our model again before it is used.
+
+```dart
+// model is a string value, e.g. 'en-US'
+bool isDownloaded = await DigitalInkModelManager.isDownloaded(model);
+
+// download the model first if it's not downloaded yet
+if (!isDownloaded) {
+  await DigitalInkModelManager.download(model);
+}
+
+List<RecognitionCandidate> result = await recognition.process();
+```
+
 ### Output
+
+The output of digital ink recognition process is a list of `RecognitionCandidate` object which contains data as follows.
+
+```dart
+String text
+double? score
+```
+
+The `RecognitionCandidate` data inside the list is already sorted by its score, so we can always pick the first one as the most possible candidate for the answer.
 
 ### Dispose
 
