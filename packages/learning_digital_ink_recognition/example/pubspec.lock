@@ -145,9 +145,9 @@ packages:
   learning_digital_ink_recognition:
     dependency: "direct main"
     description:
-      path: ".."
-      relative: true
-    source: path
+      name: learning_digital_ink_recognition
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.0.1"
   learning_input_image:
     dependency: "direct main"
