@@ -35,7 +35,10 @@ android {
 }
 
 dependencies {
-    // MLKit Image Labeling
+    // MLKit Image Labeling with base model
     implementation 'com.google.mlkit:image-labeling:17.0.3'
+    // Image labeling feature with custom bundled model
     implementation 'com.google.mlkit:image-labeling-custom:16.3.1'
+    // Image labeling feature with model downloaded from firebase
+    implementation 'com.google.mlkit:linkfirebase:16.1.1'
 }

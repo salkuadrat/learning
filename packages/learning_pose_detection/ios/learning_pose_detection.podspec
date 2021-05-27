@@ -5,16 +5,18 @@
 Pod::Spec.new do |s|
   s.name             = 'learning_pose_detection'
   s.version          = '0.0.1'
-  s.summary          = 'A new flutter plugin project.'
+  s.summary          = 'Learning Pose Detection.'
   s.description      = <<-DESC
-A new flutter plugin project.
+  The easy way to use ML Kit for pose detection in Flutter.
                        DESC
-  s.homepage         = 'http://example.com'
+  s.homepage         = 'https://github.com/salkuadrat/learning/tree/master/packages/learning_pose_detection'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Your Company' => 'email@example.com' }
+  s.author           = { 'Salman S' => 'salkuadrat@gmail.com' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
+  s.dependency 'GoogleMLKit/PoseDetection'
+  s.dependency 'GoogleMLKit/PoseDetectionAccurate'
   s.platform = :ios, '8.0'
 
   # Flutter.framework does not contain a i386 slice.

@@ -4,17 +4,18 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'learning_translate'
-  s.version          = '0.0.1'
-  s.summary          = 'A new flutter plugin project.'
+  s.version          = '0.0.2'
+  s.summary          = 'Learning Translate.'
   s.description      = <<-DESC
-A new flutter plugin project.
+  The easy way to use ML Kit for text translation in Flutter.
                        DESC
-  s.homepage         = 'http://example.com'
+  s.homepage         = 'https://github.com/salkuadrat/learning/tree/master/packages/learning_translate'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Your Company' => 'email@example.com' }
+  s.author           = { 'Salman S' => 'salkuadrat@gmail.com' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
+  s.dependency 'GoogleMLKit/Translate'
   s.platform = :ios, '8.0'
 
   # Flutter.framework does not contain a i386 slice.

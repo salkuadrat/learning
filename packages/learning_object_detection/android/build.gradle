@@ -37,6 +37,8 @@ android {
 dependencies {
     // MLKit Object Detection
     implementation 'com.google.mlkit:object-detection:16.2.4'
+    // Object detection & tracking feature with custom bundled model
     implementation 'com.google.mlkit:object-detection-custom:16.3.1'
+    // Object detection & tracking feature with model downloaded from firebase
     implementation 'com.google.mlkit:linkfirebase:16.1.1'
 }
