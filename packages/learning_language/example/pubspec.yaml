@@ -11,7 +11,7 @@ dependencies:
   
   provider: ^5.0.0
   learning_input_image: ^0.0.5
-  learning_language: ^0.0.2
+  learning_language: ^0.0.3
 
 dev_dependencies:
   flutter_test:

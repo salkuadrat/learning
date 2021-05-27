@@ -144,7 +144,7 @@ Learning consists of 13 different sub-packages that we can add separately based 
   <tr>
     <td><code>learning_language</code></td>
     <td><b>Published</b></td>
-    <td>^0.0.2</td>
+    <td>^0.0.3</td>
     <td>
       <a href="https://pub.dev/packages/learning_language">https://pub.dev/packages/learning_language</a><br>
       <a href="https://github.com/salkuadrat/learning/tree/master/packages/learning_language">https://github.com/salkuadrat/learning/tree/master/packages/learning_language</a>
