@@ -162,7 +162,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.0.3"
+    version: "0.0.4"
   learning_barcode_scanning:
     dependency: transitive
     description:
@@ -170,6 +170,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.2"
+  learning_digital_ink_recognition:
+    dependency: transitive
+    description:
+      name: learning_digital_ink_recognition
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
   learning_entity_extraction:
     dependency: transitive
     description:

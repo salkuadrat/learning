@@ -1,3 +1,7 @@
+## [0.0.4] - 27 May 2021
+
+* add learning_digital_ink_recognition
+
 ## [0.0.3] - 27 May 2021
 
 * update dependency learning_text_recognition to version ^0.0.2

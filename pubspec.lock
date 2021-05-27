@@ -149,6 +149,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.2"
+  learning_digital_ink_recognition:
+    dependency: "direct main"
+    description:
+      name: learning_digital_ink_recognition
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
   learning_entity_extraction:
     dependency: "direct main"
     description:

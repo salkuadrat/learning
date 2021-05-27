@@ -5,6 +5,7 @@ import 'nlp/entity_extraction.dart';
 import 'nlp/language.dart';
 import 'nlp/translate.dart';
 import 'vision/barcode_scanning.dart';
+import 'vision/digital_ink_recognition.dart';
 import 'vision/face_detection.dart';
 import 'vision/image_labeling.dart';
 import 'vision/oject_detection.dart';
@@ -106,6 +107,13 @@ class _LearningHomeState extends State<LearningHome> {
               ChangeNotifierProvider(
                 create: (_) => LearningObjectDetectionState(),
                 child: LearningObjectDetection(),
+              ),
+            ),
+            _menuItem(
+              'Digital Ink Recognition',
+              ChangeNotifierProvider(
+                create: (_) => LearningDigitalInkRecognitionState(),
+                child: LearningDigitalInkRecognition(),
               ),
             ),
             _menuItem(

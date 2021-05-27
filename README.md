@@ -14,7 +14,7 @@ or
 
 ```yaml
 dependencies:
-  learning: ^0.0.3
+  learning: ^0.0.4
 ```
 
 Then run `flutter pub get`.
@@ -121,9 +121,10 @@ Learning consists of 13 different sub-packages that we can add separately based 
   </tr>
   <tr>
     <td><code>learning_digital_ink_recognition</code></td>
-    <td>Development</td>
-    <td></td>
+    <td>Published</td>
+    <td>^0.0.1</td>
     <td>
+      <a href="https://pub.dev/packages/learning_digital_ink_recognition">https://pub.dev/packages/learning_digital_ink_recognition</a><br>
       <a href="https://github.com/salkuadrat/learning/tree/master/packages/learning_digital_ink_recognition">https://github.com/salkuadrat/learning/tree/master/packages/learning_digital_ink_recognition</a>
     </td>
     <td>
@@ -208,4 +209,4 @@ Learning consists of 13 different sub-packages that we can add separately based 
 
 ## Example Project
 
-You can learn more from example project [here](example). Also, you can learn the code while running the working application from [learning.apk](https://drive.google.com/file/d/1qX5HED9j2YSpxUE7Xloq5waCPcQFpkDM/view?usp=sharing).
+You can learn more from example project [here](example). Also, you can learn the code while running the example application on device: [learning.apk](https://drive.google.com/file/d/1xn5yYZ2NIGt2VYszCeTAgqTfeMySQsc9/view?usp=sharing).
