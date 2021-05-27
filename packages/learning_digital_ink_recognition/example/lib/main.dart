@@ -103,58 +103,83 @@ class _DigitalInkRecognitionPageState extends State<DigitalInkRecognitionPage> {
       // always check the availability of model before being used for recognition
       await _checkModel();
       state.data = await _recognition.process();
-      print(state.toCompleteString());
       state.stopProcessing();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text('ML Digital Ink Recognition'),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Builder(
-                builder: (buildContext) {
-                  _init();
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('ML Digital Ink Recognition'),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Builder(
+              builder: (_) {
+                _init();
 
-                  return GestureDetector(
-                    onScaleStart: (details) async =>
-                        await _actionDown(details.localFocalPoint),
-                    onScaleUpdate: (details) async =>
-                        await _actionMove(details.localFocalPoint),
-                    onScaleEnd: (details) async => await _actionUp(),
-                    child: Consumer<DigitalInkRecognitionState>(
-                      builder: (_, state, __) => CustomPaint(
-                        painter: DigitalInkPainter(writings: state.writings),
-                        child: Container(
-                          width: _width,
-                          height: _height,
-                        ),
+                return GestureDetector(
+                  onScaleStart: (details) async =>
+                      await _actionDown(details.localFocalPoint),
+                  onScaleUpdate: (details) async =>
+                      await _actionMove(details.localFocalPoint),
+                  onScaleEnd: (details) async => await _actionUp(),
+                  child: Consumer<DigitalInkRecognitionState>(
+                    builder: (_, state, __) => CustomPaint(
+                      painter: DigitalInkPainter(writings: state.writings),
+                      child: Container(
+                        width: _width,
+                        height: _height,
                       ),
                     ),
-                  );
-                },
-              ),
-              SizedBox(height: 20),
-              NormalPinkButton(
-                text: 'Start Recognition',
-                onPressed: _startRecognition,
-              ),
-              SizedBox(height: 10),
-              NormalBlueButton(
-                text: 'Reset Canvas',
-                onPressed: _reset,
-              ),
-              
-            ],
-          ),
+                  ),
+                );
+              },
+            ),
+            SizedBox(height: 20),
+            NormalPinkButton(
+              text: 'Start Recognition',
+              onPressed: _startRecognition,
+            ),
+            SizedBox(height: 10),
+            NormalBlueButton(
+              text: 'Reset Canvas',
+              onPressed: _reset,
+            ),
+            SizedBox(height: 20),
+            Consumer<DigitalInkRecognitionState>(builder: (_, state, __) {
+              if (state.isNotProcessing && state.isNotEmpty) {
+                return Center(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 18),
+                    child: Text(
+                      state.toCompleteString(),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                );
+              }
+
+              if (state.isProcessing) {
+                return Center(
+                  child: Container(
+                    width: 36,
+                    height: 36,
+                    color: Colors.transparent,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  ),
+                );
+              }
+
+              return Container();
+            }),
+          ],
         ),
       ),
     );
@@ -164,11 +189,11 @@ class _DigitalInkRecognitionPageState extends State<DigitalInkRecognitionPage> {
 class DigitalInkRecognitionState extends ChangeNotifier {
   List<List<Offset>> _writings = [];
   List<RecognitionCandidate> _data = [];
-  bool _isProcessing = false;
+  bool isProcessing = false;
 
   List<List<Offset>> get writings => _writings;
   List<RecognitionCandidate> get data => _data;
-  bool get isNotProcessing => !_isProcessing;
+  bool get isNotProcessing => !isProcessing;
   bool get isEmpty => _data.isEmpty;
   bool get isNotEmpty => _data.isNotEmpty;
 
@@ -200,12 +225,12 @@ class DigitalInkRecognitionState extends ChangeNotifier {
   }
 
   void startProcessing() {
-    _isProcessing = true;
+    isProcessing = true;
     notifyListeners();
   }
 
   void stopProcessing() {
-    _isProcessing = false;
+    isProcessing = false;
     notifyListeners();
   }
 
