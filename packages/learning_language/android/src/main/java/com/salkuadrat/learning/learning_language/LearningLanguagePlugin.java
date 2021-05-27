@@ -29,7 +29,7 @@ public class LearningLanguagePlugin implements FlutterPlugin, MethodCallHandler 
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
         switch (call.method) {
             case "identify":
-                handleLanguageIdentification(call, result);
+                identify(call, result);
                 break;
             case "dispose":
                 dispose(result);
@@ -40,7 +40,7 @@ public class LearningLanguagePlugin implements FlutterPlugin, MethodCallHandler 
         }
     }
 
-    private void handleLanguageIdentification(@NonNull MethodCall call, Result result) {
+    private void identify(@NonNull MethodCall call, Result result) {
         String text = call.argument("text");
         Double _threshold = call.argument("confidenceThreshold");
         Boolean _multi = call.argument("isMultipleLanguages");
@@ -50,7 +50,7 @@ public class LearningLanguagePlugin implements FlutterPlugin, MethodCallHandler 
 
         if (text != null) {
             languageIdentification = new LanguageIdentification(threshold, multi);
-            languageIdentification.start(text, result);
+            languageIdentification.identify(text, result);
         }
     }
 

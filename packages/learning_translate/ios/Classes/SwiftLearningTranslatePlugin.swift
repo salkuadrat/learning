@@ -3,7 +3,7 @@ import UIKit
 
 public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "learning_translate", binaryMessenger: registrar.messenger())
+    let channel = FlutterMethodChannel(name: "LearningTranslate", binaryMessenger: registrar.messenger())
     let instance = SwiftLearningTranslatePlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
   }

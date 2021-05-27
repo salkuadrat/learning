@@ -30,7 +30,7 @@ public class LanguageIdentification {
         this.identifier = com.google.mlkit.nl.languageid.LanguageIdentification.getClient(options);
     }
 
-    public void start(@NonNull String text, @NonNull final MethodChannel.Result result) {
+    public void identify(@NonNull String text, @NonNull final MethodChannel.Result result) {
         if (multi) {
             identifyLanguages(text, result);
         } else {
