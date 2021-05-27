@@ -24,64 +24,65 @@ public class SwiftLearningLanguagePlugin: NSObject, FlutterPlugin {
   func identify(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
 
     let text: String? = args["text"]
-    let threshold: Double = args["confidenceThreshold"] ?? 0.5
+    let threshold: Float = args["confidenceThreshold"] ?? 0.5
     let multi: Bool = args["isMultipleLanguages"] ?? false
 
-    if text != nil {
-      let options = LanguageIdentificationOptions(confidenceThreshold: threshold)
-      let languageId = NaturalLanguage.languageIdentification(options: options)
-
-      if multi {
-        languageId.identifyPossibleLanguages(for: text) { (identifiedLanguages, error) in
-          if let error = error {
-            result(FlutterError(
-              code: "FAILED", 
-              message: "Language identification failed with error: \(error)",
-              details: error))
-            return
-          }
-          
-          guard let identifiedLanguages = identifiedLanguages,
-            !identifiedLanguages.isEmpty,
-            identifiedLanguages[0].languageCode != "und"
-          else {
-            result(FlutterError(
-              code: "UNIDENTIFIED", 
-              message: "No language was identified",
-              details: nil))
-            return
-          }
-
-          result(identifiedLanguages.map {[
-            "language": $0.languageCode,
-            "confidence": $0.confidence
-          ]})
-        }
-      } else {
-        languageId.identifyLanguage(for: text) { (languageCode, error) in
-          if let error = error {
-            result(FlutterError(
-              code: "FAILED", 
-              message: "Language identification failed with error: \(error)",
-              details: error))
-            return
-          }
-          
-          if let languageCode = languageCode, languageCode != "und" {
-            result(languageCode)
-          } else {
-            result(FlutterError(
-              code: "UNIDENTIFIED", 
-              message: "No language was identified",
-              details: nil))
-          }
-        }
-      }
-    } else {
+    if text == nil {
       result(FlutterError(
         code: "NOTEXT", 
         message: "No text argument",
         details: nil))
+      return
+    }
+    
+    let options = LanguageIdentificationOptions(confidenceThreshold: threshold)
+    let languageId = NaturalLanguage.languageIdentification(options: options)
+
+    if multi {
+      languageId.identifyPossibleLanguages(for: text) { (identifiedLanguages, error) in
+        if let error = error {
+          result(FlutterError(
+            code: "FAILED", 
+            message: "Language identification failed with error: \(error)",
+            details: error))
+          return
+        }
+        
+        guard let identifiedLanguages = identifiedLanguages,
+          !identifiedLanguages.isEmpty,
+          identifiedLanguages[0].languageCode != "und"
+        else {
+          result(FlutterError(
+            code: "UNIDENTIFIED", 
+            message: "No language was identified",
+            details: nil))
+          return
+        }
+
+        result(identifiedLanguages.map {[
+          "language": $0.languageCode,
+          "confidence": $0.confidence
+        ]})
+      }
+    } else {
+      languageId.identifyLanguage(for: text) { (languageCode, error) in
+        if let error = error {
+          result(FlutterError(
+            code: "FAILED", 
+            message: "Language identification failed with error: \(error)",
+            details: error))
+          return
+        }
+        
+        if let languageCode = languageCode, languageCode != "und" {
+          result(languageCode)
+        } else {
+          result(FlutterError(
+            code: "UNIDENTIFIED", 
+            message: "No language was identified",
+            details: nil))
+        }
+      }
     }
   }
 
