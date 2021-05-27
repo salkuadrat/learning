@@ -46,6 +46,7 @@ class _IdentifyLanguagePageState extends State<IdentifyLanguagePage> {
 
   @override
   void dispose() {
+    _controller.dispose();
     _identifier.dispose();
     super.dispose();
   }
