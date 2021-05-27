@@ -48,6 +48,7 @@ class _EntityExtractionPageState extends State<EntityExtractionPage> {
 
   @override
   void dispose() {
+    _controller.dispose();
     _extractor.dispose();
     super.dispose();
   }
