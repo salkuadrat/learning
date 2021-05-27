@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
   
   learning_input_image: ^0.0.5
-  learning_language: ^0.0.2
+  learning_language: ^0.0.3
   learning_translate: ^0.0.2
   learning_smart_reply: ^0.0.2
   learning_entity_extraction: ^0.0.2

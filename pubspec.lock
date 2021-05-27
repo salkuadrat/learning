@@ -190,7 +190,7 @@ packages:
       name: learning_language
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.2"
+    version: "0.0.3"
   learning_object_detection:
     dependency: "direct main"
     description:
