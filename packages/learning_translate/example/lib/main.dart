@@ -55,6 +55,7 @@ class _TranslateTextPageState extends State<TranslateTextPage> {
   @override
   void dispose() {
     //_identifier.dispose();
+    _controller.dispose();
     _translator.dispose();
     super.dispose();
   }
