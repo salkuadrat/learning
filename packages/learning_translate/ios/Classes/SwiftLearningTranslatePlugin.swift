@@ -81,7 +81,8 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
   }
 
   func setModelManager(registrar: FlutterPluginRegistrar) {
-    let modelManagerChannel = FlutterMethodChannel(name: "LearningTranslationModelManager", binaryMessenger: registrar.messenger())
+    let modelManagerChannel = FlutterMethodChannel(
+      name: "LearningTranslationModelManager", binaryMessenger: registrar.messenger())
 
     modelManagerChannel.setMethodCallHandler({
       (call: FlutterMethodCall, result: FlutterResult) -> Void in
@@ -122,7 +123,7 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
       return
     }
 
-    let model = TranslateRemoteModel.translateRemoteModel(language: language)
+    let model = TranslateRemoteModel.translateRemoteModel(language: language!)
     result(modelManager.isModelDownloaded(model))
   }
 
