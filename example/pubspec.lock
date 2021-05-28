@@ -162,7 +162,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.0.4"
+    version: "0.0.4+1"
   learning_barcode_scanning:
     dependency: transitive
     description:

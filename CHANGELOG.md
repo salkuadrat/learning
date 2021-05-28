@@ -1,3 +1,7 @@
+## [0.0.4+1] - 28 May 2021
+
+* Edit learning language ios
+
 ## [0.0.4] - 27 May 2021
 
 * add learning_digital_ink_recognition
