@@ -190,7 +190,7 @@ packages:
       name: learning_language
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.3"
+    version: "0.0.3+1"
   learning_object_detection:
     dependency: "direct main"
     description:
@@ -232,7 +232,7 @@ packages:
       name: learning_translate
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.2"
+    version: "0.0.3"
   matcher:
     dependency: transitive
     description:

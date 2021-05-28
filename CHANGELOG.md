@@ -1,3 +1,7 @@
+## [0.0.4+2] - 29 May 2021
+
+* Update learning translate ios
+
 ## [0.0.4+1] - 28 May 2021
 
 * Edit learning language ios
