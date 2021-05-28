@@ -16,7 +16,7 @@ or
 
 ```yaml
 dependencies:
-  learning_language: ^0.0.3
+  learning_language: ^0.0.3+1
 ```
 
 Then run `flutter pub get`.
@@ -43,8 +43,9 @@ String text = 'Baby, you light up my world like nobody else';
 LanguageIdentifier identifier = LanguageIdentifier();
 List<IdentifiedLanguage> possibleLanguages = await identifier.idenfityPossibleLanguages(text);
 
-print('Possible Languages:');
-print(possibleLanguages);
+String languages = possibleLanguages.map((item) => item.language).toList().join(', ');
+
+print('Possible Languages: $languages');
 ```
 
 ### Dispose

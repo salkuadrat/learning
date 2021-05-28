@@ -33,12 +33,12 @@ public class SwiftLearningLanguagePlugin: NSObject, FlutterPlugin {
 
     let text: String? = args["text"]
     let threshold: Float = args["confidenceThreshold"] ?? 0.5
-    let multi: Bool = args["isMultipleLanguages"] ?? false
+    let isMultipleLanguages: Bool = args["isMultipleLanguages"] ?? false
 
     if text == nil {
       result(FlutterError(
         code: "NOTEXT", 
-        message: "No text argument",
+        message: "No argument text",
         details: nil))
       return
     }
@@ -46,7 +46,7 @@ public class SwiftLearningLanguagePlugin: NSObject, FlutterPlugin {
     let options = LanguageIdentificationOptions(confidenceThreshold: threshold)
     let languageId = NaturalLanguage.languageIdentification(options: options)
 
-    if multi {
+    if isMultipleLanguages {
       languageId.identifyPossibleLanguages(for: text!) { (identifiedLanguages, error) in
         if let error = error {
           result(FlutterError(
@@ -73,7 +73,7 @@ public class SwiftLearningLanguagePlugin: NSObject, FlutterPlugin {
         ]})
       }
     } else {
-      languageId.identifyLanguage(for: text) { (languageCode, error) in
+      languageId.identifyLanguage(for: text!) { (languageCode, error) in
         if let error = error {
           result(FlutterError(
             code: "FAILED", 
