@@ -43,8 +43,8 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
     
     if source == nil || target == nil || text == nil {
       result(FlutterError(
-        code: "NCARGUMENTS", 
-        message: "Not complete arguments",
+        code: "INCARGUMENTS", 
+        message: "Incomplete arguments",
         details: nil))
       return
     }
@@ -116,13 +116,16 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
     }
 
     let language: String? = args["model"]
-    let modelManager = ModelManager.modelManager()
 
     if language == nil {
-      result(false)
+      result(FlutterError(
+        code: "INCARGUMENTS", 
+        message: "Incomplete arguments",
+        details: nil))
       return
     }
 
+    let modelManager = ModelManager.modelManager()
     let model = TranslateRemoteModel.translateRemoteModel(language: language!)
     result(modelManager.isModelDownloaded(model))
   }
@@ -138,14 +141,17 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
 
     let language: String? = args["model"]
     let isDownloadRequireWifi: Bool = args["isDownloadRequireWifi"] ?? true
-    let modelManager = ModelManager.modelManager()
 
     if language == nil {
-      result(false)
+      result(FlutterError(
+        code: "INCARGUMENTS", 
+        message: "Incomplete arguments",
+        details: nil))
       return
     }
 
-    let model = TranslateRemoteModel.translateRemoteModel(language: language)
+    let modelManager = ModelManager.modelManager()
+    let model = TranslateRemoteModel.translateRemoteModel(language: language!)
     let conditions = ModelDownloadConditions(
       allowsCellularAccess: !isDownloadRequireWifi,
       allowsBackgroundDownloading: true
@@ -165,14 +171,17 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
     }
 
     let language: String? = args["model"]
-    let modelManager = ModelManager.modelManager()
-
+    
     if language == nil {
-      result(false)
+      result(FlutterError(
+        code: "INCARGUMENTS", 
+        message: "Incomplete arguments",
+        details: nil))
       return
     }
 
-    let model = TranslateRemoteModel.translateRemoteModel(language: language)
+    let modelManager = ModelManager.modelManager()
+    let model = TranslateRemoteModel.translateRemoteModel(language: language!)
     modelManager.deleteDownloadedModel(model) { error in
       result(true);
     }

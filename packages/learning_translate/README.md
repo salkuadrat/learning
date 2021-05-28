@@ -22,7 +22,7 @@ or
 
 ```yaml
 dependencies:
-  learning_translate: ^0.0.2
+  learning_translate: ^0.0.3
 ```
 
 Then run `flutter pub get`.
@@ -38,8 +38,8 @@ import 'package:learning_translate/learning_translate.dart';
 ```dart
 String text = 'Baby, you light up my world like nobody else';
 Translator translator = Translator(from: ENGLISH, to: INDONESIAN);
-String result = await translator.translate(text);
-print(result);
+String translatedText = await translator.translate(text);
+print(translatedText);
 ```
 
 ### Dispose
@@ -55,7 +55,7 @@ When we translate text using `Translator`, ML Kit automatically downloads langua
 Get list of downloaded translation models.
 
 ```dart
-var models = await TranslationModelManager.list();
+List<String> models = await TranslationModelManager.list();
 print(models);
 ```
 
@@ -69,8 +69,8 @@ Check availability of a translation model (downloaded or not).
 
 ```dart
 // exist will true if the model is already downloaded before
-var exist = await TranslationModelManager.check(KOREAN);
-print('Check model: $exist');    
+bool isDownloaded = await TranslationModelManager.check(KOREAN);
+print('Is model downloaded: $isDownloaded');  
 ```
 
 Delete a translation model.
