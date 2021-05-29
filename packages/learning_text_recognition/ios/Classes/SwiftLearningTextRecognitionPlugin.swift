@@ -1,9 +1,12 @@
 import Flutter
 import UIKit
 
+import MLKit
+
 public class SwiftLearningTextRecognitionPlugin: NSObject, FlutterPlugin {
+  
   public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "learning_text_recognition", binaryMessenger: registrar.messenger())
+    let channel = FlutterMethodChannel(name: "LearningTextRecognition", binaryMessenger: registrar.messenger())
     let instance = SwiftLearningTextRecognitionPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
