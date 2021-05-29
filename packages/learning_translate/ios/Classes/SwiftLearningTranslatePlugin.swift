@@ -9,7 +9,7 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
     let channel = FlutterMethodChannel(name: "LearningTranslate", binaryMessenger: registrar.messenger())
     let instance = SwiftLearningTranslatePlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
-    setModelManager(registrar);
+    setModelManager(registrar)
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
@@ -183,7 +183,7 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
     let modelManager = ModelManager.modelManager()
     let model = TranslateRemoteModel.translateRemoteModel(language: language!)
     modelManager.deleteDownloadedModel(model) { error in
-      result(true);
+      result(true)
     }
   }
 }

@@ -48,7 +48,7 @@ public class SwiftLearningLanguagePlugin: NSObject, FlutterPlugin {
 
     if isMultipleLanguages {
       languageId.identifyPossibleLanguages(for: text!) { (identifiedLanguages, error) in
-        if let error = error {
+        guard error == nil else {
           result(FlutterError(
             code: "FAILED", 
             message: "Language identification failed with error: \(error!)",
@@ -74,7 +74,7 @@ public class SwiftLearningLanguagePlugin: NSObject, FlutterPlugin {
       }
     } else {
       languageId.identifyLanguage(for: text!) { (languageCode, error) in
-        if let error = error {
+        guard error == nil else  {
           result(FlutterError(
             code: "FAILED", 
             message: "Language identification failed with error: \(error!)",
@@ -82,14 +82,17 @@ public class SwiftLearningLanguagePlugin: NSObject, FlutterPlugin {
           return
         }
         
-        if let languageCode = languageCode, languageCode != "und" {
-          result(languageCode)
-        } else {
+        guard let languageCode = languageCode, 
+          languageCode != "und" 
+        else {
           result(FlutterError(
             code: "UNIDENTIFIED", 
             message: "No language was identified",
             details: nil))
+          return
         }
+
+        result(languageCode)
       }
     }
   }

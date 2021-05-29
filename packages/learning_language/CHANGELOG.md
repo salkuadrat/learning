@@ -1,3 +1,7 @@
+## [0.0.3+2] - 29 May 2021
+
+* Edit ios code
+
 ## [0.0.3+1] - 28 May 2021
 
 * Refactor plugin ios

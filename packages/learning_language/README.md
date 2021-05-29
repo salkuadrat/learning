@@ -16,7 +16,7 @@ or
 
 ```yaml
 dependencies:
-  learning_language: ^0.0.3+1
+  learning_language: ^0.0.3+2
 ```
 
 Then run `flutter pub get`.

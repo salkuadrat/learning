@@ -22,7 +22,7 @@ or
 
 ```yaml
 dependencies:
-  learning_translate: ^0.0.3
+  learning_translate: ^0.0.3+1
 ```
 
 Then run `flutter pub get`.

@@ -1,3 +1,7 @@
+## [0.0.3+1] - 29 May 2021
+
+* Update ios implementation
+
 ## [0.0.3] - 29 May 2021
 
 * Update plugin ios implementation
