@@ -6,7 +6,7 @@ The easy way to use Machine Learning Kit in Flutter.
 
 Add dependency to your flutter project:
 
-```
+```bash
 $ flutter pub add learning
 ```
 
