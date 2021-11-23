@@ -58,9 +58,9 @@ class _ObjectDetectionPageState extends State<ObjectDetectionPage> {
   Widget build(BuildContext context) {
     return InputCameraView(
       cameraDefault: InputCameraType.rear,
+      // resolutionPreset: ResolutionPreset.high,
       title: 'Object Detection & Tracking',
       onImage: _detectObjects,
-      // resolutionPreset: ResolutionPreset.high,
       overlay: Consumer<ObjectDetectionState>(
         builder: (_, state, __) {
           if (state.isEmpty) {
