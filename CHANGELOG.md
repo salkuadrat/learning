@@ -1,3 +1,7 @@
+## [0.0.6] - 23 November 2021 
+
+* Update Text Recognition
+
 ## [0.0.5] - 23 November 2021
 
 * Update all sub-packages dependencies
