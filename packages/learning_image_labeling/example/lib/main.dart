@@ -53,9 +53,9 @@ class _ImageLabelingPageState extends State<ImageLabelingPage> {
   Widget build(BuildContext context) {
     return InputCameraView(
       cameraDefault: InputCameraType.rear,
+      // resolutionPreset: ResolutionPreset.high,
       title: 'Image Labeling',
       onImage: _processLabeling,
-      // resolutionPreset: ResolutionPreset.high,
       overlay: Consumer<ImageLabelingState>(
         builder: (_, state, __) {
           if (state.isEmpty) {
