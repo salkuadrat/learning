@@ -10,15 +10,6 @@ Add dependency to your flutter project:
 $ flutter pub add learning
 ```
 
-or
-
-```yaml
-dependencies:
-  learning: ^0.0.4+2
-```
-
-Then run `flutter pub get`.
-
 **Optimization**
 
 For best performance (and to minimize application size), it's better to add dependency directly from each of sub-package you want to use in your application. 
