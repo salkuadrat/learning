@@ -1,7 +1,8 @@
 import Flutter
 import UIKit
 
-import MLKit
+import MLKitCommon
+import MLKitLanguageID
 
 public class SwiftLearningLanguagePlugin: NSObject, FlutterPlugin {
 
@@ -13,9 +14,9 @@ public class SwiftLearningLanguagePlugin: NSObject, FlutterPlugin {
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
     if call.method == "identify" {
-      identify(call, result)
+        identify(call, result:result)
     } else if call.method == "dispose" {
-      dispose(result)
+        dispose(result:result)
     } else {
       result(FlutterMethodNotImplemented)
     }
@@ -23,7 +24,7 @@ public class SwiftLearningLanguagePlugin: NSObject, FlutterPlugin {
 
   func identify(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
 
-    guard let args = call.arguments else {
+    guard let args = call.arguments as? Dictionary<String, Any> else {
       result(FlutterError(
         code: "NOARGUMENTS", 
         message: "No arguments",
@@ -31,9 +32,9 @@ public class SwiftLearningLanguagePlugin: NSObject, FlutterPlugin {
       return
     }
 
-    let text: String? = args["text"]
-    let threshold: Float = args["confidenceThreshold"] ?? 0.5
-    let isMultipleLanguages: Bool = args["isMultipleLanguages"] ?? false
+    let text: String? = args["text"] as? String
+    let threshold: Float = args["confidenceThreshold"] as? Float ?? 0.5
+    let isMultipleLanguages: Bool = args["isMultipleLanguages"] as? Bool ?? false
 
     if text == nil {
       result(FlutterError(
@@ -44,7 +45,7 @@ public class SwiftLearningLanguagePlugin: NSObject, FlutterPlugin {
     }
     
     let options = LanguageIdentificationOptions(confidenceThreshold: threshold)
-    let languageId = NaturalLanguage.languageIdentification(options: options)
+    let languageId = LanguageIdentification.languageIdentification(options: options)
 
     if isMultipleLanguages {
       languageId.identifyPossibleLanguages(for: text!) { (identifiedLanguages, error) in
@@ -58,7 +59,7 @@ public class SwiftLearningLanguagePlugin: NSObject, FlutterPlugin {
         
         guard let identifiedLanguages = identifiedLanguages,
           !identifiedLanguages.isEmpty,
-          identifiedLanguages[0].languageCode != "und"
+          identifiedLanguages[0].languageTag != "und"
         else {
           result(FlutterError(
             code: "UNIDENTIFIED", 
@@ -68,7 +69,7 @@ public class SwiftLearningLanguagePlugin: NSObject, FlutterPlugin {
         }
 
         result(identifiedLanguages.map {[
-          "language": $0.languageCode,
+          "language": $0.languageTag,
           "confidence": $0.confidence
         ]})
       }

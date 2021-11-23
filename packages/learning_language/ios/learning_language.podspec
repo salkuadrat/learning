@@ -15,8 +15,10 @@ Pod::Spec.new do |s|
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency 'GoogleMLKit/LanguageID'
-  s.platform = :ios, '8.0'
+  s.dependency 'GoogleMLKit/LanguageID', '~> 2.2.0'
+  s.platform                = :ios, '10.0'
+  s.ios.deployment_target   = '10.0'
+  s.static_framework = true
 
   # Flutter.framework does not contain a i386 slice.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
