@@ -7,7 +7,7 @@ The easy way to use Machine Learning Kit in Flutter.
 Add dependency to your flutter project:
 
 ```bash
-$ flutter pub add learning
+$ pub add learning
 ```
 
 **Optimization**
@@ -27,7 +27,7 @@ Learning consists of 13 different sub-packages that we can add separately based 
   </tr>
   <tr>
     <td><code>learning_text_recognition</code></td>
-    <td>^0.0.3</td>
+    <td>^0.0.4</td>
     <td>
       <a href="https://pub.dev/packages/learning_text_recognition">Pub.dev</a><br>
       <a href="https://github.com/salkuadrat/learning/tree/master/packages/learning_text_recognition">Github</a>
