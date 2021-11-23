@@ -1,8 +1,9 @@
 name: learning_text_recognition
 description: The easy way to use ML Kit for text recognition in Flutter.
-version: 0.0.2
+version: 0.0.3
 # author: Salman S
 homepage: https://github.com/salkuadrat/learning/tree/master/packages/learning_text_recognition
+repository: https://github.com/salkuadrat/learning/tree/master/packages/learning_text_recognition
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -11,8 +12,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  
-  learning_input_image: ^0.0.5
+  learning_input_image: ^0.0.6+2
 
 dev_dependencies:
   flutter_test:

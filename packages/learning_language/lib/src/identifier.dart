@@ -38,8 +38,10 @@ class LanguageIdentifier {
     return result;
   }
 
-  Future<dynamic?> _identify(String text,
-      {bool isMultipleLanguages = false}) async {
+  Future _identify(
+    String text, {
+    bool isMultipleLanguages = false,
+  }) async {
     return await channel.invokeMethod('identify', <String, dynamic>{
       'text': text,
       'isMultipleLanguages': isMultipleLanguages,

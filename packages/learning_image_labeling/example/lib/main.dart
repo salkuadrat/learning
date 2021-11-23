@@ -55,6 +55,7 @@ class _ImageLabelingPageState extends State<ImageLabelingPage> {
       cameraDefault: InputCameraType.rear,
       title: 'Image Labeling',
       onImage: _processLabeling,
+      // resolutionPreset: ResolutionPreset.high,
       overlay: Consumer<ImageLabelingState>(
         builder: (_, state, __) {
           if (state.isEmpty) {

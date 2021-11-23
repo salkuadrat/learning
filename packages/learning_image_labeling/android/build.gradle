@@ -8,7 +8,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.0'
+        classpath 'com.android.tools.build:gradle:7.0.3'
     }
 }
 
@@ -36,7 +36,7 @@ android {
 
 dependencies {
     // MLKit Image Labeling with base model
-    implementation 'com.google.mlkit:image-labeling:17.0.3'
+    implementation 'com.google.mlkit:image-labeling:17.0.5'
     // Image labeling feature with custom bundled model
     implementation 'com.google.mlkit:image-labeling-custom:16.3.1'
     // Image labeling feature with model downloaded from firebase

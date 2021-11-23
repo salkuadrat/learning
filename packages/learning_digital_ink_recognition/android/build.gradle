@@ -8,7 +8,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.0'
+        classpath 'com.android.tools.build:gradle:7.0.3'
     }
 }
 
@@ -36,5 +36,5 @@ android {
 
 dependencies {
     // MLKit Digital Ink Recognition
-    implementation 'com.google.mlkit:digital-ink-recognition:16.2.0'
+    implementation 'com.google.mlkit:digital-ink-recognition:17.0.0'
 }

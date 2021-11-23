@@ -10,6 +10,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognizer;
+import com.google.mlkit.vision.text.TextRecognizerOptions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +24,7 @@ public class TextRecognition  {
     final TextRecognizer recognizer;
 
     public TextRecognition() {
-        this.recognizer = com.google.mlkit.vision.text.TextRecognition.getClient();
+        this.recognizer = com.google.mlkit.vision.text.TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
     }
 
     public void process(@NonNull InputImage image, @NonNull final MethodChannel.Result result) {

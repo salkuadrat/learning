@@ -9,9 +9,10 @@ dependencies:
   flutter:
     sdk: flutter
   
-  provider: ^5.0.0
-  learning_input_image: ^0.0.5
-  learning_entity_extraction: ^0.0.2
+  provider: ^6.0.1
+  learning_input_image: ^0.0.6+2
+  learning_entity_extraction: 
+    path: ../
 
 dev_dependencies:
   flutter_test:

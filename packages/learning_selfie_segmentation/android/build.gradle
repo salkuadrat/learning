@@ -8,7 +8,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.0'
+        classpath 'com.android.tools.build:gradle:7.0.3'
     }
 }
 
@@ -36,5 +36,5 @@ android {
 
 dependencies {
     // MLKit Selfie Segmentation
-    implementation 'com.google.mlkit:segmentation-selfie:16.0.0-beta1'
+    implementation 'com.google.mlkit:segmentation-selfie:16.0.0-beta2'
 }

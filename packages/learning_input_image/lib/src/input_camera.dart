@@ -23,6 +23,7 @@ class InputCameraView extends StatefulWidget {
     this.overlay,
     this.mode = InputCameraMode.live,
     this.cameraDefault = InputCameraType.rear,
+    this.resolutionPreset = ResolutionPreset.low,
     this.canSwitchMode = true,
     this.action,
     this.onTapAction,
@@ -33,6 +34,7 @@ class InputCameraView extends StatefulWidget {
   final Widget? overlay;
   final InputCameraMode mode;
   final InputCameraType cameraDefault;
+  final ResolutionPreset resolutionPreset;
   final bool canSwitchMode;
   final String? action;
   final void Function()? onTapAction;
@@ -93,7 +95,7 @@ class _InputCameraViewState extends State<InputCameraView> {
   Future<void> _startLiveStream() async {
     _controller = CameraController(
       camera,
-      ResolutionPreset.low,
+      widget.resolutionPreset,
       enableAudio: false,
     );
 
@@ -134,10 +136,10 @@ class _InputCameraViewState extends State<InputCameraView> {
   }
 
   Future<void> _getImage(ImageSource source) async {
-    PickedFile? pickedFile = await _imagePicker?.getImage(source: source);
+    XFile? xfile = await _imagePicker?.pickImage(source: source);
 
-    if (pickedFile != null) {
-      File image = new File(pickedFile.path);
+    if (xfile != null) {
+      File image = new File(xfile.path);
 
       setState(() {
         _image = image;

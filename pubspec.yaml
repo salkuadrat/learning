@@ -1,6 +1,6 @@
 name: learning
 description: The easy way to use Machine Learning Kit (Vision & NLP) in Flutter.
-version: 0.0.4+2
+version: 0.0.5
 # author: Salman S
 homepage: https://github.com/salkuadrat/learning
 
@@ -12,19 +12,19 @@ dependencies:
   flutter:
     sdk: flutter
   
-  learning_input_image: ^0.0.5
-  learning_language: ^0.0.3+1
-  learning_translate: ^0.0.3
-  learning_smart_reply: ^0.0.2
-  learning_entity_extraction: ^0.0.2
-  learning_text_recognition: ^0.0.2
-  learning_face_detection: ^0.0.2
-  learning_pose_detection: ^0.0.1
-  learning_image_labeling: ^0.0.1
-  learning_barcode_scanning: ^0.0.2
-  learning_object_detection: ^0.0.1
-  learning_selfie_segmentation: ^0.0.1
-  learning_digital_ink_recognition: ^0.0.1
+  learning_input_image: ^0.0.6+2
+  learning_barcode_scanning: ^0.0.3
+  learning_digital_ink_recognition: ^0.0.2
+  learning_entity_extraction: ^0.0.3
+  learning_face_detection: ^0.0.3
+  learning_image_labeling: ^0.0.2
+  learning_language: ^0.0.4
+  learning_object_detection: ^0.0.2
+  learning_pose_detection: ^0.0.2
+  learning_selfie_segmentation: ^0.0.3
+  learning_smart_reply: ^0.0.3
+  learning_text_recognition: ^0.0.3
+  learning_translate: ^0.0.4
 
 dev_dependencies:
   flutter_test:

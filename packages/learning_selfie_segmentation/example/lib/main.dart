@@ -91,6 +91,7 @@ class _SelfieSegmentationPageState extends State<SelfieSegmentationPage> {
     return InputCameraView(
       mode: InputCameraMode.gallery,
       cameraDefault: InputCameraType.rear,
+      // resolutionPreset: ResolutionPreset.high,
       title: 'Selfie Segmentation',
       onImage: _process,
       overlay: Consumer<SelfieSegmentationState>(

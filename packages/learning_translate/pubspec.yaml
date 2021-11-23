@@ -1,8 +1,9 @@
 name: learning_translate
 description: The easy way to use ML Kit for text translation in Flutter.
-version: 0.0.3+1
+version: 0.0.4
 # author: Salman S
 homepage: https://github.com/salkuadrat/learning/tree/master/packages/learning_translate
+repository: https://github.com/salkuadrat/learning/tree/master/packages/learning_translate
 
 environment:
   sdk: ">=2.12.0 <3.0.0"

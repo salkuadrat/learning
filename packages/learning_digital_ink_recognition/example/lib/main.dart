@@ -42,7 +42,7 @@ class _DigitalInkRecognitionPageState extends State<DigitalInkRecognitionPage> {
   late DigitalInkRecognition _recognition;
 
   double get _width => MediaQuery.of(context).size.width;
-  double _height = 480;
+  double _height = 360;
 
   @override
   void initState() {
@@ -110,43 +110,44 @@ class _DigitalInkRecognitionPageState extends State<DigitalInkRecognitionPage> {
         centerTitle: true,
         title: const Text('ML Digital Ink Recognition'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Builder(
-              builder: (_) {
-                _init();
+      body: Column(
+        children: [
+          Builder(
+            builder: (_) {
+              _init();
 
-                return GestureDetector(
-                  onScaleStart: (details) async =>
-                      await _actionDown(details.localFocalPoint),
-                  onScaleUpdate: (details) async =>
-                      await _actionMove(details.localFocalPoint),
-                  onScaleEnd: (details) async => await _actionUp(),
-                  child: Consumer<DigitalInkRecognitionState>(
-                    builder: (_, state, __) => CustomPaint(
-                      painter: DigitalInkPainter(writings: state.writings),
-                      child: Container(
-                        width: _width,
-                        height: _height,
-                      ),
+              return GestureDetector(
+                onScaleStart: (details) async =>
+                    await _actionDown(details.localFocalPoint),
+                onScaleUpdate: (details) async =>
+                    await _actionMove(details.localFocalPoint),
+                onScaleEnd: (details) async => await _actionUp(),
+                child: Consumer<DigitalInkRecognitionState>(
+                  builder: (_, state, __) => CustomPaint(
+                    painter: DigitalInkPainter(writings: state.writings),
+                    child: Container(
+                      width: _width,
+                      height: _height,
                     ),
                   ),
-                );
-              },
-            ),
-            SizedBox(height: 20),
-            NormalPinkButton(
-              text: 'Start Recognition',
-              onPressed: _startRecognition,
-            ),
-            SizedBox(height: 10),
-            NormalBlueButton(
-              text: 'Reset Canvas',
-              onPressed: _reset,
-            ),
-            SizedBox(height: 20),
-            Consumer<DigitalInkRecognitionState>(builder: (_, state, __) {
+                ),
+              );
+            },
+          ),
+          SizedBox(height: 20),
+          NormalPinkButton(
+            text: 'Start Recognition',
+            onPressed: _startRecognition,
+          ),
+          SizedBox(height: 5),
+          NormalBlueButton(
+            text: 'Reset Canvas',
+            onPressed: _reset,
+          ),
+          SizedBox(height: 15),
+          Center(
+            child:
+                Consumer<DigitalInkRecognitionState>(builder: (_, state, __) {
               if (state.isNotProcessing && state.isNotEmpty) {
                 return Center(
                   child: Container(
@@ -175,8 +176,9 @@ class _DigitalInkRecognitionPageState extends State<DigitalInkRecognitionPage> {
 
               return Container();
             }),
-          ],
-        ),
+          ),
+          Expanded(child: Container()),
+        ],
       ),
     );
   }

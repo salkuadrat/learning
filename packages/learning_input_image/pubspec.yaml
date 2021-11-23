@@ -1,6 +1,6 @@
 name: learning_input_image
 description: Input image package to be used by other learning plugins.
-version: 0.0.5
+version: 0.0.6+2
 # author: Salman S
 homepage: https://github.com/salkuadrat/learning/tree/master/packages/learning_input_image
 
@@ -11,9 +11,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_svg: ^0.22.0
-  image_picker: ^0.7.5+2
-  camera: ^0.8.1
+  flutter_svg: ^0.23.0+1
+  image_picker: ^0.8.4+4
+  camera: ^0.9.4+5
 
 dev_dependencies:
   flutter_test:

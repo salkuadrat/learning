@@ -1,3 +1,7 @@
+## [0.0.5] - 23 November 2021
+
+* Update all sub-packages dependencies
+
 ## [0.0.4+2] - 29 May 2021
 
 * Update learning translate ios

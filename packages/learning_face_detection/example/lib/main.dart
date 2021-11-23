@@ -61,6 +61,7 @@ class _FaceDetectionPageState extends State<FaceDetectionPage> {
     return InputCameraView(
       title: 'Face Detection',
       onImage: _detectFaces,
+      resolutionPreset: ResolutionPreset.high,
       overlay: Consumer<FaceDetectionState>(
         builder: (_, state, __) {
           if (state.isEmpty) {

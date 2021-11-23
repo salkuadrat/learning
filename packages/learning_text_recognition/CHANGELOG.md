@@ -1,3 +1,7 @@
+## [0.0.3] - 23 November 2021
+
+* Update dependencies
+
 ## [0.0.2] - 27 May 2021
 
 * Delete unnecessary gradle dependencies.

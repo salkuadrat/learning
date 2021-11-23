@@ -53,6 +53,7 @@ class _PoseDetectionPageState extends State<PoseDetectionPage> {
   Widget build(BuildContext context) {
     return InputCameraView(
       cameraDefault: InputCameraType.rear,
+      // resolutionPreset: ResolutionPreset.high,
       title: 'Pose Detection',
       onImage: _detectPose,
       overlay: Consumer<PoseDetectionState>(

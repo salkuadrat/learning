@@ -1,3 +1,7 @@
+## [0.0.4] - 23 November 2021
+
+* Update dependencies
+
 ## [0.0.3+1] - 29 May 2021
 
 * Update ios implementation

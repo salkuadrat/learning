@@ -8,7 +8,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.0'
+        classpath 'com.android.tools.build:gradle:7.0.3'
     }
 }
 
@@ -36,7 +36,7 @@ android {
 
 dependencies {
     // If you want to use the base sdk
-    implementation 'com.google.mlkit:pose-detection:17.0.1-beta3'
+    implementation 'com.google.mlkit:pose-detection:17.0.1-beta6'
     // If you want to use the accurate sdk
-    implementation 'com.google.mlkit:pose-detection-accurate:17.0.1-beta3'
+    implementation 'com.google.mlkit:pose-detection-accurate:17.0.1-beta6'
 }

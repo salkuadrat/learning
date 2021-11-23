@@ -56,6 +56,7 @@ class _TextRecognitionPageState extends State<TextRecognitionPage> {
   Widget build(BuildContext context) {
     return InputCameraView(
       mode: InputCameraMode.gallery,
+      // resolutionPreset: ResolutionPreset.high,
       title: 'Text Recognition',
       onImage: _startRecognition,
       overlay: Consumer<TextRecognitionState>(

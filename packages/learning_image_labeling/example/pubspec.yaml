@@ -9,9 +9,9 @@ dependencies:
   flutter:
     sdk: flutter
 
-  provider: ^5.0.0
-  learning_input_image: ^0.0.5
-  learning_image_labeling: ^0.0.1
+  provider: ^6.0.1
+  learning_image_labeling: 
+    path: ../
 
 dev_dependencies:
   flutter_test:

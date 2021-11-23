@@ -59,7 +59,8 @@ class _LearningEntityExtractionState extends State<LearningEntityExtraction> {
   Future<void> _extract() async {
     state.startProcessing();
     List extractedItems = await _extractor.extract(_controller.text);
-    state.data = extractedItems.map((item) => item.toString()).toList().join('\n\n');
+    state.data =
+        extractedItems.map((item) => item.toString()).toList().join('\n\n');
     state.stopProcessing();
   }
 

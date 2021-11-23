@@ -60,6 +60,7 @@ class _ObjectDetectionPageState extends State<ObjectDetectionPage> {
       cameraDefault: InputCameraType.rear,
       title: 'Object Detection & Tracking',
       onImage: _detectObjects,
+      // resolutionPreset: ResolutionPreset.high,
       overlay: Consumer<ObjectDetectionState>(
         builder: (_, state, __) {
           if (state.isEmpty) {

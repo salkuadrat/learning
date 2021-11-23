@@ -27,7 +27,7 @@ For best performance (and to minimize application size), it's better to add depe
 
 Learning consists of 13 different sub-packages that we can add separately based on our application needs. Please reference to each link below to learn more about the usage of each learning package.
 <br><br>
-<table>
+<table width="100%">
   <tr>
     <th>Vision</th>
     <th>Version</th>
@@ -36,7 +36,7 @@ Learning consists of 13 different sub-packages that we can add separately based 
   </tr>
   <tr>
     <td><code>learning_text_recognition</code></td>
-    <td>^0.0.2</td>
+    <td>^0.0.3</td>
     <td>
       <a href="https://pub.dev/packages/learning_text_recognition">Pub.dev</a><br>
       <a href="https://github.com/salkuadrat/learning/tree/master/packages/learning_text_recognition">Github</a>
@@ -48,7 +48,7 @@ Learning consists of 13 different sub-packages that we can add separately based 
   </tr>
   <tr>
     <td><code>learning_face_detection</code></td>
-    <td>^0.0.2</td>
+    <td>^0.0.3</td>
     <td>
       <a href="https://pub.dev/packages/learning_face_detection">Pub.dev</a><br>
       <a href="https://github.com/salkuadrat/learning/tree/master/packages/learning_face_detection">Github</a>
@@ -60,7 +60,7 @@ Learning consists of 13 different sub-packages that we can add separately based 
   </tr>
   <tr>
     <td><code>learning_pose_detection</code></td>
-    <td>^0.0.1</td>
+    <td>^0.0.2</td>
     <td>
       <a href="https://pub.dev/packages/learning_pose_detection">Pub.dev</a><br>
       <a href="https://github.com/salkuadrat/learning/tree/master/packages/learning_pose_detection">Github</a>
@@ -72,7 +72,7 @@ Learning consists of 13 different sub-packages that we can add separately based 
   </tr>
   <tr>
     <td><code>learning_selfie_segmentation</code></td>
-    <td>^0.0.1</td>
+    <td>^0.0.3</td>
     <td>
       <a href="https://pub.dev/packages/learning_selfie_segmentation">Pub.dev</a><br>
       <a href="https://github.com/salkuadrat/learning/tree/master/packages/learning_selfie_segmentation">Github</a>
@@ -84,7 +84,7 @@ Learning consists of 13 different sub-packages that we can add separately based 
   </tr>
   <tr>
     <td><code>learning_image_labeling</code></td>
-    <td>^0.0.1</td>
+    <td>^0.0.2</td>
     <td>
       <a href="https://pub.dev/packages/learning_image_labeling">Pub.dev</a><br>
       <a href="https://github.com/salkuadrat/learning/tree/master/packages/learning_image_labeling">Github</a>
@@ -96,7 +96,7 @@ Learning consists of 13 different sub-packages that we can add separately based 
   </tr>
   <tr>
     <td><code>learning_barcode_scanning</code></td>
-    <td>^0.0.2</td>
+    <td>^0.0.3</td>
     <td>
       <a href="https://pub.dev/packages/learning_barcode_scanning">Pub.dev</a><br>
       <a href="https://github.com/salkuadrat/learning/tree/master/packages/learning_barcode_scanning">Github</a>
@@ -108,7 +108,7 @@ Learning consists of 13 different sub-packages that we can add separately based 
   </tr>
   <tr>
     <td><code>learning_object_detection</code></td>
-    <td>^0.0.1</td>
+    <td>^0.0.2</td>
     <td>
       <a href="https://pub.dev/packages/learning_object_detection">Pub.dev</a><br>
       <a href="https://github.com/salkuadrat/learning/tree/master/packages/learning_object_detection">Github</a>
@@ -120,7 +120,7 @@ Learning consists of 13 different sub-packages that we can add separately based 
   </tr>
   <tr>
     <td><code>learning_digital_ink_recognition</code></td>
-    <td>^0.0.1</td>
+    <td>^0.0.2</td>
     <td>
       <a href="https://pub.dev/packages/learning_digital_ink_recognition">Pub.dev</a><br>
       <a href="https://github.com/salkuadrat/learning/tree/master/packages/learning_digital_ink_recognition">Github</a>
@@ -132,7 +132,7 @@ Learning consists of 13 different sub-packages that we can add separately based 
   </tr>
 </table>
 <br>
-<table>
+<table width="100%">
   <tr>
     <th>NLP</th>
     <th>Version</th>
@@ -141,7 +141,7 @@ Learning consists of 13 different sub-packages that we can add separately based 
   </tr>
   <tr>
     <td><code>learning_language</code></td>
-    <td>^0.0.3+1</td>
+    <td>^0.0.4</td>
     <td>
       <a href="https://pub.dev/packages/learning_language">Pub.dev</a><br>
       <a href="https://github.com/salkuadrat/learning/tree/master/packages/learning_language">Github</a>
@@ -153,7 +153,7 @@ Learning consists of 13 different sub-packages that we can add separately based 
   </tr>
   <tr>
     <td><code>learning_translate</code></td>
-    <td>^0.0.3</td>
+    <td>^0.0.4</td>
     <td>
       <a href="https://pub.dev/packages/learning_translate">Pub.dev</a><br>
       <a href="https://github.com/salkuadrat/learning/tree/master/packages/learning_translate">Github</a>
@@ -165,7 +165,7 @@ Learning consists of 13 different sub-packages that we can add separately based 
   </tr>
   <tr>
     <td><code>learning_entity_extraction</code></td>
-    <td>^0.0.2</td>
+    <td>^0.0.3</td>
     <td>
       <a href="https://pub.dev/packages/learning_entity_extraction">Pub.dev</a><br>
       <a href="https://github.com/salkuadrat/learning/tree/master/packages/learning_entity_extraction">Github</a>
@@ -177,7 +177,7 @@ Learning consists of 13 different sub-packages that we can add separately based 
   </tr>
   <tr>
     <td><code>learning_smart_reply</code></td>
-    <td>^0.0.2</td>
+    <td>^0.0.3</td>
     <td>
       <a href="https://pub.dev/packages/learning_smart_reply">Pub.dev</a><br>
       <a href="https://github.com/salkuadrat/learning/tree/master/packages/learning_smart_reply">Github</a>
@@ -188,7 +188,7 @@ Learning consists of 13 different sub-packages that we can add separately based 
   </tr>
 </table>
 <br>
-<table>
+<table width="100%">
   <tr>
     <th>Helper</th>
     <th>Version</th>
@@ -196,7 +196,7 @@ Learning consists of 13 different sub-packages that we can add separately based 
   </tr>
   <tr>
     <td><code>learning_input_image</code></td>
-    <td>^0.0.5</td>
+    <td>^0.0.6+2</td>
     <td>
       <a href="https://pub.dev/packages/learning_input_image">Pub.dev</a><br>
       <a href="https://github.com/salkuadrat/learning/tree/master/packages/learning_input_image">Github</a>
