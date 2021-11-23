@@ -96,7 +96,7 @@ packages:
       name: flutter_native_image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.6"
+    version: "0.0.6+1"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -169,7 +169,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.0.5"
+    version: "0.0.6"
   learning_barcode_scanning:
     dependency: transitive
     description:
@@ -197,16 +197,16 @@ packages:
       name: learning_face_detection
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.2"
+    version: "0.0.3"
   learning_image_labeling:
     dependency: transitive
     description:
       name: learning_image_labeling
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.1"
+    version: "0.0.2"
   learning_input_image:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: learning_input_image
       url: "https://pub.dartlang.org"
@@ -218,49 +218,49 @@ packages:
       name: learning_language
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.3+1"
+    version: "0.0.4"
   learning_object_detection:
     dependency: transitive
     description:
       name: learning_object_detection
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.1"
+    version: "0.0.2"
   learning_pose_detection:
     dependency: transitive
     description:
       name: learning_pose_detection
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.1"
+    version: "0.0.2"
   learning_selfie_segmentation:
     dependency: transitive
     description:
       name: learning_selfie_segmentation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.1"
+    version: "0.0.3"
   learning_smart_reply:
     dependency: transitive
     description:
       name: learning_smart_reply
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.2"
+    version: "0.0.3"
   learning_text_recognition:
     dependency: transitive
     description:
       name: learning_text_recognition
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.2"
+    version: "0.0.4"
   learning_translate:
     dependency: transitive
     description:
       name: learning_translate
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.3"
+    version: "0.0.4"
   matcher:
     dependency: transitive
     description:
@@ -330,7 +330,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.0"
+    version: "6.0.1"
   quiver:
     dependency: transitive
     description:
@@ -405,7 +405,7 @@ packages:
       name: uuid
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.4"
+    version: "3.0.5"
   vector_math:
     dependency: transitive
     description:

@@ -14,6 +14,10 @@ class LearningTextRecognition extends StatefulWidget {
 class _LearningTextRecognitionState extends State<LearningTextRecognition> {
   TextRecognition? _textRecognition = TextRecognition();
 
+  /* TextRecognition? _textRecognition = TextRecognition(
+    options: TextRecognitionOptions.Japanese
+  ); */
+
   @override
   void dispose() {
     _textRecognition?.dispose();
