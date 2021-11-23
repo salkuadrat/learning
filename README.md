@@ -18,7 +18,7 @@ For best performance (and to minimize application size), it's better to add depe
 
 Learning consists of 13 different sub-packages that we can add separately based on our application needs. Please reference to each link below to learn more about the usage of each learning package.
 <br><br>
-<table width="100%">
+<table>
   <tr>
     <th>Vision</th>
     <th>Version</th>
@@ -123,7 +123,7 @@ Learning consists of 13 different sub-packages that we can add separately based 
   </tr>
 </table>
 <br>
-<table width="100%">
+<table>
   <tr>
     <th>NLP</th>
     <th>Version</th>
@@ -179,7 +179,7 @@ Learning consists of 13 different sub-packages that we can add separately based 
   </tr>
 </table>
 <br>
-<table width="100%">
+<table>
   <tr>
     <th>Helper</th>
     <th>Version</th>
