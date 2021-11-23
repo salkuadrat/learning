@@ -68,9 +68,9 @@ class _BarcodeScanningPageState extends State<BarcodeScanningPage> {
     return InputCameraView(
       mode: InputCameraMode.gallery,
       cameraDefault: InputCameraType.rear,
+      // resolutionPreset: ResolutionPreset.high,
       title: 'Barcode Scanning',
       onImage: _scan,
-      // resolutionPreset: ResolutionPreset.high,
       overlay: Consumer<BarcodeScanningState>(
         builder: (_, state, __) {
           if (state.isEmpty) {
