@@ -35,6 +35,10 @@ class TextRecognitionPage extends StatefulWidget {
 class _TextRecognitionPageState extends State<TextRecognitionPage> {
   TextRecognition? _textRecognition = TextRecognition();
 
+  /* TextRecognition? _textRecognition = TextRecognition(
+    options: TextRecognitionOptions.Japanese
+  ); */
+
   @override
   void dispose() {
     _textRecognition?.dispose();

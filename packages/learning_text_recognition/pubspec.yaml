@@ -1,6 +1,6 @@
 name: learning_text_recognition
 description: The easy way to use ML Kit for text recognition in Flutter.
-version: 0.0.3
+version: 0.0.4
 # author: Salman S
 homepage: https://github.com/salkuadrat/learning/tree/master/packages/learning_text_recognition
 repository: https://github.com/salkuadrat/learning/tree/master/packages/learning_text_recognition

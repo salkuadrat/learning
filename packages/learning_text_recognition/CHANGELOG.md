@@ -1,3 +1,7 @@
+## [0.0.4] - 23 November 2021 
+
+* Update to MLKit Text Recognition v2 (Beta) to support Chinese, Devanagari, Japanese and Korean scripts
+
 ## [0.0.3] - 23 November 2021
 
 * Update dependencies

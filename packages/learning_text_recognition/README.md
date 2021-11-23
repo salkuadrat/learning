@@ -2,7 +2,7 @@
 
 The easy way to use ML Kit for text recognition in Flutter.
 
-ML Kit's text recognition can recognize text in any Latin-based character set. They can also be used to automate data-entry tasks such as processing credit cards, receipts, and business cards.
+ML Kit's text recognition can recognize text in Latin, Chinese, Devanagari, Japanese and Korean scripts and a [wide range of languages](https://developers.google.com/ml-kit/vision/text-recognition/v2/languages). They can also be used to automate data-entry tasks such as processing credit cards, receipts, and business cards.
 
 <img src="https://github.com/salkuadrat/learning/raw/master/packages/learning_text_recognition/screenshot.jpg" alt="universe" width="280">
 
@@ -10,19 +10,11 @@ ML Kit's text recognition can recognize text in any Latin-based character set. T
 
 Add dependency to your flutter project:
 
-```
-$ flutter pub add learning_text_recognition
-```
-
-or
-
-```yaml
-dependencies:
-  learning_text_recognition: ^0.0.2
+```bash
+$ pub add learning_text_recognition
 ```
 
-Then run `flutter pub get`.
-
+<!--
 ## Configuration
 
 You can configure your app to automatically download the ML model to the device after your app is installed from the Play Store. To do so, add the following declaration to your app's AndroidManifest.xml file.
@@ -31,17 +23,18 @@ You can configure your app to automatically download the ML model to the device 
 <application ...>
   ...
   <meta-data
-      android:name="com.google.mlkit.vision.DEPENDENCIES"
-      android:value="ocr" />
-  <!-- To use multiple models: android:value="ocr,model2,model3" -->
+    android:name="com.google.mlkit.vision.DEPENDENCIES"
+    android:value="ocr" />
 </application>
 ```
 
 If you do not enable install-time model downloads, the model will be downloaded the first time you run the text recognition process. Requests you make before the download has completed will produce no results.
 
+-->
+
 ## Usage
 
-```
+```dart
 import 'package:learning_text_recognition/learning_text_recognition.dart';
 ```
 
@@ -71,7 +64,34 @@ InputCameraView(
 After getting the `InputImage`, we can start doing text recognition by calling method `process` from an instance of `TextRecognition`.
 
 ```dart
+// When using for Latin script
 TextRecognition textRecognition = TextRecognition();
+// or like this:
+TextRecognition textRecognition = TextRecognition(
+  options: TextRecognitionOptions.Default
+);
+
+// When using for Chinese script
+TextRecognition textRecognition = TextRecognition(
+  options: TextRecognitionOptions.Chinese
+);
+
+// When using for Devanagari script
+TextRecognition textRecognition = TextRecognition(
+  options: TextRecognitionOptions.Devanagari
+);
+
+// When using for Japanese script
+TextRecognition textRecognition = TextRecognition(
+  options: TextRecognitionOptions.Japanese
+);
+
+// When using for Korean script
+TextRecognition textRecognition = TextRecognition(
+  options: TextRecognitionOptions.Korean
+);
+
+// Process text recognition...
 RecognizedText result = await textRecognition.process(image);
 ```
 

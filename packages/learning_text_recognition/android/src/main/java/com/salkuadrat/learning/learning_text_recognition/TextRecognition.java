@@ -10,7 +10,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognizer;
-import com.google.mlkit.vision.text.TextRecognizerOptions;
+import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
+import com.google.mlkit.vision.text.chinese.ChineseTextRecognizerOptions;
+import com.google.mlkit.vision.text.devanagari.DevanagariTextRecognizerOptions;
+import com.google.mlkit.vision.text.japanese.JapaneseTextRecognizerOptions;
+import com.google.mlkit.vision.text.korean.KoreanTextRecognizerOptions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,8 +27,18 @@ public class TextRecognition  {
 
     final TextRecognizer recognizer;
 
-    public TextRecognition() {
-        this.recognizer = com.google.mlkit.vision.text.TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
+    public TextRecognition(String options) {
+        if (options == "chinese") {
+            this.recognizer = com.google.mlkit.vision.text.TextRecognition.getClient(new ChineseTextRecognizerOptions.Builder().build());
+        } else if (options == "devanagari") {
+            this.recognizer = com.google.mlkit.vision.text.TextRecognition.getClient(new DevanagariTextRecognizerOptions.Builder().build());
+        } else if (options == "japanese") {
+            this.recognizer = com.google.mlkit.vision.text.TextRecognition.getClient(new JapaneseTextRecognizerOptions.Builder().build());
+        } else if (options == "korean") {
+            this.recognizer = com.google.mlkit.vision.text.TextRecognition.getClient(new KoreanTextRecognizerOptions.Builder().build());
+        } else {
+            this.recognizer = com.google.mlkit.vision.text.TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
+        }
     }
 
     public void process(@NonNull InputImage image, @NonNull final MethodChannel.Result result) {
@@ -109,9 +123,7 @@ public class TextRecognition  {
         }
         return result;
     }
-
-
-
+    
     public void dispose() {
         if (recognizer != null) {
             recognizer.close();

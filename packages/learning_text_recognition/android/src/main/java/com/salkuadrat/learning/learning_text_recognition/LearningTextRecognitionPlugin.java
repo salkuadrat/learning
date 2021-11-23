@@ -53,9 +53,10 @@ public class LearningTextRecognitionPlugin implements FlutterPlugin, MethodCallH
 
     private void process(MethodCall call, Result result) {
         InputImage image = getInputImage(call, result);
+        String options = call.argument("options");
 
         if (image != null) {
-            textRecognition = new TextRecognition();
+            textRecognition = new TextRecognition(options);
             textRecognition.process(image, result);
         }
     }
