@@ -1,7 +1,7 @@
 import Flutter
 import UIKit
 
-import MLKit
+import MLKitTranslate
 
 public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
 
@@ -9,7 +9,7 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
     let channel = FlutterMethodChannel(name: "LearningTranslate", binaryMessenger: registrar.messenger())
     let instance = SwiftLearningTranslatePlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
-    setModelManager(registrar)
+    instance.setModelManager(registrar)
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
@@ -28,7 +28,7 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
 
   func translate(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
 
-    guard let args = call.arguments else {
+    guard let args = call.arguments as? Dictionary<String, AnyObject> else {
       result(FlutterError(
         code: "NOARGUMENTS", 
         message: "No arguments",
@@ -87,15 +87,15 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
     modelManagerChannel.setMethodCallHandler({
       (call: FlutterMethodCall, result: FlutterResult) -> Void in
         if call.method == "list" {
-          listModel(result)
+          self.listModel(result)
         } else if call.method == "download" {
-          downloadModel(call, result)
+          self.downloadModel(call: call, result: result)
         } else if call.method == "check" {
-          checkModel(call, result)
+          self.checkModel(call: call, result: result)
         } else if call.method == "delete" {
-          deleteModel(call, result)
+          self.deleteModel(call: call, result: result)
         } else {
-          result(FlutterMethodNotImplemented)
+          self.result(FlutterMethodNotImplemented)
         }
     })
   }
@@ -107,7 +107,7 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
   }
 
   func checkModel(call: FlutterMethodCall, result: FlutterResult) {
-    guard let args = call.arguments else {
+    guard let args = call.arguments as? Dictionary<String, AnyObject> else {
       result(FlutterError(
         code: "NOARGUMENTS", 
         message: "No arguments",
@@ -126,12 +126,12 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
     }
 
     let modelManager = ModelManager.modelManager()
-    let model = TranslateRemoteModel.translateRemoteModel(language: language!)
+    let model = TranslateRemoteModel.translateRemoteModel(language: TranslateLanguage(rawValue: language!))
     result(modelManager.isModelDownloaded(model))
   }
 
   func downloadModel(call: FlutterMethodCall, result: FlutterResult) {
-    guard let args = call.arguments else {
+    guard let args = call.arguments as? Dictionary<String, AnyObject> else {
       result(FlutterError(
         code: "NOARGUMENTS", 
         message: "No arguments",
@@ -151,7 +151,7 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
     }
 
     let modelManager = ModelManager.modelManager()
-    let model = TranslateRemoteModel.translateRemoteModel(language: language!)
+    let model = TranslateRemoteModel.translateRemoteModel(language: TranslateLanguage(rawValue: language!))
     let conditions = ModelDownloadConditions(
       allowsCellularAccess: !isDownloadRequireWifi,
       allowsBackgroundDownloading: true
@@ -162,7 +162,7 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
   }
 
   func deleteModel(call: FlutterMethodCall, result: FlutterResult) {
-    guard let args = call.arguments else {
+    guard let args = call.arguments as? Dictionary<String, AnyObject> else {
       result(FlutterError(
         code: "NOARGUMENTS", 
         message: "No arguments",
@@ -181,7 +181,7 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
     }
 
     let modelManager = ModelManager.modelManager()
-    let model = TranslateRemoteModel.translateRemoteModel(language: language!)
+    let model = TranslateRemoteModel.translateRemoteModel(language: TranslateLanguage(rawValue: language!))
     modelManager.deleteDownloadedModel(model) { error in
       result(true)
     }
