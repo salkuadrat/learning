@@ -1,7 +1,7 @@
 import Flutter
 import UIKit
 
-import MLKit
+import MLKitTranslate
 
 public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
 
@@ -9,14 +9,14 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
     let channel = FlutterMethodChannel(name: "LearningTranslate", binaryMessenger: registrar.messenger())
     let instance = SwiftLearningTranslatePlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
-    setModelManager(registrar)
+    instance.setModelManager(registrar: registrar)
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
     if call.method == "translate" {
-      translate(call, result)
+      translate(call, result: result)
     } else if call.method == "dispose" {
-      dispose(result)
+      dispose(result: result)
     } else {
       result(FlutterMethodNotImplemented)
     }
@@ -28,7 +28,7 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
 
   func translate(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
 
-    guard let args = call.arguments else {
+    guard let args = call.arguments as? Dictionary<String, AnyObject> else {
       result(FlutterError(
         code: "NOARGUMENTS", 
         message: "No arguments",
@@ -36,10 +36,10 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
       return
     }
     
-    let source: String? = args["from"]
-    let target: String? = args["to"]
-    let text: String? = args["text"]
-    let isDownloadRequireWifi: Bool = args["isDownloadRequireWifi"] ?? true
+    let source: String? = args["from"] as? String
+    let target: String? = args["to"] as? String
+    let text: String? = args["text"] as? String
+    let isDownloadRequireWifi: Bool = args["isDownloadRequireWifi"] as? Bool ?? true
     
     if source == nil || target == nil || text == nil {
       result(FlutterError(
@@ -49,7 +49,10 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
       return
     }
 
-    let options = TranslatorOptions(sourceLanguage: source!, targetLanguage: target!)
+    let options = TranslatorOptions(
+      sourceLanguage: TranslateLanguage(rawValue: source!), 
+      targetLanguage: TranslateLanguage(rawValue: target!)
+    )
     let translator = Translator.translator(options: options)
 
     let conditions = ModelDownloadConditions(
@@ -85,15 +88,15 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
       name: "LearningTranslationModelManager", binaryMessenger: registrar.messenger())
 
     modelManagerChannel.setMethodCallHandler({
-      (call: FlutterMethodCall, result: FlutterResult) -> Void in
+      (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
         if call.method == "list" {
-          listModel(result)
+          self.listModel(result: result)
         } else if call.method == "download" {
-          downloadModel(call, result)
+          self.downloadModel(call: call, result: result)
         } else if call.method == "check" {
-          checkModel(call, result)
+          self.checkModel(call: call, result: result)
         } else if call.method == "delete" {
-          deleteModel(call, result)
+          self.deleteModel(call: call, result: result)
         } else {
           result(FlutterMethodNotImplemented)
         }
@@ -107,7 +110,7 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
   }
 
   func checkModel(call: FlutterMethodCall, result: FlutterResult) {
-    guard let args = call.arguments else {
+    guard let args = call.arguments as? Dictionary<String, AnyObject> else {
       result(FlutterError(
         code: "NOARGUMENTS", 
         message: "No arguments",
@@ -115,7 +118,7 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
       return
     }
 
-    let language: String? = args["model"]
+    let language: String? = args["model"] as? String
 
     if language == nil {
       result(FlutterError(
@@ -126,12 +129,12 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
     }
 
     let modelManager = ModelManager.modelManager()
-    let model = TranslateRemoteModel.translateRemoteModel(language: language!)
+    let model = TranslateRemoteModel.translateRemoteModel(language: TranslateLanguage(rawValue: language!))
     result(modelManager.isModelDownloaded(model))
   }
 
   func downloadModel(call: FlutterMethodCall, result: FlutterResult) {
-    guard let args = call.arguments else {
+    guard let args = call.arguments as? Dictionary<String, AnyObject> else {
       result(FlutterError(
         code: "NOARGUMENTS", 
         message: "No arguments",
@@ -139,8 +142,8 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
       return
     }
 
-    let language: String? = args["model"]
-    let isDownloadRequireWifi: Bool = args["isDownloadRequireWifi"] ?? true
+    let language: String? = args["model"] as? String
+    let isDownloadRequireWifi: Bool = args["isDownloadRequireWifi"] as? Bool ?? true
 
     if language == nil {
       result(FlutterError(
@@ -151,7 +154,7 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
     }
 
     let modelManager = ModelManager.modelManager()
-    let model = TranslateRemoteModel.translateRemoteModel(language: language!)
+    let model = TranslateRemoteModel.translateRemoteModel(language: TranslateLanguage(rawValue: language!))
     let conditions = ModelDownloadConditions(
       allowsCellularAccess: !isDownloadRequireWifi,
       allowsBackgroundDownloading: true
@@ -161,8 +164,8 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
     result(true)
   }
 
-  func deleteModel(call: FlutterMethodCall, result: FlutterResult) {
-    guard let args = call.arguments else {
+  func deleteModel(call: FlutterMethodCall, result: @escaping FlutterResult) {
+    guard let args = call.arguments as? Dictionary<String, AnyObject> else {
       result(FlutterError(
         code: "NOARGUMENTS", 
         message: "No arguments",
@@ -170,7 +173,7 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
       return
     }
 
-    let language: String? = args["model"]
+    let language: String? = args["model"] as? String
     
     if language == nil {
       result(FlutterError(
@@ -181,7 +184,7 @@ public class SwiftLearningTranslatePlugin: NSObject, FlutterPlugin {
     }
 
     let modelManager = ModelManager.modelManager()
-    let model = TranslateRemoteModel.translateRemoteModel(language: language!)
+    let model = TranslateRemoteModel.translateRemoteModel(language: TranslateLanguage(rawValue: language!))
     modelManager.deleteDownloadedModel(model) { error in
       result(true)
     }
