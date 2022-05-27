@@ -62,7 +62,7 @@ class _InputCameraViewState extends State<InputCameraView> {
     super.initState();
 
     _imagePicker = ImagePicker();
-    WidgetsBinding.instance?.addPostFrameCallback((_) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       await _initializeCamera();
       if (_isLive) await _startLiveStream();
       _refresh();
