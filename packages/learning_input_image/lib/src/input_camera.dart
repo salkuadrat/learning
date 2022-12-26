@@ -2,9 +2,9 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -14,6 +14,7 @@ import 'input_image_data.dart';
 import 'shared.dart';
 
 enum InputCameraMode { live, gallery }
+
 enum InputCameraType { front, rear }
 
 class InputCameraView extends StatefulWidget {
@@ -62,7 +63,7 @@ class _InputCameraViewState extends State<InputCameraView> {
     super.initState();
 
     _imagePicker = ImagePicker();
-    WidgetsBinding.instance?.addPostFrameCallback((_) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       await _initializeCamera();
       if (_isLive) await _startLiveStream();
       _refresh();
